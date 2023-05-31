@@ -7,8 +7,8 @@
   <h3 align="center">Astro project</h3>
 
   <p align="center">
-    Astro is an open source, modern and intuitive competition manager.
-
-    It is currently under development and is not yet ready for use.
+    Astro is an open-source, modern and intuitive competition manager.
   </p>
 </div>
+
+👷‍♂️ It is currently under development and is not yet ready for use.
