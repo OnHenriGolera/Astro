@@ -43,11 +43,19 @@ table(Stage) {
     column(Name, String)
 }
 
+table(StageList) {
+	foreign_key(StageId, Int)
+	foreign_key(CompetitionId, Int)
+}
+
+table(ParticipantList) {
+	foreign_key(ParticipantId, Int)
+	foreign_key(StageId, Int)
+}
+
 table(Competition) {
     primary_key(Id, Int)
     foreign_key(FormulaId, Int)
-    foreign_key(StageId, Int)
-    foreign_key(ParticipantId, Int)
     column(Name, String)
     column(Status, String)
     column(Category, String)
@@ -56,8 +64,12 @@ table(Competition) {
 table(Formula) {
     primary_key(Id, Int)
     column(Name, String)
-    foreign_key(FormulaElementId, Int)
     column(Description, String)
+}
+
+table(FormulaElementList) {
+	foreign_key(FormulaId, Int)
+	foreign_key(FormulaElementId, Int)
 }
 
 table(FormulaElement) {
@@ -72,17 +84,19 @@ table(Participant) {
     primary_key(ParticipantId, Int)
     foreign_key(PersonId, Int)
     column(Category, String)
+	column(Present, Boolean)
 }
 
 User --> Person
 Stage --> FormulaElement
 Competition --> Formula
-Competition --> Stage
-Competition --> Participant
-Formula --> FormulaElement
+StageList --> Stage
+Stage <-- ParticipantList
+ParticipantList --> Participant
+Formula <-- FormulaElementList
+FormulaElementList --> FormulaElement
 Participant --> Person
 User --> Role
-
-
+StageList --> Competition
 
 @enduml

@@ -12,47 +12,55 @@ public class Initializer {
 
             PreparedStatement preparedStatement;
 
-            // Create the table "Person"
+            // Create the table "Person" : id, name, surname
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Person (personId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255))");
+                    "CREATE TABLE IF NOT EXISTS Person (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255))");
             preparedStatement.executeUpdate();
 
-            // Create the table "Role"
+            // Create the table "Role" : id, name, accessLevel
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Role (roleId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), accessLevel INTEGER)");
+                    "CREATE TABLE IF NOT EXISTS Role (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), accessLevel INT)");
             preparedStatement.executeUpdate();
 
-            // Create the table "User"
+            // Create the table "User" : userId, personId, roleId, password
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS User (userId INTEGER PRIMARY KEY AUTO_INCREMENT, password VARCHAR(255), personId INTEGER, roleId INTEGER, FOREIGN KEY(personId) REFERENCES Person(personId), FOREIGN KEY(roleId) REFERENCES Role(roleId))");
+                    "CREATE TABLE IF NOT EXISTS User (userId INT PRIMARY KEY AUTO_INCREMENT, personId INT, roleId INT, password VARCHAR(255), FOREIGN KEY (personId) REFERENCES Person(id), FOREIGN KEY (roleId) REFERENCES Role(id))");
             preparedStatement.executeUpdate();
 
-            // Create the table "Participant
+            // Create the table "Participant" : participantId, personId, category, present
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Participant (participantId INTEGER PRIMARY KEY AUTO_INCREMENT, personId INTEGER, FOREIGN KEY(personId) REFERENCES Person(personId))");
+                    "CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, FOREIGN KEY (personId) REFERENCES Person(id))");
             preparedStatement.executeUpdate();
 
-            // Create the table "FormulaElement"
+            // Create the table "FormulaElement" : formulaElementId, type, numberBefore, numberAfter, description
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS FormulaElement (formulaElementId INTEGER PRIMARY KEY AUTO_INCREMENT, type VARCHAR(255), description VARCHAR(255), numberBefore INTEGER, numberAfter INTEGER)");
+                    "CREATE TABLE IF NOT EXISTS FormulaElement (formulaElementId INT PRIMARY KEY AUTO_INCREMENT, type VARCHAR(255), numberBefore INT, numberAfter INT, description VARCHAR(255))");
             preparedStatement.executeUpdate();
 
-            // Create the table "Formula"
+            // Create the table : "Stage" : stageId, name, formulaElementId
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Formula (formulaId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), description VARCHAR(255), formulaElementId INTEGER, FOREIGN KEY(formulaElementId) REFERENCES FormulaElement(formulaElementId))");
+                    "CREATE TABLE IF NOT EXISTS Stage (stageId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), formulaElementId INT, FOREIGN KEY (formulaElementId) REFERENCES FormulaElement(formulaElementId))");
             preparedStatement.executeUpdate();
 
-            // Create the table "Stage"
+            // Create the table : "Formula" : formulaId, name, description
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Stage (stageId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), formulaElementId INTEGER, FOREIGN KEY(formulaElementId) REFERENCES FormulaElement(formulaElementId))");
+                    "CREATE TABLE IF NOT EXISTS Formula (formulaId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), description VARCHAR(255))");
             preparedStatement.executeUpdate();
 
-            // Create the table "Competition"
+            // Create the table : "Competition" : competitionId, formulaId, name, status, category
             preparedStatement = connect.prepareStatement(
-                    "CREATE TABLE IF NOT EXISTS Competition (competitionId INTEGER PRIMARY KEY AUTO_INCREMENT, formulaId INTEGER, stageId INTEGER, participantId INTEGER, name VARCHAR(255), status VARCHAR(255), category VARCHAR(255), FOREIGN KEY(formulaId) REFERENCES Formula(formulaId), FOREIGN KEY(stageId) REFERENCES Stage(stageId), FOREIGN KEY(participantId) REFERENCES Participant(participantId))");
+                    "CREATE TABLE IF NOT EXISTS Competition (competitionId INT PRIMARY KEY AUTO_INCREMENT, formulaId INT, name VARCHAR(255), status VARCHAR(255), category VARCHAR(255), FOREIGN KEY (formulaId) REFERENCES Formula(formulaId))");
             preparedStatement.executeUpdate();
 
-            System.out.println("Database initialized.");
+            // Create the table : "StageList" : stageId, competitionId
+            preparedStatement = connect.prepareStatement(
+                    "CREATE TABLE IF NOT EXISTS StageList (stageId INT, competitionId INT, FOREIGN KEY (stageId) REFERENCES Stage(stageId), FOREIGN KEY (competitionId) REFERENCES Competition(competitionId))");
+            preparedStatement.executeUpdate();
+
+            // Create the table : "FormulaElementList" : formulaId, formulaElementId
+            preparedStatement = connect.prepareStatement(
+                    "CREATE TABLE IF NOT EXISTS FormulaElementList (formulaId INT, formulaElementId INT, FOREIGN KEY (formulaId) REFERENCES Formula(formulaId), FOREIGN KEY (formulaElementId) REFERENCES FormulaElement(formulaElementId))");
+            preparedStatement.executeUpdate();
 
         } catch (Exception e) {
 
