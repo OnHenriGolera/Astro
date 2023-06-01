@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import src.fr.astro.entity.PersonEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
@@ -37,6 +39,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
     /* ------------------------------------------------- */
 
     /**
@@ -164,6 +167,37 @@ public class PersonDAO implements SQLObject<PersonEntity> {
         }
 
         return exist(object.getPersonId());
+    }
+
+    @Override
+    public List<PersonEntity> getAll() throws SQLException {
+
+        return getAll(-1);
+
+    }
+
+    @Override
+    public List<PersonEntity> getAll(int limit) throws SQLException {
+        
+        if (limit < 0) {
+            limit = +Integer.MAX_VALUE;
+        }
+
+        PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
+        statement.setInt(1, limit);
+        ResultSet result = statement.executeQuery();
+
+        List<PersonEntity> list = new ArrayList<PersonEntity>();
+
+        while (result.next()) {
+            int id = result.getInt(COLUMN_ID);
+            String name = result.getString(COLUMN_FIRSTNAME);
+            String surname = result.getString(COLUMN_SURNAME);
+            list.add(new PersonEntity(id, name, surname));
+        }
+
+        return list;
+
     }
 
 }

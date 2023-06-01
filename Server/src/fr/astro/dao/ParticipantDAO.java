@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import src.fr.astro.entity.ParticipantEntity;
 import src.fr.astro.entity.PersonEntity;
@@ -39,6 +41,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
     /* ------------------------------------------------- */
 
     /**
@@ -178,6 +181,43 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
         }
 
         return false;
+    }
+
+    @Override
+    public List<ParticipantEntity> getAll() throws SQLException {
+        return getAll(-1);
+    }
+
+    @Override
+    public List<ParticipantEntity> getAll(int limit) throws SQLException {
+
+        if (limit < 0) {
+            limit = +Integer.MAX_VALUE;
+        }
+        
+        List<ParticipantEntity> participants = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
+        statement.setInt(1, limit);
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            try {
+                int personId = result.getInt(COLUMN_PERSON_ID);
+                String category = result.getString(COLUMN_CATEGORY);
+                boolean present = result.getBoolean(COLUMN_PRESENT);
+
+                PersonEntity person = PersonDAO.getInstance().get(personId);
+                String name = person.getPersonName();
+                String surname = person.getPersonSurname();
+                
+                participants.add(ParticipantEntity.of(personId, name, surname, personId, category, present));
+            } catch (ObjectNotFound e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
     
 }

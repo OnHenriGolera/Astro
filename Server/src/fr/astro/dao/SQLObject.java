@@ -1,6 +1,7 @@
 package src.fr.astro.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import src.fr.astro.exception.sql.ObjectNotFound;
 
@@ -53,5 +54,19 @@ public interface SQLObject<T> {
      * @return true if the object exist in the database, false otherwise
      */
     public boolean exist(T object) throws SQLException;
+
+    /**
+     * Return all the objects in the database
+     * 
+     * @return all the objects in the database
+     */
+    public List<T> getAll() throws SQLException;
+
+    /**
+     * Return all the objects in the database with limit
+     * 
+     * @return all the objects in the database with limit
+     */
+    public List<T> getAll(int limit) throws SQLException;
 
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import src.fr.astro.entity.PersonEntity;
 import src.fr.astro.entity.RoleEntity;
@@ -14,6 +16,7 @@ import src.fr.astro.exception.sql.ObjectNotFound;
  * UserDAO
  * 
  * DAO for UserEntity
+ * 
  * @see UserEntity
  * @see SQLObject
  */
@@ -25,7 +28,7 @@ public class UserDAO implements SQLObject<UserEntity> {
 
     /* --------------- Query Information --------------- */
     private final String TABLE_NAME = "User";
-    
+
     // Columns
     private final String COLUMN_ID = "userId";
     private final String COLUMN_PERSON_ID = "personId";
@@ -40,11 +43,13 @@ public class UserDAO implements SQLObject<UserEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
     /* ------------------------------------------------- */
 
     /**
      * Constructor
      * Create a connection to the database
+     * 
      * @see Connector
      */
     private UserDAO() {
@@ -54,6 +59,7 @@ public class UserDAO implements SQLObject<UserEntity> {
     /**
      * Return the instance of UserDAO
      * Create it if it doesn't exist
+     * 
      * @return the instance of UserDAO
      */
     public static UserDAO getInstance() {
@@ -202,6 +208,49 @@ public class UserDAO implements SQLObject<UserEntity> {
         }
 
         return exist(object.getUserId());
+
+    }
+
+    @Override
+    public List<UserEntity> getAll() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
+    @Override
+    public List<UserEntity> getAll(int limit) throws SQLException {
+
+        if (limit < 0) {
+            limit = +Integer.MAX_VALUE;
+        }
+
+        PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
+        statement.setInt(1, limit);
+        ResultSet result = statement.executeQuery();
+
+        List<UserEntity> users = new ArrayList<>();
+
+        while (result.next()) {
+            try {
+                int userId = result.getInt(COLUMN_ID);
+                int personId = result.getInt(COLUMN_PERSON_ID);
+                String password = result.getString(COLUMN_PASSWORD);
+                int roleId = result.getInt(COLUMN_ROLE_ID);
+
+                PersonEntity person = PersonDAO.getInstance().get(personId);
+                String personName = person.getPersonName();
+                String personSurname = person.getPersonSurname();
+
+                RoleEntity role = RoleDAO.getInstance().get(roleId);
+
+                users.add(UserEntity.of(userId, personName, personSurname, personId, password, role));
+
+            } catch (ObjectNotFound e) {
+                e.printStackTrace();
+            }
+        }
+
+        return users;
 
     }
 

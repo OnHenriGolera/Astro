@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import src.fr.astro.entity.RoleEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
@@ -12,6 +14,7 @@ import src.fr.astro.exception.sql.ObjectNotFound;
  * RoleDAO
  * 
  * DAO for RoleEntity
+ * 
  * @see RoleEntity
  * @see SQLObject
  */
@@ -23,7 +26,7 @@ public class RoleDAO implements SQLObject<RoleEntity> {
 
     /* --------------- Query Information --------------- */
     private final String TABLE_NAME = "Role";
-    
+
     // Columns
     private final String COLUMN_ID = "roleId";
     private final String COLUMN_NAME = "name";
@@ -37,6 +40,7 @@ public class RoleDAO implements SQLObject<RoleEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
     /* ------------------------------------------------- */
 
     /**
@@ -52,6 +56,7 @@ public class RoleDAO implements SQLObject<RoleEntity> {
     /**
      * Return the instance of RoleDAO
      * Create it if it doesn't exist
+     * 
      * @return the instance of RoleDAO
      */
     public static RoleDAO getInstance() {
@@ -160,6 +165,35 @@ public class RoleDAO implements SQLObject<RoleEntity> {
         }
 
         return exist(object.getRoleId());
+    }
+
+    @Override
+    public List<RoleEntity> getAll() throws SQLException {
+        return getAll(-1);
+    }
+
+    @Override
+    public List<RoleEntity> getAll(int limit) throws SQLException {
+
+        if (limit < 0) {
+            limit = +Integer.MAX_VALUE;
+        }
+
+        PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
+        statement.setInt(1, limit);
+        ResultSet result = statement.executeQuery();
+
+        List<RoleEntity> roles = new ArrayList<>();
+
+        while (result.next()) {
+            int id = result.getInt(COLUMN_ID);
+            String name = result.getString(COLUMN_NAME);
+            int accessLevel = result.getInt(COLUMN_ACCESS_LEVEL);
+            roles.add(RoleEntity.of(id, name, accessLevel));
+        }
+
+        return roles;
+
     }
 
 }
