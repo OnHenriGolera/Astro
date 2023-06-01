@@ -7,25 +7,25 @@ import static java.util.Objects.requireNonNull;
  */
 public class PersonEntity {
 
-    private int userId;
+    private int personId;
     private String name;
     private String surname;
 
     /**
      * Constructor
      * 
-     * @param userId
+     * @param personId
      * @param name
      * @param surname
-     * @throws NullPointerException if userId, name or surname is null
+     * @throws NullPointerException if personId, name or surname is null
      */
-    private PersonEntity(int userId, String name, String surname) {
+    public PersonEntity(int personId, String name, String surname) {
 
         requireNonNull(name);
         requireNonNull(surname);
-        requireNonNull(userId);
+        requireNonNull(personId);
 
-        this.userId = userId;
+        this.personId = personId;
         this.name = name;
         this.surname = surname;
     }
@@ -33,23 +33,23 @@ public class PersonEntity {
     /**
      * Return a PersonEntity
      * 
-     * @param userId  - required
-     * @param name    - required
-     * @param surname - required
+     * @param personId - required
+     * @param name     - required
+     * @param surname  - required
      * @return a PersonEntity
-     * @throws NullPointerException if userId, name or surname is null
+     * @throws NullPointerException if personId, name or surname is null
      */
-    public static PersonEntity of(int userId, String name, String surname) {
-        return new PersonEntity(userId, name, surname);
+    public static PersonEntity of(int personId, String name, String surname) {
+        return new PersonEntity(personId, name, surname);
     }
 
     /**
-     * Return the userId
+     * Return the personId
      * 
-     * @return userId
+     * @return personId
      */
     public int getPersonId() {
-        return userId;
+        return personId;
     }
 
     /**
@@ -71,17 +71,17 @@ public class PersonEntity {
     }
 
     /**
-     * Set the userId
+     * Set the personId
      * 
-     * @param userId
+     * @param personId
      * @return void
-     * @throws NullPointerException if userId is null
+     * @throws NullPointerException if personId is null
      */
-    public void setPersonId(int userId) {
+    public void setPersonId(int personId) {
 
-        requireNonNull(userId);
+        requireNonNull(personId);
 
-        this.userId = userId;
+        this.personId = personId;
     }
 
     /**
@@ -120,7 +120,7 @@ public class PersonEntity {
     @Override
     public String toString() {
         return "PersonEntity{" +
-                "id=" + userId +
+                "id=" + personId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
@@ -137,7 +137,7 @@ public class PersonEntity {
     public boolean equals(Object obj) {
         if (obj instanceof PersonEntity) {
             PersonEntity other = (PersonEntity) obj;
-            return this.userId == other.userId;
+            return this.personId == other.personId;
         }
         return false;
     }
@@ -150,7 +150,7 @@ public class PersonEntity {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.userId);
+        return Integer.hashCode(this.personId);
     }
 
 }

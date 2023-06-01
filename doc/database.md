@@ -90,6 +90,7 @@ We need to store the following data for each participant:
 - `ParticipantId` (unique)
 - `Person` (see above)
 - `Category` (`FFU20`, ...)
+- `Present` (`true`, `false`)
 
 # Database structure
 

@@ -7,9 +7,8 @@ import static java.util.Objects.requireNonNull;
  * 
  * @see PersonEntity
  */
-public class UserEntity {
+public class UserEntity extends PersonEntity {
 
-    private PersonEntity userEntity;
     private RoleEntity roleEntity;
     private int userId;
     private String password;
@@ -20,16 +19,17 @@ public class UserEntity {
      * @param userEntity
      * @param roleEntity
      * @param password
-     * @throws NullPointerException if userId, name, surname, roleId or password is
-     *                              null
+     * @throws NullPointerException if userId, name, surname, userId, password or
+     *                              roleEntity is null
      */
-    private UserEntity(int userId, String password, PersonEntity userEntity, RoleEntity roleEntity) {
-        requireNonNull(userEntity);
+    private UserEntity(int personId, String name, String surname, int userId, String password, RoleEntity roleEntity) {
+
+        super(personId, name, surname);
+
         requireNonNull(roleEntity);
         requireNonNull(password);
         requireNonNull(userId);
 
-        this.userEntity = userEntity;
         this.roleEntity = roleEntity;
         this.password = password;
         this.userId = userId;
@@ -42,11 +42,12 @@ public class UserEntity {
      * @param roleEntity
      * @param password
      * @return a UserEntity
-     * @throws NullPointerException if userId, name, surname, roleId or password is
-     *                              null
+     * @throws NullPointerException if userId, name, surname, userId, password or
+     *                              roleEntity is null
      */
-    public static UserEntity of(int userId, String password, PersonEntity userEntity, RoleEntity roleEntity) {
-        return new UserEntity(userId, password, userEntity, roleEntity);
+    public static UserEntity of(int personId, String name, String surname, int userId, String password,
+            RoleEntity roleEntity) {
+        return new UserEntity(personId, name, surname, userId, password, roleEntity);
     }
 
     /**
@@ -56,24 +57,6 @@ public class UserEntity {
      */
     public int getUserId() {
         return this.userId;
-    }
-
-    /**
-     * Return the name
-     * 
-     * @return name
-     */
-    public String getUserName() {
-        return userEntity.getPersonName();
-    }
-
-    /**
-     * Return the surname
-     * 
-     * @return surname
-     */
-    public String getUserSurname() {
-        return userEntity.getPersonSurname();
     }
 
     /**
@@ -104,23 +87,43 @@ public class UserEntity {
     }
 
     /**
-     * Set the name
+     * Return the password
      * 
-     * @param name
-     * @throws NullPointerException if name is null
+     * @return password
      */
-    public void setUserName(String name) {
-        userEntity.setPersonName(name);
+    public String getUserPassword() {
+        return this.password;
     }
 
     /**
-     * Set the surname
+     * Set the password
      * 
-     * @param surname
-     * @throws NullPointerException if surname is null
+     * @param password
+     * @throws NullPointerException if password is null
      */
-    public void setUserSurname(String surname) {
-        userEntity.setPersonSurname(surname);
+    public void setUserPassword(String password) {
+        requireNonNull(password);
+        this.password = password;
+    }
+
+    /**
+     * Return the RoleEntity
+     * 
+     * @return roleEntity
+     */
+    public RoleEntity getUserRoleEntity() {
+        return this.roleEntity;
+    }
+
+    /**
+     * Set the RoleEntity
+     * 
+     * @param roleEntity
+     * @throws NullPointerException if roleEntity is null
+     */
+    public void setUserRoleEntity(RoleEntity roleEntity) {
+        requireNonNull(roleEntity);
+        this.roleEntity = roleEntity;
     }
 
     /**
@@ -130,7 +133,7 @@ public class UserEntity {
      */
     @Override
     public String toString() {
-        return "UserEntity [userEntity=" + userEntity + ", roleEntity=" + roleEntity + ", password=" + password + "]";
+        return "UserEntity [userId=" + userId + ", password=" + password + ", roleEntity=" + roleEntity + "]";
     }
 
     /**

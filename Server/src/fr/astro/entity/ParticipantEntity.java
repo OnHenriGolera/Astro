@@ -7,9 +7,8 @@ import static java.util.Objects.requireNonNull;
  * 
  * @see PersonEntity
  */
-public class ParticipantEntity {
+public class ParticipantEntity extends PersonEntity {
 
-    private PersonEntity personEntity;
     private int participantId;
     private String category;
     private boolean present;
@@ -23,17 +22,18 @@ public class ParticipantEntity {
      * @param participantId
      * @param category
      * @param present
-     * @throws NullPointerException if personEntity, name, surname, participantId,
+     * @throws NullPointerException if personId, name, surname, participantId,
+     *                              category or present is null
      */
-    private ParticipantEntity(PersonEntity personEntity, int participantId, String category,
+    private ParticipantEntity(int personId, String name, String surname, int participantId, String category,
             boolean present) {
 
-        requireNonNull(personEntity);
+        super(personId, name, surname);
+
         requireNonNull(participantId);
         requireNonNull(category);
         requireNonNull(present);
 
-        this.personEntity = personEntity;
         this.participantId = participantId;
         this.category = category;
         this.present = present;
@@ -47,16 +47,12 @@ public class ParticipantEntity {
      * @param category
      * @param present
      * @return a Participant
-     * @throws NullPointerException if userId, name, surname, participantId,
+     * @throws NullPointerException if personId, name, surname, participantId,
      *                              category or present is null
      */
-    public static ParticipantEntity of(PersonEntity personEntity, int participantId, String category,
+    public static ParticipantEntity of(int personId, String name, String surname, int participantId, String category,
             boolean present) {
-        return new ParticipantEntity(
-                personEntity,
-                participantId,
-                category,
-                present);
+        return new ParticipantEntity(personId, name, surname, participantId, category, present);
     }
 
     /**
@@ -73,7 +69,7 @@ public class ParticipantEntity {
      * 
      * @return category
      */
-    public String getCategory() {
+    public String getParticipantCategory() {
         return category;
     }
 
@@ -82,7 +78,7 @@ public class ParticipantEntity {
      * 
      * @return present
      */
-    public boolean isPresent() {
+    public boolean isParticipantPresent() {
         return present;
     }
 
@@ -92,7 +88,7 @@ public class ParticipantEntity {
      * @param category
      * @throws NullPointerException if category is null
      */
-    public void setCategory(String category) {
+    public void setParticipantCategory(String category) {
 
         requireNonNull(category);
 
@@ -105,7 +101,7 @@ public class ParticipantEntity {
      * @param present
      * @throws NullPointerException if present is null
      */
-    public void setPresent(boolean present) {
+    public void setParticipantPresent(boolean present) {
 
         requireNonNull(present);
 
@@ -146,9 +142,9 @@ public class ParticipantEntity {
 
         if (getParticipantId() != that.getParticipantId())
             return false;
-        if (isPresent() != that.isPresent())
+        if (isParticipantPresent() != that.isParticipantPresent())
             return false;
-        return getCategory().equals(that.getCategory());
+        return getParticipantCategory().equals(that.getParticipantCategory());
     }
 
     /**
