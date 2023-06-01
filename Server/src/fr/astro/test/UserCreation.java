@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.fr.astro.dao.Initializer;
-import src.fr.astro.dao.RoleDAO;
 import src.fr.astro.dao.UserDAO;
 import src.fr.astro.entity.UserEntity;
 import src.fr.astro.util.Generator;
@@ -40,6 +39,12 @@ public class UserCreation extends Tester {
 
     }
 
+    /**
+     * Initialize the test
+     * - Create a backup of the database
+     * - Create a new database
+     * - Initialize the database
+     */
     @Override
     public void init() throws Exception {
 
@@ -54,6 +59,12 @@ public class UserCreation extends Tester {
 
     }
 
+    /**
+     * Run the test
+     * - Generate users
+     * - Save them in the database
+     * - Store them in a list
+     */
     @Override
     public void run() throws Exception {
 
@@ -72,9 +83,13 @@ public class UserCreation extends Tester {
 
         }
 
-
     }
 
+    /**
+     * Validate the test
+     * - Check if the number of users is correct
+     * - Check if the users are correct
+     */
     @Override
     public void validate() throws Exception {
 
@@ -101,6 +116,10 @@ public class UserCreation extends Tester {
 
     }
 
+    /**
+     * Display the test
+     * - Display all users
+     */
     @Override
     public void display() throws Exception {
 
@@ -116,6 +135,11 @@ public class UserCreation extends Tester {
 
     }
 
+    /**
+     * Clean the test
+     * - Delete the current database
+     * - Restore the database
+     */
     @Override
     public void clean() throws Exception {
 

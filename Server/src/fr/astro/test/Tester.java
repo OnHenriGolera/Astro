@@ -18,6 +18,7 @@ public abstract class Tester {
      * Run the test
      * 
      * @return void
+     * @throws Exception if an error occured
      */
     public abstract void run() throws Exception;
 
@@ -25,6 +26,7 @@ public abstract class Tester {
      * Validate the test
      * 
      * @return void
+     * @throws Exception if an error occured
      */
     public abstract void validate() throws Exception;
 
@@ -32,6 +34,7 @@ public abstract class Tester {
      * Display the test
      * 
      * @return void
+     * @throws Exception if an error occured
      */
     public abstract void display() throws Exception;
 
@@ -39,9 +42,15 @@ public abstract class Tester {
      * Remove all the test data
      * 
      * @return void
+     * @throws Exception if an error occured
      */
     public abstract void clean() throws Exception;
 
+    /**
+     * Run the test
+     * 
+     * @return void
+     */
     public void test() {
 
         try {

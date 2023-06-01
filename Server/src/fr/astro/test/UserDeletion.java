@@ -3,8 +3,18 @@ package src.fr.astro.test;
 import src.fr.astro.dao.UserDAO;
 import src.fr.astro.entity.UserEntity;
 
+/**
+ * UserDeletion
+ * 
+ * Test the deletion of users
+ * @see UserCreation
+ */
 public class UserDeletion extends UserCreation {
 
+    /**
+     * Main
+     * @param args
+     */
     public static void main(String[] args) {
 
         UserDeletion userDeletion = new UserDeletion();
@@ -12,6 +22,11 @@ public class UserDeletion extends UserCreation {
 
     }
     
+    /**
+     * Run the test
+     * - Call the super method (create users) @see UserCreation
+     * - Delete the users
+     */
     @Override
     public void run() throws Exception {
 
@@ -27,6 +42,10 @@ public class UserDeletion extends UserCreation {
 
     }
 
+    /**
+     * Validate the test
+     * - Check if the users are deleted
+     */
     @Override
     public void validate() throws Exception {
 
@@ -39,6 +58,10 @@ public class UserDeletion extends UserCreation {
 
     }
 
+    /**
+     * Display the test
+     * - Display all users (normally none)
+     */
     @Override
     public void display() throws Exception {
 
