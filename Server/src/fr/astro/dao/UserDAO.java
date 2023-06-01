@@ -77,10 +77,6 @@ public class UserDAO implements SQLObject<UserEntity> {
             throw new ObjectNotFound("UserEntity", "null");
         }
 
-        if (!exist(object)) {
-            throw new ObjectNotFound("UserEntity", object.getUserId());
-        }
-
         // Save as PersonEntity
         PersonDAO.getInstance().save(object);
 
@@ -214,8 +210,7 @@ public class UserDAO implements SQLObject<UserEntity> {
 
     @Override
     public List<UserEntity> getAll() throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return getAll(-1);
     }
 
     @Override

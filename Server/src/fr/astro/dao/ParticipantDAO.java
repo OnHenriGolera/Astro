@@ -74,9 +74,6 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
             throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
-        if (!exist(object)) {
-            throw new ObjectNotFound("ParticipantEntity", object.getParticipantId());
-        }
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
         statement.setInt(1, object.getPersonId());

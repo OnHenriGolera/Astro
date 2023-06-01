@@ -28,7 +28,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     // Columns
     private final String COLUMN_ID = "personId";
-    private final String COLUMN_FIRSTNAME = "firstname";
+    private final String COLUMN_FIRSTNAME = "name";
     private final String COLUMN_SURNAME = "surname";
     
     // Queries
@@ -70,10 +70,6 @@ public class PersonDAO implements SQLObject<PersonEntity> {
         
         if (object == null) {
             throw new ObjectNotFound("PersonEntity", "null");
-        }
-
-        if (!exist(object)) {
-            throw new ObjectNotFound("PersonEntity", object.getPersonId());
         }
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);

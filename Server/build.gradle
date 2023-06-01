@@ -2,7 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName='src.fr.astro.Server'
+mainClassName='src.fr.astro.test.UserTest'
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ jar {
  manifest {
         attributes 'Implementation-Title': 'Gradle Quickstart',
                    'Implementation-Version': '1.0.0',
-                   'Main-Class': 'src.fr.astro.Server'
+                   'Main-Class': mainClassName
     }
 }
 

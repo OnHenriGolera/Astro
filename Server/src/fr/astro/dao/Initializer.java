@@ -23,22 +23,22 @@ public class Initializer {
 
 			// Create the table "Person" : id, name, surname
 			preparedStatement = connect.prepareStatement(
-					"CREATE TABLE IF NOT EXISTS Person (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255))");
+					"CREATE TABLE IF NOT EXISTS Person (personId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255))");
 			preparedStatement.executeUpdate();
 
 			// Create the table "Role" : id, name, accessLevel
 			preparedStatement = connect.prepareStatement(
-					"CREATE TABLE IF NOT EXISTS Role (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), accessLevel INT)");
+					"CREATE TABLE IF NOT EXISTS Role (roleId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), accessLevel INT)");
 			preparedStatement.executeUpdate();
 
 			// Create the table "User" : userId, personId, roleId, password
 			preparedStatement = connect.prepareStatement(
-					"CREATE TABLE IF NOT EXISTS User (userId INT PRIMARY KEY AUTO_INCREMENT, personId INT, roleId INT, password VARCHAR(255), FOREIGN KEY (personId) REFERENCES Person(id), FOREIGN KEY (roleId) REFERENCES Role(id))");
+					"CREATE TABLE IF NOT EXISTS User (userId INT PRIMARY KEY AUTO_INCREMENT, personId INT, roleId INT, password VARCHAR(255), FOREIGN KEY (personId) REFERENCES Person(personId), FOREIGN KEY (roleId) REFERENCES Role(roleId))");
 			preparedStatement.executeUpdate();
 
 			// Create the table "Participant" : participantId, personId, category, present
 			preparedStatement = connect.prepareStatement(
-					"CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, FOREIGN KEY (personId) REFERENCES Person(id))");
+					"CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, FOREIGN KEY (personId) REFERENCES Person(personId))");
 			preparedStatement.executeUpdate();
 
 			// Create the table "FormulaElement" : formulaElementId, type, numberBefore,
@@ -94,4 +94,53 @@ public class Initializer {
 		file.delete();
 
 	}
+
+	/**
+	 * Make a copy of the database in a file
+	 * 
+	 * @param filePath
+	 */
+	public static void Backup(String filePath) {
+
+		Connection connect = Connector.getInstance();
+
+		try {
+
+			Statement statement = connect.createStatement();
+
+			statement.execute("BACKUP TO '" + filePath + "'");
+
+		} catch (Exception e) {
+
+			System.out.println("An error occured while backing up the database.");
+			e.printStackTrace();
+
+		}
+
+	}
+
+	/**
+	 * Load a database from a file (replace the current database)
+	 * 
+	 * @param filePath
+	 */
+	public static void Load(String filePath) {
+
+		// Close the current connection
+		Connector.close();
+
+		// Load the database
+		Connector.getInstance(filePath);
+
+	}
+	
+	/**
+	 * Get the path of the database
+	 * 
+	 * @return the path of the database
+	 */
+	public static String getFilePath() {
+		return Connector.getFilePath();
+	}
+
 }

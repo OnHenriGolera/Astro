@@ -30,7 +30,7 @@ public class RoleDAO implements SQLObject<RoleEntity> {
     // Columns
     private final String COLUMN_ID = "roleId";
     private final String COLUMN_NAME = "name";
-    private final String COLUMN_ACCESS_LEVEL = "access_level";
+    private final String COLUMN_ACCESS_LEVEL = "accessLevel";
 
     // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?)", TABLE_NAME,
@@ -72,10 +72,6 @@ public class RoleDAO implements SQLObject<RoleEntity> {
 
         if (object == null) {
             throw new ObjectNotFound("RoleEntity", "null");
-        }
-
-        if (!exist(object)) {
-            throw new ObjectNotFound("RoleEntity", object.getRoleId());
         }
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);

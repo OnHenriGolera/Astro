@@ -14,7 +14,7 @@ import src.fr.astro.entity.UserEntity;
 
 public class Generator {
 
-    private Generator instance;
+    private static Generator instance;
     private Faker fakerInstance;
 
     /**
@@ -30,7 +30,7 @@ public class Generator {
      * 
      * @return a Generator
      */
-    public Generator getInstance() {
+    public static Generator getInstance() {
         if (instance == null) {
             instance = new Generator();
         }
@@ -88,7 +88,7 @@ public class Generator {
      * @return a PersonEntity
      */
     public PersonEntity generatePersonEntity() throws SQLException {
-        return PersonEntity.of(PersonDAO.getInstance().getLastInsertedId(), generateName(), generateSurname());
+        return PersonEntity.of(PersonDAO.getInstance().getLastInsertedId() + 1, generateName(), generateSurname());
     }
 
     /**
@@ -97,7 +97,7 @@ public class Generator {
      * @return a RoleEntity
      */
     public RoleEntity generateRoleEntity() throws SQLException {
-        return RoleEntity.of(RoleDAO.getInstance().getLastInsertedId(), generateRoleName(), generateRoleAccessLevel());
+        return RoleEntity.of(RoleDAO.getInstance().getLastInsertedId() + 1, generateRoleName(), generateRoleAccessLevel());
     }
 
     /**
@@ -156,7 +156,7 @@ public class Generator {
                 personEntity.getPersonId(),
                 personEntity.getPersonName(),
                 personEntity.getPersonSurname(),
-                ParticipantDAO.getInstance().getLastInsertedId(),
+                ParticipantDAO.getInstance().getLastInsertedId() + 1,
                 generateCategory(),
                 generatePresent());
     }
