@@ -8,17 +8,28 @@ import java.sql.SQLException;
 import src.fr.astro.entity.PersonEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
 
+/**
+ * PersonDAO
+ * 
+ * DAO for PersonEntity
+ * @see PersonEntity
+ * @see SQLObject
+ */
 public class PersonDAO implements SQLObject<PersonEntity> {
 
+    // Instances
     private static PersonDAO instance;
     private static Connection connection;
 
-    private final String TABLE_NAME = "person";
+    /* --------------- Query Information --------------- */
+    private final String TABLE_NAME = "Person";
 
+    // Columns
     private final String COLUMN_ID = "personId";
     private final String COLUMN_FIRSTNAME = "firstname";
     private final String COLUMN_SURNAME = "surname";
     
+    // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?)", TABLE_NAME,
             COLUMN_FIRSTNAME, COLUMN_SURNAME);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
@@ -26,12 +37,23 @@ public class PersonDAO implements SQLObject<PersonEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    /* ------------------------------------------------- */
 
-
+    /**
+     * Constructor
+     * Create a connection to the database
+     * 
+     * @see Connector
+     */
     private PersonDAO() {
         connection = Connector.getInstance();
     }
 
+    /**
+     * Return the instance of PersonDAO
+     * Create it if it doesn't exist
+     * @return the instance of PersonDAO
+     */
     public static PersonDAO getInstance() {
         if (instance == null) {
             instance = new PersonDAO();

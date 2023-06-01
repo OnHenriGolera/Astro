@@ -4,6 +4,11 @@ import java.sql.SQLException;
 
 import src.fr.astro.exception.sql.ObjectNotFound;
 
+/**
+ * SQLObject
+ * 
+ * Interface for DAO : Data Access Object
+ */
 public interface SQLObject<T> {
 
     /**

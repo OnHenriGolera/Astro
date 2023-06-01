@@ -10,18 +10,29 @@ import src.fr.astro.entity.RoleEntity;
 import src.fr.astro.entity.UserEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
 
+/**
+ * UserDAO
+ * 
+ * DAO for UserEntity
+ * @see UserEntity
+ * @see SQLObject
+ */
 public class UserDAO implements SQLObject<UserEntity> {
 
+    // Instances
     private static UserDAO instance;
     private static Connection connection;
 
-    private final String TABLE_NAME = "user";
+    /* --------------- Query Information --------------- */
+    private final String TABLE_NAME = "User";
     
+    // Columns
     private final String COLUMN_ID = "userId";
     private final String COLUMN_PERSON_ID = "personId";
     private final String COLUMN_PASSWORD = "password";
     private final String COLUMN_ROLE_ID = "roleId";
 
+    // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
             COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
@@ -29,11 +40,22 @@ public class UserDAO implements SQLObject<UserEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    /* ------------------------------------------------- */
 
+    /**
+     * Constructor
+     * Create a connection to the database
+     * @see Connector
+     */
     private UserDAO() {
         connection = Connector.getInstance();
     }
 
+    /**
+     * Return the instance of UserDAO
+     * Create it if it doesn't exist
+     * @return the instance of UserDAO
+     */
     public static UserDAO getInstance() {
         if (instance == null) {
             instance = new UserDAO();

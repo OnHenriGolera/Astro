@@ -8,17 +8,28 @@ import java.sql.SQLException;
 import src.fr.astro.entity.RoleEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
 
+/**
+ * RoleDAO
+ * 
+ * DAO for RoleEntity
+ * @see RoleEntity
+ * @see SQLObject
+ */
 public class RoleDAO implements SQLObject<RoleEntity> {
 
+    // Instances
     private static RoleDAO instance;
     private static Connection connection;
 
-    private final String TABLE_NAME = "role";
-
+    /* --------------- Query Information --------------- */
+    private final String TABLE_NAME = "Role";
+    
+    // Columns
     private final String COLUMN_ID = "roleId";
     private final String COLUMN_NAME = "name";
     private final String COLUMN_ACCESS_LEVEL = "access_level";
 
+    // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?)", TABLE_NAME,
             COLUMN_NAME, COLUMN_ACCESS_LEVEL);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
@@ -26,11 +37,23 @@ public class RoleDAO implements SQLObject<RoleEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    /* ------------------------------------------------- */
 
+    /**
+     * Constructor
+     * Create a connection to the database
+     * 
+     * @see Connector
+     */
     private RoleDAO() {
         connection = Connector.getInstance();
     }
 
+    /**
+     * Return the instance of RoleDAO
+     * Create it if it doesn't exist
+     * @return the instance of RoleDAO
+     */
     public static RoleDAO getInstance() {
         if (instance == null) {
             instance = new RoleDAO();

@@ -9,18 +9,29 @@ import src.fr.astro.entity.ParticipantEntity;
 import src.fr.astro.entity.PersonEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
 
+/**
+ * ParticipantDAO
+ * 
+ * DAO for ParticipantEntity
+ * @see ParticipantEntity
+ * @see SQLObject
+ */
 public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
+    // Instances
     private static ParticipantDAO instance;
     private static Connection connection;
 
-    private final String TABLE_NAME = "participant";
+    /* --------------- Query Information --------------- */
+    private final String TABLE_NAME = "Participant";
 
+    // Columns
     private final String COLUMN_ID = "participantId";
     private final String COLUMN_PERSON_ID = "personId";
     private final String COLUMN_CATEGORY = "category";
     private final String COLUMN_PRESENT = "present";
 
+    // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
             COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
@@ -28,13 +39,23 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
+    /* ------------------------------------------------- */
 
-
-
+    /**
+     * Constructor
+     * Create a connection to the database
+     * 
+     * @see Connector
+     */
     private ParticipantDAO() {
         connection = Connector.getInstance();
     }
 
+    /**
+     * Return the instance of ParticipantDAO
+     * Create it if it doesn't exist
+     * @return the instance of ParticipantDAO
+     */
     public static ParticipantDAO getInstance() {
         if (instance == null) {
             instance = new ParticipantDAO();
