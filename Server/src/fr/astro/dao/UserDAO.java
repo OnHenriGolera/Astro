@@ -44,6 +44,7 @@ public class UserDAO implements SQLObject<UserEntity> {
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
+    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID, TABLE_NAME, COLUMN_ID);
     /* ------------------------------------------------- */
 
     /**
@@ -251,6 +252,20 @@ public class UserDAO implements SQLObject<UserEntity> {
         }
 
         return users;
+
+    }
+
+    @Override
+    public int getLastInsertedId() throws SQLException {
+
+        PreparedStatement statement = connection.prepareStatement(GET_LAST_INSERTED_ID);
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            return result.getInt(1);
+        }
+
+        return -1;
 
     }
 

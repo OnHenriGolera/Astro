@@ -69,4 +69,11 @@ public interface SQLObject<T> {
      */
     public List<T> getAll(int limit) throws SQLException;
 
+    /**
+     * Return last inserted id
+     * 
+     * @return last inserted id
+     */
+    public int getLastInsertedId() throws SQLException;
+
 }

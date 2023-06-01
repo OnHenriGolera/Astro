@@ -1,5 +1,6 @@
 package src.fr.astro.dao;
 
+import java.io.File;
 import java.sql.*;
 
 /**
@@ -78,6 +79,19 @@ public class Initializer {
 			e.printStackTrace();
 
 		}
+
+	}
+
+	/**
+	 * Drop the database
+	 */
+	public static void Drop() {
+
+		// Delete the database is destroying the file from Connector
+		String filePath = Connector.getFilePath();
+
+		File file = new File(filePath);
+		file.delete();
 
 	}
 }

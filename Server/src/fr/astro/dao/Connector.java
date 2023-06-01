@@ -7,7 +7,8 @@ import java.sql.SQLException;
 public class Connector {
 
 	// Connection information
-	private static String url = "jdbc:h2:~/bdd_astro";
+	private static String filePath = "~/bdd_astro";
+	private static String url = "jdbc:h2:" + filePath;
 	private static String user = "astro-user";
 	private static String passwd = "";
 
@@ -17,6 +18,7 @@ public class Connector {
 	/**
 	 * Return the instance of Connector
 	 * Create it if it doesn't exist
+	 * 
 	 * @return the instance of Connector
 	 */
 	public static Connection getInstance() {
@@ -28,6 +30,15 @@ public class Connector {
 			}
 		}
 		return connect;
+	}
+
+	/**
+	 * Get the path of the database
+	 * 
+	 * @return the path of the database
+	 */
+	public static String getFilePath() {
+		return filePath;
 	}
 
 }

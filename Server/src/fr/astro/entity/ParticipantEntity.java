@@ -22,15 +22,15 @@ public class ParticipantEntity extends PersonEntity {
      * @param participantId
      * @param category
      * @param present
-     * @throws NullPointerException if personId, name, surname, participantId,
-     *                              category or present is null
+     * @throws NullPointerException if name, surname, participantId, category or
+     *                              present is null (personId can be
+     *                              because of auto-increment)
      */
     private ParticipantEntity(int personId, String name, String surname, int participantId, String category,
             boolean present) {
 
         super(personId, name, surname);
 
-        requireNonNull(participantId);
         requireNonNull(category);
         requireNonNull(present);
 
@@ -47,8 +47,9 @@ public class ParticipantEntity extends PersonEntity {
      * @param category
      * @param present
      * @return a Participant
-     * @throws NullPointerException if personId, name, surname, participantId,
-     *                              category or present is null
+     * @throws NullPointerException if name, surname, participantId, category or
+     *                              present is null (personId can be
+     *                              because of auto-increment)
      */
     public static ParticipantEntity of(int personId, String name, String surname, int participantId, String category,
             boolean present) {

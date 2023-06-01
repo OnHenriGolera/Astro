@@ -19,8 +19,8 @@ public class UserEntity extends PersonEntity {
      * @param userEntity
      * @param roleEntity
      * @param password
-     * @throws NullPointerException if userId, name, surname, userId, password or
-     *                              roleEntity is null
+     * @throws NullPointerException if name, surname, password or
+     *                              roleEntity is null (personId and userId can be because of auto-increment)
      */
     private UserEntity(int personId, String name, String surname, int userId, String password, RoleEntity roleEntity) {
 
@@ -28,7 +28,6 @@ public class UserEntity extends PersonEntity {
 
         requireNonNull(roleEntity);
         requireNonNull(password);
-        requireNonNull(userId);
 
         this.roleEntity = roleEntity;
         this.password = password;
@@ -42,8 +41,9 @@ public class UserEntity extends PersonEntity {
      * @param roleEntity
      * @param password
      * @return a UserEntity
-     * @throws NullPointerException if userId, name, surname, userId, password or
-     *                              roleEntity is null
+     * @throws NullPointerException if name, surname, password or
+     *                              roleEntity is null (personId and userId can be
+     *                              because of auto-increment)
      */
     public static UserEntity of(int personId, String name, String surname, int userId, String password,
             RoleEntity roleEntity) {

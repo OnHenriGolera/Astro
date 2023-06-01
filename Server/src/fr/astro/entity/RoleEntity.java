@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
  * RoleEntity
  */
 public class RoleEntity {
-    
+
     private int roleId;
     private String name;
     private int accessLevel;
@@ -17,11 +17,11 @@ public class RoleEntity {
      * @param roleId
      * @param name
      * @param accessLevel
-     * @throws NullPointerException if roleId, name or accessLevel is null
+     * @throws NullPointerException if name or accessLevel is null (roleId can be
+     *                              because of auto-increment)
      */
     private RoleEntity(int roleId, String name, int accessLevel) {
 
-        requireNonNull(roleId);
         requireNonNull(name);
         requireNonNull(accessLevel);
 
@@ -37,7 +37,8 @@ public class RoleEntity {
      * @param name
      * @param accessLevel
      * @return a RoleEntity
-     * @throws NullPointerException if roleId, name or accessLevel is null
+     * @throws NullPointerException if name or accessLevel is null (roleId can be
+     *                              because of auto-increment)
      */
     public static RoleEntity of(int roleId, String name, int accessLevel) {
         return new RoleEntity(roleId, name, accessLevel);

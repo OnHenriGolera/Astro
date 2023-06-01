@@ -17,13 +17,13 @@ public class PersonEntity {
      * @param personId
      * @param name
      * @param surname
-     * @throws NullPointerException if personId, name or surname is null
+     * @throws NullPointerException if name or surname is null (personId can be
+     *                              because of auto-increment)
      */
     public PersonEntity(int personId, String name, String surname) {
 
         requireNonNull(name);
         requireNonNull(surname);
-        requireNonNull(personId);
 
         this.personId = personId;
         this.name = name;
@@ -37,7 +37,8 @@ public class PersonEntity {
      * @param name     - required
      * @param surname  - required
      * @return a PersonEntity
-     * @throws NullPointerException if personId, name or surname is null
+     * @throws NullPointerException if name or surname is null (personId can be
+     *                              because of auto-increment)
      */
     public static PersonEntity of(int personId, String name, String surname) {
         return new PersonEntity(personId, name, surname);
