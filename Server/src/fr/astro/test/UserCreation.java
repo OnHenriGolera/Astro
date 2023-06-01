@@ -6,22 +6,36 @@ import java.util.List;
 import src.fr.astro.dao.Initializer;
 import src.fr.astro.dao.RoleDAO;
 import src.fr.astro.dao.UserDAO;
-import src.fr.astro.entity.RoleEntity;
 import src.fr.astro.entity.UserEntity;
 import src.fr.astro.util.Generator;
 
-public class UserTest extends Tester {
+/**
+ * UserTest
+ * 
+ * Test the UserDAO
+ */
+public class UserCreation extends Tester {
 
-    private final String backupFile = "~/astro_db_backup.db";
+    // Backup file
+    private final String backupFile = System.getProperty("user.home") + "/bdd_astro";
+    private final String testFile = System.getProperty("user.home") + "/bdd_astro_test";
+    
+    // To generate data
     private Generator generatorInstance = Generator.getInstance();
-
-    private List<UserEntity> users;
-    private List<UserEntity> usersFromDatabase;
+    
+    // Utils
+    protected List<UserEntity> users;
+    protected List<UserEntity> usersFromDatabase;
     private int numberOfUsers = 10;
 
+    /**
+     * Main
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
 
-        UserTest userTest = new UserTest();
+        UserCreation userTest = new UserCreation();
         userTest.test();
 
     }
@@ -32,10 +46,10 @@ public class UserTest extends Tester {
         // Store make a copy of the database
         Initializer.Backup(backupFile);
 
-        // Delete the current database
-        Initializer.Drop();
-
         // Create a new database
+        Initializer.Load(testFile);
+
+        // Initialize the database
         Initializer.Init();
 
     }
@@ -45,12 +59,6 @@ public class UserTest extends Tester {
 
         users = new ArrayList<UserEntity>();
 
-        // Create a role
-        RoleEntity role = generatorInstance.generateRoleEntity();
-
-        // Insert the role
-        RoleDAO.getInstance().save(role);
-
         UserEntity currentUser;
 
         // Generate users
@@ -58,18 +66,12 @@ public class UserTest extends Tester {
 
             currentUser = generatorInstance.generateUserEntity();
 
+            UserDAO.getInstance().save(currentUser);
+
             users.add(currentUser);
 
         }
 
-        // Insert users
-        for (UserEntity user : users) {
-
-            System.out.println("Inserting " + user + "...");
-
-            UserDAO.getInstance().save(user);
-
-        }
 
     }
 
@@ -82,7 +84,7 @@ public class UserTest extends Tester {
         // Check if the number of users is correct
         if (usersFromDatabase.size() != numberOfUsers) {
             throw new Exception(
-                    "❌ The number of users is incorrect : " + usersFromDatabase.size() + "/" + numberOfUsers);
+                    "❌ The number of users is incorrect : " + usersFromDatabase.size() + "/" + numberOfUsers + "%n");
         }
 
         // Check if the users are correct
@@ -90,12 +92,12 @@ public class UserTest extends Tester {
 
             if (!usersFromDatabase.contains(user)) {
                 throw new Exception("❌ The user " + user + " is not in the database." + usersFromDatabase.size() + "/"
-                        + numberOfUsers);
+                        + numberOfUsers + "%n");
             }
 
         }
 
-        System.out.println("✅ UserTest validated.");
+        System.out.println("✅ UserCreation validated.");
 
     }
 

@@ -15,7 +15,7 @@ public class Initializer {
 	 */
 	public static void Init() {
 
-		Connection connect = Connector.getInstance();
+		Connection connect = Connector.getInstance(Connector.getFilePath());
 
 		try {
 

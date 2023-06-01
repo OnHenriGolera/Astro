@@ -1,5 +1,10 @@
 package src.fr.astro.test;
 
+/**
+ * Tester
+ * 
+ * Help making tests classes
+ */
 public abstract class Tester {
 
     /**

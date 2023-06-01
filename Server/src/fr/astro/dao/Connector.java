@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Connector {
 
 	// Connection information
-	private static String dbPath = System.getProperty("user.dir") + "/bdd_astro";
+	private static String dbPath = System.getProperty("user.home") + "/bdd_astro";
 	private static String filePath = dbPath;
 	private static String url = "jdbc:h2:" + filePath;
 	private static String user = "astro-user";
@@ -23,7 +23,10 @@ public class Connector {
 	 * @return the instance of Connector
 	 */
 	public static Connection getInstance() {
-		return getInstance(dbPath);
+		if (connect == null) {
+			return getInstance(dbPath);
+		}
+		return connect;
 	}
 
 	/**

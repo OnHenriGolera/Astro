@@ -17,6 +17,8 @@ public class Generator {
     private static Generator instance;
     private Faker fakerInstance;
 
+    private RoleEntity roleEntity;
+
     /**
      * Constructor
      */
@@ -73,7 +75,7 @@ public class Generator {
         return "role"; // TODO
     }
 
-    /** 
+    /**
      * Generate a role access level
      * 
      * @return a role access level
@@ -97,7 +99,33 @@ public class Generator {
      * @return a RoleEntity
      */
     public RoleEntity generateRoleEntity() throws SQLException {
-        return RoleEntity.of(RoleDAO.getInstance().getLastInsertedId() + 1, generateRoleName(), generateRoleAccessLevel());
+        return RoleEntity.of(RoleDAO.getInstance().getLastInsertedId() + 1, generateRoleName(),
+                generateRoleAccessLevel());
+    }
+
+    /**
+     * Generate a RoleEntity
+     * Create a new RoleEntity if instance is null
+     * 
+     * @return a RoleEntity
+     */
+    public RoleEntity getRoleEntity() throws SQLException {
+        if (roleEntity == null) {
+            try {
+                // Check if a role exists
+                if (RoleDAO.getInstance().getLastInsertedId() != -1) {
+                    roleEntity = RoleDAO.getInstance().get(RoleDAO.getInstance().getLastInsertedId());
+                } else {
+                    roleEntity = generateRoleEntity();
+
+                    // Save the role
+                    RoleDAO.getInstance().save(roleEntity);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return roleEntity;
     }
 
     /**
@@ -110,7 +138,7 @@ public class Generator {
         PersonEntity personEntity = generatePersonEntity();
 
         // Then, generate a RoleEntity
-        RoleEntity roleEntity = generateRoleEntity();
+        RoleEntity roleEntity = getRoleEntity();
 
         // Finally, generate a UserEntity
         return UserEntity.of(

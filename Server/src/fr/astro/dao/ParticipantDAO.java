@@ -15,6 +15,7 @@ import src.fr.astro.exception.sql.ObjectNotFound;
  * ParticipantDAO
  * 
  * DAO for ParticipantEntity
+ * 
  * @see ParticipantEntity
  * @see SQLObject
  */
@@ -34,15 +35,16 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
     private final String COLUMN_PRESENT = "present";
 
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
-            COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT);
+    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME,
+            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
             COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
-    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID, TABLE_NAME, COLUMN_ID);
+    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID,
+            TABLE_NAME, COLUMN_ID);
     /* ------------------------------------------------- */
 
     /**
@@ -58,6 +60,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
     /**
      * Return the instance of ParticipantDAO
      * Create it if it doesn't exist
+     * 
      * @return the instance of ParticipantDAO
      */
     public static ParticipantDAO getInstance() {
@@ -69,16 +72,22 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     @Override
     public boolean save(ParticipantEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
+        if (exist(object)) {
+            return update(object);
+        }
+
+        PersonDAO.getInstance().save(object);
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
-        statement.setInt(1, object.getPersonId());
-        statement.setString(2, object.getParticipantCategory());
-        statement.setBoolean(3, object.isParticipantPresent());
+        statement.setInt(1, object.getParticipantId());
+        statement.setInt(2, object.getPersonId());
+        statement.setString(3, object.getParticipantCategory());
+        statement.setBoolean(4, object.isParticipantPresent());
         statement.executeUpdate();
 
         return true;
@@ -87,7 +96,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     @Override
     public boolean update(ParticipantEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new ObjectNotFound("ParticipantEntity", "null");
         }
@@ -109,7 +118,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     @Override
     public boolean delete(ParticipantEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new ObjectNotFound("ParticipantEntity", "null");
         }
@@ -122,12 +131,15 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
         statement.setInt(1, object.getParticipantId());
         statement.executeUpdate();
 
+        // Delete as PersonEntity
+        PersonDAO.getInstance().delete(object);
+
         return true;
     }
 
     @Override
     public ParticipantEntity get(int id) throws ObjectNotFound, SQLException {
-        
+
         if (!exist(id)) {
             throw new ObjectNotFound("ParticipantEntity", id);
         }
@@ -144,18 +156,18 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
             PersonEntity person = PersonDAO.getInstance().get(personId);
             String name = person.getPersonName();
             String surname = person.getPersonSurname();
-            
+
             return ParticipantEntity.of(personId, name, surname, id, category, present);
 
         }
-        
+
         // Never reached because of the exist(id) check
         return null;
     }
 
     @Override
     public boolean exist(int id) throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
@@ -169,7 +181,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     @Override
     public boolean exist(ParticipantEntity object) throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
         statement.setInt(1, object.getParticipantId());
         ResultSet result = statement.executeQuery();
@@ -192,7 +204,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
         if (limit < 0) {
             limit = +Integer.MAX_VALUE;
         }
-        
+
         List<ParticipantEntity> participants = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
@@ -208,7 +220,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
                 PersonEntity person = PersonDAO.getInstance().get(personId);
                 String name = person.getPersonName();
                 String surname = person.getPersonSurname();
-                
+
                 participants.add(ParticipantEntity.of(personId, name, surname, personId, category, present));
             } catch (ObjectNotFound e) {
                 e.printStackTrace();
@@ -220,7 +232,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     @Override
     public int getLastInsertedId() throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(GET_LAST_INSERTED_ID);
         ResultSet result = statement.executeQuery();
 
@@ -230,5 +242,5 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
         return -1;
     }
-    
+
 }

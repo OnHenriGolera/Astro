@@ -14,6 +14,7 @@ import src.fr.astro.exception.sql.ObjectNotFound;
  * PersonDAO
  * 
  * DAO for PersonEntity
+ * 
  * @see PersonEntity
  * @see SQLObject
  */
@@ -30,17 +31,18 @@ public class PersonDAO implements SQLObject<PersonEntity> {
     private final String COLUMN_ID = "personId";
     private final String COLUMN_FIRSTNAME = "name";
     private final String COLUMN_SURNAME = "surname";
-    
+
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?)", TABLE_NAME,
-            COLUMN_FIRSTNAME, COLUMN_SURNAME);
+    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
+            COLUMN_ID, COLUMN_FIRSTNAME, COLUMN_SURNAME);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
             COLUMN_FIRSTNAME, COLUMN_SURNAME, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
-    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID, TABLE_NAME, COLUMN_ID);
+    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID,
+            TABLE_NAME, COLUMN_ID);
     /* ------------------------------------------------- */
 
     /**
@@ -56,6 +58,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
     /**
      * Return the instance of PersonDAO
      * Create it if it doesn't exist
+     * 
      * @return the instance of PersonDAO
      */
     public static PersonDAO getInstance() {
@@ -67,14 +70,19 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public boolean save(PersonEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new ObjectNotFound("PersonEntity", "null");
         }
 
+        if (exist(object)) {
+            return update(object);
+        }
+
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
-        statement.setString(1, object.getPersonName());
-        statement.setString(2, object.getPersonSurname());
+        statement.setInt(1, object.getPersonId());
+        statement.setString(2, object.getPersonName());
+        statement.setString(3, object.getPersonSurname());
         statement.executeUpdate();
 
         return true;
@@ -82,7 +90,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public boolean update(PersonEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             return false;
         }
@@ -103,7 +111,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public boolean delete(PersonEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             return false;
         }
@@ -143,7 +151,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public boolean exist(int id) throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
@@ -175,7 +183,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public List<PersonEntity> getAll(int limit) throws SQLException {
-        
+
         if (limit < 0) {
             limit = +Integer.MAX_VALUE;
         }
@@ -199,7 +207,7 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     @Override
     public int getLastInsertedId() throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(GET_LAST_INSERTED_ID);
         ResultSet result = statement.executeQuery();
 

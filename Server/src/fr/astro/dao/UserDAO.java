@@ -36,15 +36,16 @@ public class UserDAO implements SQLObject<UserEntity> {
     private final String COLUMN_ROLE_ID = "roleId";
 
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
-            COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID);
+    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME,
+            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
             COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
-    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID, TABLE_NAME, COLUMN_ID);
+    private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID,
+            TABLE_NAME, COLUMN_ID);
     /* ------------------------------------------------- */
 
     /**
@@ -77,17 +78,19 @@ public class UserDAO implements SQLObject<UserEntity> {
             throw new ObjectNotFound("UserEntity", "null");
         }
 
+        if (exist(object)) {
+            return update(object);
+        }
+
         // Save as PersonEntity
         PersonDAO.getInstance().save(object);
 
-        // Save role
-        RoleDAO.getInstance().save(object.getUserRoleEntity());
-
         // Save user
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
-        statement.setInt(1, object.getPersonId());
-        statement.setString(2, object.getUserPassword());
-        statement.setInt(3, object.getUserRoleEntity().getRoleId());
+        statement.setInt(1, object.getUserId());
+        statement.setInt(2, object.getPersonId());
+        statement.setString(3, object.getUserPassword());
+        statement.setInt(4, object.getUserRoleEntity().getRoleId());
         statement.executeUpdate();
 
         return true;
@@ -106,9 +109,6 @@ public class UserDAO implements SQLObject<UserEntity> {
 
         // Update as PersonEntity
         PersonDAO.getInstance().update(object);
-
-        // Update role
-        RoleDAO.getInstance().update(object.getUserRoleEntity());
 
         // Update user
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
@@ -133,16 +133,13 @@ public class UserDAO implements SQLObject<UserEntity> {
             throw new ObjectNotFound("UserEntity", object.getUserId());
         }
 
-        // Delete as PersonEntity
-        PersonDAO.getInstance().delete(object);
-
-        // Delete role
-        RoleDAO.getInstance().delete(object.getUserRoleEntity());
-
         // Delete user
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getUserId());
         statement.executeUpdate();
+
+        // Delete as PersonEntity
+        PersonDAO.getInstance().delete(object);
 
         return true;
     }
