@@ -90,8 +90,10 @@ public class Initializer {
 		// Delete the database is destroying the file from Connector
 		String filePath = Connector.getFilePath();
 
-		File file = new File(filePath);
+		File file = new File(filePath + ".mv.db");
 		file.delete();
+
+		System.out.println("Database deleted : " + filePath + ".mv.db");
 
 	}
 
@@ -126,7 +128,7 @@ public class Initializer {
 	 */
 	public static void Load(String filePath) {
 
-		// Close the current connection
+		// If the connection is already established, close it
 		Connector.close();
 
 		// Load the database
