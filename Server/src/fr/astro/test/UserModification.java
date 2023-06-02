@@ -6,17 +6,36 @@ import java.util.List;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
 
+/**
+ * UserModification
+ * 
+ * Test the modification of users
+ * @see UserCreation
+ */
 public class UserModification extends UserCreation {
 
+    // Copy of the users (to compare before / after)
     private List<UserEntity> copyUsers;
 
+    /**
+     * Main
+     * @param args
+     */
     public static void main(String[] args) {
 
         UserModification userModification = new UserModification();
         userModification.test();
 
     }
-    
+
+    /**
+     * Initialize the test
+     * - Initialize like UserCreation
+     * - Initialize copyUsers
+     * 
+     * @see UserCreation
+     * @throws Exception
+     */
     @Override
     public void init() throws Exception {
 
@@ -26,7 +45,15 @@ public class UserModification extends UserCreation {
         copyUsers = new ArrayList<>();
 
     }
-    
+
+    /**
+     * Run the test
+     * - Run like UserCreation
+     * - Modify the users
+     * 
+     * @see UserCreation
+     * @throws Exception
+     */
     @Override
     public void run() throws Exception {
 
@@ -51,6 +78,14 @@ public class UserModification extends UserCreation {
 
     }
 
+    /**
+     * Validate the test
+     * - Validate like UserCreation
+     * - Check if the users have been modified
+     * 
+     * @see UserCreation
+     * @throws Exception
+     */
     @Override
     public void validate() throws Exception {
 
@@ -66,7 +101,8 @@ public class UserModification extends UserCreation {
 
             // Check if the surname has been modified
             if (users.get(i).getPersonSurname().equals(copyUsers.get(i).getPersonSurname())) {
-                throw new Exception("❌ The surname of the user " + users.get(i).getPersonId() + " has not been modified");
+                throw new Exception(
+                        "❌ The surname of the user " + users.get(i).getPersonId() + " has not been modified");
             }
 
         }
@@ -75,6 +111,12 @@ public class UserModification extends UserCreation {
 
     }
 
+    /**
+     * Display the test
+     * - Display the users (before / after)
+     * 
+     * @throws Exception
+     */
     @Override
     public void display() throws Exception {
 
@@ -90,10 +132,14 @@ public class UserModification extends UserCreation {
 
         System.out.println("--------------------");
 
-
-
     }
 
+    /**
+     * Copy a list of users
+     * 
+     * @param original - the original list
+     * @param copy     - where the copy will be stored (modified)
+     */
     private void copyList(List<UserEntity> original, List<UserEntity> copy) {
 
         for (UserEntity user : original) {
@@ -101,5 +147,5 @@ public class UserModification extends UserCreation {
         }
 
     }
-    
+
 }

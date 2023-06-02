@@ -12,6 +12,7 @@ import src.fr.astro.util.Generator;
  * UserTest
  * 
  * Test the UserDAO
+ * @see Tester
  */
 public class UserCreation extends Tester {
 
