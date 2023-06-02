@@ -1,5 +1,7 @@
 package src.fr.astro.test;
 
+import src.fr.astro.dao.database.Initializer;
+
 /**
  * Tester
  * 
@@ -7,12 +9,28 @@ package src.fr.astro.test;
  */
 public abstract class Tester {
 
+    // Backup file
+    protected final String backupFile = System.getProperty("user.home") + "/bdd_astro";
+    protected final String testFile = System.getProperty("user.home") + "/bdd_astro_test";
+
     /**
-     * Init the test
-     * 
-     * @return void
+     * Initialize the test
+     * - Create a backup of the database
+     * - Create a new database
+     * - Initialize the database
      */
-    public abstract void init() throws Exception;
+    protected void init() throws Exception {
+
+        // Store make a copy of the database
+        Initializer.Backup(backupFile);
+
+        // Create a new database
+        Initializer.Load(testFile);
+
+        // Initialize the database
+        Initializer.Init();
+
+    }
 
     /**
      * Run the test
@@ -39,12 +57,19 @@ public abstract class Tester {
     public abstract void display() throws Exception;
 
     /**
-     * Remove all the test data
-     * 
-     * @return void
-     * @throws Exception if an error occured
+     * Clean the test
+     * - Delete the current database
+     * - Restore the database
      */
-    public abstract void clean() throws Exception;
+    protected void clean() throws Exception {
+
+        // Delete the current database
+        Initializer.Drop();
+
+        // Restore the database
+        Initializer.Load(backupFile);
+
+    }
 
     /**
      * Run the test

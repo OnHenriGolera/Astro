@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.fr.astro.dao.SQLObject;
-import src.fr.astro.dao.database.Initializer;
 
 /**
  * CreationTester
@@ -17,34 +16,11 @@ public abstract class CreationTester<T> extends Tester {
 
     protected String testName = "CreationTester";
 
-    // Backup file
-    private final String backupFile = System.getProperty("user.home") + "/bdd_astro";
-    private final String testFile = System.getProperty("user.home") + "/bdd_astro_test";
 
     // Utils
     protected List<T> objects;
     protected List<T> objectsFromDatabase;
     private final int numberOfObjects = 10;
-
-    /**
-     * Initialize the test
-     * - Create a backup of the database
-     * - Create a new database
-     * - Initialize the database
-     */
-    @Override
-    public void init() throws Exception {
-
-        // Store make a copy of the database
-        Initializer.Backup(backupFile);
-
-        // Create a new database
-        Initializer.Load(testFile);
-
-        // Initialize the database
-        Initializer.Init();
-
-    }
 
     /**
      * Run the test
@@ -135,22 +111,6 @@ public abstract class CreationTester<T> extends Tester {
         }
 
         System.out.println("-------------------");
-
-    }
-
-    /**
-     * Clean the test
-     * - Delete the current database
-     * - Restore the database
-     */
-    @Override
-    public void clean() throws Exception {
-
-        // Delete the current database
-        Initializer.Drop();
-
-        // Restore the database
-        Initializer.Load(backupFile);
 
     }
 
