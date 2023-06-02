@@ -9,9 +9,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class UserEntity extends PersonEntity {
 
-    private RoleEntity roleEntity;
-    private int userId;
-    private String password;
+    protected RoleEntity roleEntity;
+    protected int userId;
+    protected String password;
 
     /**
      * Constructor
@@ -20,7 +20,8 @@ public class UserEntity extends PersonEntity {
      * @param roleEntity
      * @param password
      * @throws NullPointerException if name, surname, password or
-     *                              roleEntity is null (personId and userId can be because of auto-increment)
+     *                              roleEntity is null (personId and userId can be
+     *                              because of auto-increment)
      */
     private UserEntity(int personId, String name, String surname, int userId, String password, RoleEntity roleEntity) {
 
@@ -48,6 +49,11 @@ public class UserEntity extends PersonEntity {
     public static UserEntity of(int personId, String name, String surname, int userId, String password,
             RoleEntity roleEntity) {
         return new UserEntity(personId, name, surname, userId, password, roleEntity);
+    }
+
+    public static UserEntity Of(UserEntity userEntity) {
+        return new UserEntity(userEntity.getPersonId(), userEntity.getPersonName(), userEntity.getPersonSurname(),
+                userEntity.getUserId(), userEntity.getUserPassword(), userEntity.getUserRoleEntity());
     }
 
     /**
@@ -133,7 +139,8 @@ public class UserEntity extends PersonEntity {
      */
     @Override
     public String toString() {
-        return "UserEntity [userId=" + userId + ", password=" + password + ", roleEntity=" + roleEntity + "]";
+        return "UserEntity [userId=" + userId + ", password=" + password + ", roleEntity=" + roleEntity + ", name="
+                + name + ", surname=" + surname + ", personId=" + personId + "]";
     }
 
     /**

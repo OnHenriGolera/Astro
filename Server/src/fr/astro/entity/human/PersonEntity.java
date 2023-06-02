@@ -7,9 +7,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class PersonEntity {
 
-    private int personId;
-    private String name;
-    private String surname;
+    protected int personId;
+    protected String name;
+    protected String surname;
 
     /**
      * Constructor

@@ -120,6 +120,9 @@ public class ParticipantEntity extends PersonEntity {
                 "participantId=" + participantId +
                 ", category='" + category + '\'' +
                 ", present=" + present +
+                ", personId=" + personId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 '}';
     }
 

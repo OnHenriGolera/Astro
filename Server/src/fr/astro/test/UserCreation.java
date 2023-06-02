@@ -20,7 +20,7 @@ public class UserCreation extends Tester {
     private final String testFile = System.getProperty("user.home") + "/bdd_astro_test";
     
     // To generate data
-    private Generator generatorInstance = Generator.getInstance();
+    protected Generator generatorInstance = Generator.getInstance();
     
     // Utils
     protected List<UserEntity> users;
@@ -124,7 +124,7 @@ public class UserCreation extends Tester {
     public void display() throws Exception {
 
         System.out.println("--------------------");
-        System.out.println("✨ Test : UserTest");
+        System.out.println("✨ Test : UserCreation");
 
         // Display all users
         for (UserEntity user : usersFromDatabase) {
