@@ -214,4 +214,14 @@ public class RoleDAO implements SQLObject<RoleEntity> {
         return -1;
     }
 
+    @Override
+    public RoleEntity copyObject(RoleEntity object) throws ObjectNotFound {
+
+        if (object == null) {
+            throw new ObjectNotFound("RoleEntity", "null");
+        }
+
+        return RoleEntity.of(object.getRoleId(), object.getRoleName(), object.getRoleAccessLevel());
+    }
+
 }

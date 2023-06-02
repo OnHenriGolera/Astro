@@ -263,4 +263,17 @@ public class UserDAO implements SQLObject<UserEntity> {
 
     }
 
+    @Override
+    public UserEntity copyObject(UserEntity object) throws ObjectNotFound {
+
+        if (object == null) {
+            throw new ObjectNotFound("UserEntity", "null");
+        }
+
+        return UserEntity.of(object.getUserId(), object.getPersonName(), object.getPersonSurname(),
+                object.getPersonId(),
+                object.getUserPassword(), object.getUserRoleEntity());
+
+    }
+
 }

@@ -245,4 +245,15 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity> {
         return -1;
     }
 
+    @Override
+    public ParticipantEntity copyObject(ParticipantEntity object) throws ObjectNotFound {
+
+        if (object == null) {
+            throw new ObjectNotFound("ParticipantEntity", "null");
+        }
+
+        return ParticipantEntity.of(object.getPersonId(), object.getPersonName(), object.getPersonSurname(),
+                object.getParticipantId(), object.getParticipantCategory(), object.isParticipantPresent());
+    }
+
 }

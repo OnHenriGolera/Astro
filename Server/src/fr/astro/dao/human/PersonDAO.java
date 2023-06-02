@@ -221,4 +221,15 @@ public class PersonDAO implements SQLObject<PersonEntity> {
 
     }
 
+    @Override
+    public PersonEntity copyObject(PersonEntity object) throws ObjectNotFound {
+
+        if (object == null) {
+            throw new ObjectNotFound("PersonEntity", "null");
+        }
+
+        return new PersonEntity(object.getPersonId(), object.getPersonName(), object.getPersonSurname());
+
+    }
+
 }
