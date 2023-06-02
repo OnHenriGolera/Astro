@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import src.fr.astro.dao.DAOObject;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.database.Connector;
 import src.fr.astro.entity.human.PersonEntity;
@@ -20,7 +21,7 @@ import src.fr.astro.exception.sql.ObjectNotFound;
  * @see PersonEntity
  * @see SQLObject
  */
-public class PersonDAO implements SQLObject<PersonEntity> {
+public class PersonDAO implements SQLObject<PersonEntity>, DAOObject {
 
     // Instances
     private static PersonDAO instance;

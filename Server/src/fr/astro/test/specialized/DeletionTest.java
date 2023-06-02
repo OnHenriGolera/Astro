@@ -1,8 +1,8 @@
-package src.fr.astro.test;
+package src.fr.astro.test.specialized;
 
 public abstract class DeletionTest<T> extends CreationTest<T> {
 
-    protected String testName = "DeletionTester";
+    protected String testName = "DeletionTest";
 
     @Override
     public void run() throws Exception {

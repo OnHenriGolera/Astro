@@ -3,8 +3,8 @@ package src.fr.astro.test.user;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.CreationTest;
 import src.fr.astro.test.Test;
+import src.fr.astro.test.specialized.CreationTest;
 import src.fr.astro.util.Generator;
 
 /**
@@ -28,7 +28,7 @@ public class UserCreation extends CreationTest<UserEntity> {
      * 
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         UserCreation test = new UserCreation();
 

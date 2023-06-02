@@ -3,7 +3,7 @@ package src.fr.astro.test.user;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.DeletionTest;
+import src.fr.astro.test.specialized.DeletionTest;
 import src.fr.astro.util.Generator;
 
 /**
@@ -27,7 +27,7 @@ public class UserDeletion extends DeletionTest<UserEntity> {
      * 
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         UserDeletion test = new UserDeletion();
 
@@ -68,6 +68,7 @@ public class UserDeletion extends DeletionTest<UserEntity> {
      */
     @Override
     public SQLObject<UserEntity> getDao() {
+        
 
         return UserDAO.getInstance();
 

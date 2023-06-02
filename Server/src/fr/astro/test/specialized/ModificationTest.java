@@ -1,28 +1,21 @@
-package src.fr.astro.test;
+package src.fr.astro.test.specialized;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ModificationTest<T> extends CreationTest<T> {
 
-    protected String testName = "DeletionTester";
+    protected String testName = "DeletionTest";
 
     protected List<T> objectCopy;
 
-    @Override
-    public void init() throws Exception {
-
-        super.init();
-
-        // Initialize the copy list
-        objectCopy = new ArrayList<>();
-
-    }
 
     @Override
     public void run() throws Exception {
 
         super.run();
+
+        objectCopy = new ArrayList<>();
 
         // Create a copy of the objects
         copyList(objects, objectCopy);

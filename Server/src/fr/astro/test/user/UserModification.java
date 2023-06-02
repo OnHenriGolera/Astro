@@ -3,7 +3,7 @@ package src.fr.astro.test.user;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.ModificationTest;
+import src.fr.astro.test.specialized.ModificationTest;
 import src.fr.astro.util.Generator;
 
 /**
@@ -26,7 +26,7 @@ public class UserModification extends ModificationTest<UserEntity> {
      * 
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         UserModification test = new UserModification();
 

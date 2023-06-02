@@ -1,9 +1,10 @@
-package src.fr.astro.test;
+package src.fr.astro.test.specialized;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import src.fr.astro.dao.SQLObject;
+import src.fr.astro.test.Test;
 
 /**
  * CreationTester
@@ -14,7 +15,7 @@ import src.fr.astro.dao.SQLObject;
  */
 public abstract class CreationTest<T> extends Test {
 
-    protected String testName = "CreationTester";
+    protected String testName = "CreationTest";
 
 
     // Utils

@@ -1,6 +1,7 @@
 package src.fr.astro.test;
 
 import src.fr.astro.dao.database.Initializer;
+import src.fr.astro.exception.test.TestFailed;
 
 /**
  * Tester
@@ -19,7 +20,7 @@ public abstract class Test {
      * - Create a new database
      * - Initialize the database
      */
-    protected void init() throws Exception {
+    public final void init() throws Exception {
 
         // Store make a copy of the database
         Initializer.Backup(backupFile);
@@ -61,7 +62,7 @@ public abstract class Test {
      * - Delete the current database
      * - Restore the database
      */
-    protected void clean() throws Exception {
+    public final void clean() throws Exception {
 
         // Delete the current database
         Initializer.Drop();
@@ -75,8 +76,11 @@ public abstract class Test {
      * Run the test
      * 
      * @return void
+     * @throws TestFailed
      */
-    public void test(boolean display) {
+    public void test(boolean display) throws TestFailed {
+
+        boolean success = true;
 
         try {
             init();
@@ -87,6 +91,7 @@ public abstract class Test {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            success = false;
         }
 
         // Clean, even if an error occured
@@ -94,6 +99,11 @@ public abstract class Test {
             clean();
         } catch (Exception e) {
             e.printStackTrace();
+            success = false;
+        }
+
+        if (!success) {
+            throw new TestFailed("❌ test failed.");
         }
 
     }
