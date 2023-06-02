@@ -29,7 +29,7 @@ public abstract class ModificationTester<T> extends CreationTester<T> {
 
         // Modify the objects
         for (T object : objects) {
-            
+
             // Modify the object
             modifyObject(object);
 
@@ -98,7 +98,6 @@ public abstract class ModificationTester<T> extends CreationTester<T> {
         }
 
         System.out.println("-------------------");
-
 
     }
 

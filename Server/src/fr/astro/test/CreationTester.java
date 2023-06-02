@@ -10,6 +10,7 @@ import src.fr.astro.dao.database.Initializer;
  * CreationTester
  * 
  * Help making tests classes to test generations
+ * 
  * @see Tester
  */
 public abstract class CreationTester<T> extends Tester {
@@ -33,7 +34,7 @@ public abstract class CreationTester<T> extends Tester {
      */
     @Override
     public void init() throws Exception {
-        
+
         // Store make a copy of the database
         Initializer.Backup(backupFile);
 
@@ -74,9 +75,10 @@ public abstract class CreationTester<T> extends Tester {
         }
 
     }
-    
+
     /**
      * Generate an object
+     * 
      * @return an object
      * @throws Exception if an error occured
      */
@@ -84,6 +86,7 @@ public abstract class CreationTester<T> extends Tester {
 
     /**
      * Get the DAO to the object T
+     * 
      * @return the DAO instance
      */
     public abstract SQLObject<T> getDao();
@@ -95,7 +98,7 @@ public abstract class CreationTester<T> extends Tester {
      */
     @Override
     public void validate() throws Exception {
-        
+
         // Fetch objects from database
         objectsFromDatabase = getDao().getAll();
 
@@ -123,7 +126,7 @@ public abstract class CreationTester<T> extends Tester {
      */
     @Override
     public void display() throws Exception {
-        
+
         System.out.println("-------------------");
         System.out.println("Objects from database");
 
@@ -150,7 +153,5 @@ public abstract class CreationTester<T> extends Tester {
         Initializer.Load(backupFile);
 
     }
-
-    
 
 }

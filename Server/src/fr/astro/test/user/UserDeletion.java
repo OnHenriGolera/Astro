@@ -10,6 +10,7 @@ import src.fr.astro.util.Generator;
  * UserDeletion
  * 
  * Test the deletion of users
+ * 
  * @see UserCreation
  */
 public class UserDeletion extends DeletionTester<UserEntity> {
@@ -19,6 +20,7 @@ public class UserDeletion extends DeletionTester<UserEntity> {
 
     /**
      * Main
+     * 
      * @param args
      */
     public static void main(String[] args) {
@@ -62,11 +64,9 @@ public class UserDeletion extends DeletionTester<UserEntity> {
      */
     @Override
     public SQLObject<UserEntity> getDao() {
-        
+
         return UserDAO.getInstance();
 
     }
 
-    
-    
 }

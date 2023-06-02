@@ -11,6 +11,7 @@ import src.fr.astro.util.Generator;
  * UserTest
  * 
  * Test the UserDAO
+ * 
  * @see Tester
  */
 public class UserCreation extends CreationTester<UserEntity> {
@@ -20,6 +21,7 @@ public class UserCreation extends CreationTester<UserEntity> {
 
     /**
      * Main
+     * 
      * @param args
      */
     public static void main(String[] args) {
@@ -29,7 +31,7 @@ public class UserCreation extends CreationTester<UserEntity> {
         test.test();
 
     }
-    
+
     /**
      * Constructor
      * 
@@ -68,7 +70,5 @@ public class UserCreation extends CreationTester<UserEntity> {
         return UserDAO.getInstance();
 
     }
-
-
 
 }
