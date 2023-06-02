@@ -91,12 +91,12 @@ User --> Person
 Stage --> FormulaElement
 Competition --> Formula
 StageList --> Stage
-Stage <-- ParticipantList
+Stage --> ParticipantList
 ParticipantList --> Participant
-Formula <-- FormulaElementList
+Formula --> FormulaElementList
 FormulaElementList --> FormulaElement
 Participant --> Person
 User --> Role
-StageList --> Competition
+StageList <-- Competition
 
 @enduml
