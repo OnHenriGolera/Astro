@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 import com.github.javafaker.Faker;
 
-import src.fr.astro.dao.ParticipantDAO;
-import src.fr.astro.dao.PersonDAO;
-import src.fr.astro.dao.RoleDAO;
-import src.fr.astro.entity.ParticipantEntity;
-import src.fr.astro.entity.PersonEntity;
-import src.fr.astro.entity.RoleEntity;
-import src.fr.astro.entity.UserEntity;
+import src.fr.astro.dao.human.ParticipantDAO;
+import src.fr.astro.dao.human.PersonDAO;
+import src.fr.astro.dao.human.RoleDAO;
+import src.fr.astro.entity.human.ParticipantEntity;
+import src.fr.astro.entity.human.PersonEntity;
+import src.fr.astro.entity.human.RoleEntity;
+import src.fr.astro.entity.human.UserEntity;
 
 public class Generator {
 

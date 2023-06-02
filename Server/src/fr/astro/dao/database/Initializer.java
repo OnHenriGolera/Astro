@@ -1,4 +1,4 @@
-package src.fr.astro.dao;
+package src.fr.astro.dao.database;
 
 import java.io.File;
 import java.sql.*;
@@ -32,6 +32,7 @@ public class Initializer {
 
 	/**
 	 * Initialize the database
+	 * 
 	 * @param connect
 	 * @throws SQLException
 	 */

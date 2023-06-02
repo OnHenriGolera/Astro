@@ -1,7 +1,8 @@
 package src.fr.astro;
 
-import src.fr.astro.dao.Initializer;
 import static spark.Spark.*;
+
+import src.fr.astro.dao.database.Initializer;
 
 public class Server {
 	

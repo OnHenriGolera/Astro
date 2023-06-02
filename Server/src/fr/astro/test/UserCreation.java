@@ -3,9 +3,9 @@ package src.fr.astro.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.fr.astro.dao.Initializer;
-import src.fr.astro.dao.UserDAO;
-import src.fr.astro.entity.UserEntity;
+import src.fr.astro.dao.database.Initializer;
+import src.fr.astro.dao.human.UserDAO;
+import src.fr.astro.entity.human.UserEntity;
 import src.fr.astro.util.Generator;
 
 /**

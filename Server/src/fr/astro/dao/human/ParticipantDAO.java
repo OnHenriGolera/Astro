@@ -1,4 +1,4 @@
-package src.fr.astro.dao;
+package src.fr.astro.dao.human;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,39 +7,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.fr.astro.entity.PersonEntity;
-import src.fr.astro.entity.RoleEntity;
-import src.fr.astro.entity.UserEntity;
+import src.fr.astro.dao.SQLObject;
+import src.fr.astro.dao.database.Connector;
+import src.fr.astro.entity.human.ParticipantEntity;
+import src.fr.astro.entity.human.PersonEntity;
 import src.fr.astro.exception.sql.ObjectNotFound;
 
 /**
- * UserDAO
+ * ParticipantDAO
  * 
- * DAO for UserEntity
+ * DAO for ParticipantEntity
  * 
- * @see UserEntity
+ * @see ParticipantEntity
  * @see SQLObject
  */
-public class UserDAO implements SQLObject<UserEntity> {
+public class ParticipantDAO implements SQLObject<ParticipantEntity> {
 
     // Instances
-    private static UserDAO instance;
+    private static ParticipantDAO instance;
     private static Connection connection;
 
     /* --------------- Query Information --------------- */
-    private final String TABLE_NAME = "User";
+    private final String TABLE_NAME = "Participant";
 
     // Columns
-    private final String COLUMN_ID = "userId";
+    private final String COLUMN_ID = "participantId";
     private final String COLUMN_PERSON_ID = "personId";
-    private final String COLUMN_PASSWORD = "password";
-    private final String COLUMN_ROLE_ID = "roleId";
+    private final String COLUMN_CATEGORY = "category";
+    private final String COLUMN_PRESENT = "present";
 
     // Queries
     private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME,
-            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID);
+            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
-            COLUMN_PERSON_ID, COLUMN_PASSWORD, COLUMN_ROLE_ID, COLUMN_ID);
+            COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
@@ -54,68 +55,63 @@ public class UserDAO implements SQLObject<UserEntity> {
      * 
      * @see Connector
      */
-    private UserDAO() {
+    private ParticipantDAO() {
         connection = Connector.getInstance();
     }
 
     /**
-     * Return the instance of UserDAO
+     * Return the instance of ParticipantDAO
      * Create it if it doesn't exist
      * 
-     * @return the instance of UserDAO
+     * @return the instance of ParticipantDAO
      */
-    public static UserDAO getInstance() {
+    public static ParticipantDAO getInstance() {
         if (instance == null) {
-            instance = new UserDAO();
+            instance = new ParticipantDAO();
         }
         return instance;
     }
 
     @Override
-    public boolean save(UserEntity object) throws ObjectNotFound, SQLException {
+    public boolean save(ParticipantEntity object) throws ObjectNotFound, SQLException {
 
         if (object == null) {
-            throw new ObjectNotFound("UserEntity", "null");
+            throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
         if (exist(object)) {
             return update(object);
         }
 
-        // Save as PersonEntity
         PersonDAO.getInstance().save(object);
 
-        // Save user
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
-        statement.setInt(1, object.getUserId());
+        statement.setInt(1, object.getParticipantId());
         statement.setInt(2, object.getPersonId());
-        statement.setString(3, object.getUserPassword());
-        statement.setInt(4, object.getUserRoleEntity().getRoleId());
+        statement.setString(3, object.getParticipantCategory());
+        statement.setBoolean(4, object.isParticipantPresent());
         statement.executeUpdate();
 
         return true;
+
     }
 
     @Override
-    public boolean update(UserEntity object) throws ObjectNotFound, SQLException {
+    public boolean update(ParticipantEntity object) throws ObjectNotFound, SQLException {
 
         if (object == null) {
-            throw new ObjectNotFound("UserEntity", "null");
+            throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
         if (!exist(object)) {
-            throw new ObjectNotFound("UserEntity", object.getUserId());
+            throw new ObjectNotFound("ParticipantEntity", object.getParticipantId());
         }
 
-        // Update as PersonEntity
-        PersonDAO.getInstance().update(object);
-
-        // Update user
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
         statement.setInt(1, object.getPersonId());
-        statement.setString(2, object.getUserPassword());
-        statement.setInt(3, object.getUserRoleEntity().getRoleId());
-        statement.setInt(4, object.getUserId());
+        statement.setString(2, object.getParticipantCategory());
+        statement.setBoolean(3, object.isParticipantPresent());
+        statement.setInt(3, object.getParticipantId());
         statement.executeUpdate();
 
         return true;
@@ -123,19 +119,18 @@ public class UserDAO implements SQLObject<UserEntity> {
     }
 
     @Override
-    public boolean delete(UserEntity object) throws ObjectNotFound, SQLException {
+    public boolean delete(ParticipantEntity object) throws ObjectNotFound, SQLException {
 
         if (object == null) {
-            throw new ObjectNotFound("UserEntity", "null");
+            throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
         if (!exist(object)) {
-            throw new ObjectNotFound("UserEntity", object.getUserId());
+            throw new ObjectNotFound("ParticipantEntity", object.getParticipantId());
         }
 
-        // Delete user
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
-        statement.setInt(1, object.getUserId());
+        statement.setInt(1, object.getParticipantId());
         statement.executeUpdate();
 
         // Delete as PersonEntity
@@ -145,38 +140,30 @@ public class UserDAO implements SQLObject<UserEntity> {
     }
 
     @Override
-    public UserEntity get(int id) throws ObjectNotFound, SQLException {
+    public ParticipantEntity get(int id) throws ObjectNotFound, SQLException {
 
         if (!exist(id)) {
-            throw new ObjectNotFound("UserEntity", id);
+            throw new ObjectNotFound("ParticipantEntity", id);
         }
 
-        // Get as PersonEntity
-        PersonDAO.getInstance().get(id);
-
-        // Get role
-        RoleDAO.getInstance().get(id);
-
-        // Get user
         PreparedStatement statement = connection.prepareStatement(GET_QUERY);
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
             int personId = result.getInt(COLUMN_PERSON_ID);
-            String password = result.getString(COLUMN_PASSWORD);
-            int roleId = result.getInt(COLUMN_ROLE_ID);
+            String category = result.getString(COLUMN_CATEGORY);
+            boolean present = result.getBoolean(COLUMN_PRESENT);
 
             PersonEntity person = PersonDAO.getInstance().get(personId);
-            String personName = person.getPersonName();
-            String personSurname = person.getPersonSurname();
+            String name = person.getPersonName();
+            String surname = person.getPersonSurname();
 
-            RoleEntity role = RoleDAO.getInstance().get(roleId);
+            return ParticipantEntity.of(personId, name, surname, id, category, present);
 
-            return UserEntity.of(id, personName, personSurname, id, password, role);
         }
 
-        // Normally, this line is never reached because of exist(id) check
+        // Never reached because of the exist(id) check
         return null;
     }
 
@@ -195,56 +182,54 @@ public class UserDAO implements SQLObject<UserEntity> {
     }
 
     @Override
-    public boolean exist(UserEntity object) throws SQLException {
+    public boolean exist(ParticipantEntity object) throws SQLException {
 
-        if (object == null) {
-            return false;
+        PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
+        statement.setInt(1, object.getParticipantId());
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            return result.getInt(1) == 1;
         }
 
-        return exist(object.getUserId());
-
+        return false;
     }
 
     @Override
-    public List<UserEntity> getAll() throws SQLException {
+    public List<ParticipantEntity> getAll() throws SQLException {
         return getAll(-1);
     }
 
     @Override
-    public List<UserEntity> getAll(int limit) throws SQLException {
+    public List<ParticipantEntity> getAll(int limit) throws SQLException {
 
         if (limit < 0) {
             limit = +Integer.MAX_VALUE;
         }
 
+        List<ParticipantEntity> participants = new ArrayList<>();
+
         PreparedStatement statement = connection.prepareStatement(GET_ALL_LIMIT_QUERY);
         statement.setInt(1, limit);
         ResultSet result = statement.executeQuery();
 
-        List<UserEntity> users = new ArrayList<>();
-
         while (result.next()) {
             try {
-                int userId = result.getInt(COLUMN_ID);
                 int personId = result.getInt(COLUMN_PERSON_ID);
-                String password = result.getString(COLUMN_PASSWORD);
-                int roleId = result.getInt(COLUMN_ROLE_ID);
+                String category = result.getString(COLUMN_CATEGORY);
+                boolean present = result.getBoolean(COLUMN_PRESENT);
 
                 PersonEntity person = PersonDAO.getInstance().get(personId);
-                String personName = person.getPersonName();
-                String personSurname = person.getPersonSurname();
+                String name = person.getPersonName();
+                String surname = person.getPersonSurname();
 
-                RoleEntity role = RoleDAO.getInstance().get(roleId);
-
-                users.add(UserEntity.of(userId, personName, personSurname, personId, password, role));
-
+                participants.add(ParticipantEntity.of(personId, name, surname, personId, category, present));
             } catch (ObjectNotFound e) {
                 e.printStackTrace();
             }
         }
 
-        return users;
-
+        return null;
     }
 
     @Override
@@ -258,7 +243,6 @@ public class UserDAO implements SQLObject<UserEntity> {
         }
 
         return -1;
-
     }
 
 }
