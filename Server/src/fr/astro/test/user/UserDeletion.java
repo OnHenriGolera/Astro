@@ -17,6 +17,10 @@ public class UserDeletion extends DeletionTester<UserEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();
+    
+    // Display
+    private final static boolean display = true;
+
 
     /**
      * Main
@@ -27,7 +31,7 @@ public class UserDeletion extends DeletionTester<UserEntity> {
 
         UserDeletion test = new UserDeletion();
 
-        test.test();
+        test.test(display);
 
     }
 

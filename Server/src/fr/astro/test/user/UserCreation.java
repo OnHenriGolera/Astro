@@ -18,6 +18,10 @@ public class UserCreation extends CreationTester<UserEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();
+    
+    // Display
+    private final static boolean display = true;
+
 
     /**
      * Main
@@ -28,7 +32,7 @@ public class UserCreation extends CreationTester<UserEntity> {
 
         UserCreation test = new UserCreation();
 
-        test.test();
+        test.test(display);
 
     }
 

@@ -18,6 +18,9 @@ public class UserModification extends ModificationTester<UserEntity> {
     // Instances
     private Generator generatorInstance = Generator.getInstance();
 
+    // Display
+    private final static boolean display = true;
+
     /**
      * Main
      * 
@@ -27,7 +30,7 @@ public class UserModification extends ModificationTester<UserEntity> {
 
         UserModification test = new UserModification();
 
-        test.test();
+        test.test(display);
 
     }
 

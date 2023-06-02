@@ -51,13 +51,15 @@ public abstract class Tester {
      * 
      * @return void
      */
-    public void test() {
+    public void test(boolean display) {
 
         try {
             init();
             run();
             validate();
-            display();
+            if (display) {
+                display();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
