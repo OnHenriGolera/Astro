@@ -3,7 +3,7 @@ package src.fr.astro.test.user;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.DeletionTester;
+import src.fr.astro.test.DeletionTest;
 import src.fr.astro.util.Generator;
 
 /**
@@ -13,7 +13,7 @@ import src.fr.astro.util.Generator;
  * 
  * @see UserCreation
  */
-public class UserDeletion extends DeletionTester<UserEntity> {
+public class UserDeletion extends DeletionTest<UserEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();

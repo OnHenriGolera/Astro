@@ -1,6 +1,6 @@
 package src.fr.astro.test;
 
-public abstract class DeletionTester<T> extends CreationTester<T> {
+public abstract class DeletionTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTester";
 

@@ -3,8 +3,8 @@ package src.fr.astro.test.user;
 import src.fr.astro.dao.SQLObject;
 import src.fr.astro.dao.human.UserDAO;
 import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.CreationTester;
-import src.fr.astro.test.Tester;
+import src.fr.astro.test.CreationTest;
+import src.fr.astro.test.Test;
 import src.fr.astro.util.Generator;
 
 /**
@@ -12,9 +12,9 @@ import src.fr.astro.util.Generator;
  * 
  * Test the UserDAO
  * 
- * @see Tester
+ * @see Test
  */
-public class UserCreation extends CreationTester<UserEntity> {
+public class UserCreation extends CreationTest<UserEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();

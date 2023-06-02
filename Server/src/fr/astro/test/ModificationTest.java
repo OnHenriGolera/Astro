@@ -3,7 +3,7 @@ package src.fr.astro.test;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ModificationTester<T> extends CreationTester<T> {
+public abstract class ModificationTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTester";
 

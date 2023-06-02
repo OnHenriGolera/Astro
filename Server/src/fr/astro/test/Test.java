@@ -7,7 +7,7 @@ import src.fr.astro.dao.database.Initializer;
  * 
  * Help making tests classes
  */
-public abstract class Tester {
+public abstract class Test {
 
     // Backup file
     protected final String backupFile = System.getProperty("user.home") + "/bdd_astro";

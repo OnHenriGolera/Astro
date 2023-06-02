@@ -10,9 +10,9 @@ import src.fr.astro.dao.SQLObject;
  * 
  * Help making tests classes to test generations
  * 
- * @see Tester
+ * @see Test
  */
-public abstract class CreationTester<T> extends Tester {
+public abstract class CreationTest<T> extends Test {
 
     protected String testName = "CreationTester";
 
