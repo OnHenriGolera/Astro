@@ -20,9 +20,10 @@ nav {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "logo nav nav nav";
-    background-color: #fff;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.01);
     color: #000;
-    border-bottom: 2px solid #000;
 }
 
 nav .logo {
@@ -51,4 +52,10 @@ nav .logo .logo-img {
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: bold;
+    transition: scale 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+    cursor: pointer;
+    scale: 1.1;
 }
