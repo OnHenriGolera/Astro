@@ -3,6 +3,7 @@ package src.fr.astro;
 import static spark.Spark.*;
 
 import src.fr.astro.dao.database.Initializer;
+import src.fr.astro.gui.staticPages.IndexGUI;
 
 public class Server {
 	
@@ -11,7 +12,19 @@ public class Server {
 		staticFiles.location("/static/");
 		port(8081);
 
-        Initializer.Init();
+		Initializer.Init();
+
+		defineGETs();
+
+	}
+
+	public static void defineGETs() {
+
+		get("/", (request, response) -> {
+
+			return IndexGUI.getInstance().renderPage();
+
+		});
 
 	}
 
