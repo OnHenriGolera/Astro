@@ -1,10 +1,10 @@
-package src.fr.astro.test.specialized;
+package fr.astro.test.specialized;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import src.fr.astro.dao.SQLObject;
-import src.fr.astro.test.Test;
+import fr.astro.dao.SQLObject;
+import fr.astro.test.Test;
 
 /**
  * CreationTester

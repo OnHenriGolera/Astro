@@ -1,7 +1,7 @@
-package src.fr.astro.test;
+package fr.astro.test;
 
-import src.fr.astro.dao.database.Initializer;
-import src.fr.astro.exception.test.TestFailed;
+import fr.astro.dao.database.Initializer;
+import fr.astro.exception.test.TestFailed;
 
 /**
  * Tester

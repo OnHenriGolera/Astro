@@ -1,8 +1,8 @@
-package src.fr.astro.gui.staticPages;
+package fr.astro.gui.staticPages;
 
 import spark.Request;
 import spark.Response;
-import src.fr.astro.gui.Page;
+import fr.astro.gui.Page;
 
 public class IndexGUI extends Page {
 

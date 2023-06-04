@@ -1,4 +1,4 @@
-package src.fr.astro.exception.test;
+package fr.astro.exception.test;
 
 public class TestFailed extends Exception {
     

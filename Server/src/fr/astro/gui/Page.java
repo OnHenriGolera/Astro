@@ -1,12 +1,12 @@
-package src.fr.astro.gui;
+package fr.astro.gui;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import spark.Request;
 import spark.Response;
-import src.fr.astro.exception.sql.InvalidArguments;
-import src.fr.astro.util.Instantiable;
+import fr.astro.exception.sql.InvalidArguments;
+import fr.astro.util.Instantiable;
 
 public abstract class Page implements Instantiable {
 

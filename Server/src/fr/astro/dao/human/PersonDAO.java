@@ -1,4 +1,4 @@
-package src.fr.astro.dao.human;
+package fr.astro.dao.human;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.fr.astro.dao.SQLObject;
-import src.fr.astro.dao.database.Connector;
-import src.fr.astro.entity.human.PersonEntity;
-import src.fr.astro.exception.sql.ObjectNotFound;
-import src.fr.astro.util.Instantiable;
+import fr.astro.dao.SQLObject;
+import fr.astro.dao.database.Connector;
+import fr.astro.entity.human.PersonEntity;
+import fr.astro.exception.sql.ObjectNotFound;
+import fr.astro.util.Instantiable;
 
 /**
  * PersonDAO

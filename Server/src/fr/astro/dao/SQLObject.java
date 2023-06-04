@@ -1,9 +1,9 @@
-package src.fr.astro.dao;
+package fr.astro.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import src.fr.astro.exception.sql.ObjectNotFound;
+import fr.astro.exception.sql.ObjectNotFound;
 
 /**
  * SQLObject

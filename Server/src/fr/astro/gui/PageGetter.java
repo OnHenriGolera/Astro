@@ -1,4 +1,4 @@
-package src.fr.astro.gui;
+package fr.astro.gui;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

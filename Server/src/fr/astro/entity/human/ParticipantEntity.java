@@ -1,4 +1,4 @@
-package src.fr.astro.entity.human;
+package fr.astro.entity.human;
 
 import static java.util.Objects.requireNonNull;
 

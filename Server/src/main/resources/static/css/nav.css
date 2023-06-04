@@ -1,0 +1,54 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    
+    background-color: #f8f9fa;
+    opacity: 0.2;
+    background-image:  radial-gradient(#2B2D42 1.35px, transparent 1.35px), radial-gradient(#2B2D42 1.35px, #f8f9fa 1.35px);
+    background-size: 54px 54px;
+    background-position: 0 0,27px 27px;
+}
+
+nav {
+    height: 10vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "logo nav nav nav";
+    background-color: #fff;
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+nav .logo {
+    /* Flex, align left */
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 2vw;
+}
+
+nav .logo .logo-img {
+    height: 8vh;
+    width: 8vh;
+}
+
+.nav-links {
+    grid-area: nav;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

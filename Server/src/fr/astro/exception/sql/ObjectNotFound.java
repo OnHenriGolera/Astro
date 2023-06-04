@@ -1,4 +1,4 @@
-package src.fr.astro.exception.sql;
+package fr.astro.exception.sql;
 
 /**
  * ObjectNotFound

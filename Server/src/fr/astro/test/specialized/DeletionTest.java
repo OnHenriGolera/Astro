@@ -1,4 +1,4 @@
-package src.fr.astro.test.specialized;
+package fr.astro.test.specialized;
 
 public abstract class DeletionTest<T> extends CreationTest<T> {
 

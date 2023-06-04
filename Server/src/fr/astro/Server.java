@@ -1,9 +1,9 @@
-package src.fr.astro;
+package fr.astro;
 
 import static spark.Spark.*;
 
-import src.fr.astro.dao.database.Initializer;
-import src.fr.astro.gui.staticPages.IndexGUI;
+import fr.astro.dao.database.Initializer;
+import fr.astro.gui.staticPages.IndexGUI;
 
 public class Server {
 	

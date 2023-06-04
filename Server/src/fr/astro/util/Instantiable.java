@@ -1,4 +1,4 @@
-package src.fr.astro.util;
+package fr.astro.util;
 
 public interface Instantiable {
     

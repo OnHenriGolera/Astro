@@ -1,4 +1,4 @@
-package src.fr.astro.dao.database;
+package fr.astro.dao.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

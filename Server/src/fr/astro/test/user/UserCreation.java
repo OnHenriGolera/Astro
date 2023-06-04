@@ -1,11 +1,11 @@
-package src.fr.astro.test.user;
+package fr.astro.test.user;
 
-import src.fr.astro.dao.SQLObject;
-import src.fr.astro.dao.human.UserDAO;
-import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.Test;
-import src.fr.astro.test.specialized.CreationTest;
-import src.fr.astro.util.Generator;
+import fr.astro.dao.SQLObject;
+import fr.astro.dao.human.UserDAO;
+import fr.astro.entity.human.UserEntity;
+import fr.astro.test.Test;
+import fr.astro.test.specialized.CreationTest;
+import fr.astro.util.Generator;
 
 /**
  * UserTest

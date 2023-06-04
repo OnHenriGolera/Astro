@@ -1,4 +1,4 @@
-package src.fr.astro.dao.database;
+package fr.astro.dao.database;
 
 import java.io.File;
 import java.sql.*;

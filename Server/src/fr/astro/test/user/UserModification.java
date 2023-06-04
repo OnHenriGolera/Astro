@@ -1,10 +1,10 @@
-package src.fr.astro.test.user;
+package fr.astro.test.user;
 
-import src.fr.astro.dao.SQLObject;
-import src.fr.astro.dao.human.UserDAO;
-import src.fr.astro.entity.human.UserEntity;
-import src.fr.astro.test.specialized.ModificationTest;
-import src.fr.astro.util.Generator;
+import fr.astro.dao.SQLObject;
+import fr.astro.dao.human.UserDAO;
+import fr.astro.entity.human.UserEntity;
+import fr.astro.test.specialized.ModificationTest;
+import fr.astro.util.Generator;
 
 /**
  * UserModification
