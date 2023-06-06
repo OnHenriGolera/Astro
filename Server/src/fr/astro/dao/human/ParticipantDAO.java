@@ -85,7 +85,8 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             return update(object);
         }
 
-        PersonDAO.getInstance().save(object);
+        // Save as PersonEntity
+        boolean success = PersonDAO.getInstance().save(object);
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
         statement.setInt(1, object.getParticipantId());
@@ -93,7 +94,9 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         statement.setString(3, object.getParticipantCategory());
         statement.setBoolean(4, object.isParticipantPresent());
         
-        return statement.executeUpdate() > 0;
+        success &= statement.executeUpdate() > 0;
+
+        return success;
 
     }
 
@@ -108,13 +111,18 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             throw new ObjectNotFound("ParticipantEntity", object.getParticipantId());
         }
 
+        // Update as PersonEntity
+        boolean success = PersonDAO.getInstance().update(object);
+
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getParticipantCategory());
         statement.setBoolean(3, object.isParticipantPresent());
         statement.setInt(4, object.getParticipantId());
         
-        return statement.executeUpdate() > 0;
+        success &= statement.executeUpdate() > 0;
+
+        return success;
 
     }
 

@@ -75,6 +75,7 @@ public abstract class Test {
     /**
      * Run the test
      * 
+     * @param display - display the test
      * @return void
      * @throws TestFailed
      */

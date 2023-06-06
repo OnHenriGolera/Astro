@@ -72,6 +72,33 @@ public class RoleEntity {
     }
 
     /**
+     * Set the roleId
+     * 
+     * @param roleId
+     */
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    /**
+     * Set the name
+     * 
+     * @param name
+     */
+    public void setRoleName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set the accessLevel
+     * 
+     * @param accessLevel
+     */
+    public void setRoleAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    /**
      * Return a String representation of the object
      * 
      * @return a String representation of the object
