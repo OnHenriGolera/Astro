@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.astro.dao.SQLObject;
+import fr.astro.exception.test.TestFailed;
 import fr.astro.test.Test;
 
 /**
@@ -81,7 +82,7 @@ public abstract class CreationTest<T> extends Test {
 
         // Check if the number of objects is the same
         if (objectsFromDatabase.size() != numberOfObjects) {
-            throw new Exception("❌ The number of objects is not the same (expected : " + numberOfObjects + ", got : " + objectsFromDatabase.size() + ")");
+            throw new TestFailed("❌ The number of objects is not the same (expected : " + numberOfObjects + ", got : " + objectsFromDatabase.size() + ")");
         }
 
         // Check if the objects are the same
@@ -89,7 +90,7 @@ public abstract class CreationTest<T> extends Test {
 
             // Contains
             if (!objectsFromDatabase.contains(objects.get(i))) {
-                throw new Exception("❌ The objects are not the same (object " + i + " : " + objects.get(i) + ")");
+                throw new TestFailed("❌ The objects are not the same (object " + i + " : " + objects.get(i) + ")");
             }
 
         }
