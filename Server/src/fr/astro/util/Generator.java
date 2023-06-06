@@ -85,6 +85,25 @@ public class Generator {
     }
 
     /**
+     * Generate a category
+     *
+     * @return a category
+     */
+    public String generateCategory() {
+        return "category"; // TODO
+    }
+
+    /**
+     * Generate a present
+     *
+     * @return a present
+     */
+    public boolean generatePresent() {
+        return true; // TODO
+    }
+
+    
+    /**
      * Generate PersonEntity
      * 
      * @return a PersonEntity
@@ -148,24 +167,6 @@ public class Generator {
                 personEntity.getPersonId(),
                 generatePassword(),
                 roleEntity);
-    }
-
-    /**
-     * Generate a category
-     *
-     * @return a category
-     */
-    public String generateCategory() {
-        return "category"; // TODO
-    }
-
-    /**
-     * Generate a present
-     *
-     * @return a present
-     */
-    public boolean generatePresent() {
-        return true; // TODO
     }
 
     /**

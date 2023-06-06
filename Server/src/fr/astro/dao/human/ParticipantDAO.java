@@ -113,7 +113,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getParticipantCategory());
         statement.setBoolean(3, object.isParticipantPresent());
-        statement.setInt(3, object.getParticipantId());
+        statement.setInt(4, object.getParticipantId());
         statement.executeUpdate();
 
         return true;
@@ -231,7 +231,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             }
         }
 
-        return null;
+        return participants;
     }
 
     @Override

@@ -1,20 +1,19 @@
-package fr.astro.test.user;
+package fr.astro.test.content.participant;
 
 import fr.astro.dao.SQLObject;
-import fr.astro.dao.human.UserDAO;
-import fr.astro.entity.human.UserEntity;
-import fr.astro.test.Test;
-import fr.astro.test.specialized.CreationTest;
+import fr.astro.dao.human.ParticipantDAO;
+import fr.astro.entity.human.ParticipantEntity;
+import fr.astro.test.specialized.DeletionTest;
 import fr.astro.util.Generator;
 
 /**
- * UserTest
+ * UserDeletion
  * 
- * Test the UserDAO
+ * Test the deletion of users
  * 
- * @see Test
+ * @see ParticipantCreation
  */
-public class UserCreation extends CreationTest<UserEntity> {
+public class ParticipantDeletion extends DeletionTest<ParticipantEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();
@@ -30,7 +29,7 @@ public class UserCreation extends CreationTest<UserEntity> {
      */
     public static void main(String[] args) throws Exception {
 
-        UserCreation test = new UserCreation();
+        ParticipantDeletion test = new ParticipantDeletion();
 
         test.test(display);
 
@@ -41,9 +40,9 @@ public class UserCreation extends CreationTest<UserEntity> {
      * 
      * Set the test name
      */
-    public UserCreation() {
+    public ParticipantDeletion() {
 
-        testName = "UserCreation";
+        testName = "UserDeletion";
 
     }
 
@@ -52,12 +51,11 @@ public class UserCreation extends CreationTest<UserEntity> {
      * 
      * @return the generated object
      * @throws Exception
-     * @see Generator
      */
     @Override
-    public UserEntity generateObject() throws Exception {
+    public ParticipantEntity generateObject() throws Exception {
 
-        UserEntity user = generatorInstance.generateUserEntity();
+        ParticipantEntity user = generatorInstance.generateParticipantEntity();
 
         return user;
 
@@ -69,9 +67,10 @@ public class UserCreation extends CreationTest<UserEntity> {
      * @return the DAO
      */
     @Override
-    public SQLObject<UserEntity> getDao() {
+    public SQLObject<ParticipantEntity> getDao() {
+        
 
-        return UserDAO.getInstance();
+        return ParticipantDAO.getInstance();
 
     }
 

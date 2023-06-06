@@ -1,4 +1,4 @@
-package fr.astro.test.user;
+package fr.astro.test.content.user;
 
 import fr.astro.dao.SQLObject;
 import fr.astro.dao.human.UserDAO;
