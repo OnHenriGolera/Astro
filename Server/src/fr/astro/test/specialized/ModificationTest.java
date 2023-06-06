@@ -51,7 +51,7 @@ public abstract class ModificationTest<T> extends CreationTest<T> {
 
         // Check if the objects are deleted
         if (objectsFromDatabase.size() != objects.size()) {
-            throw new Exception("❌ The objects are not modified");
+            throw new Exception("❌ The objects are not modified (expected : " + objects.size() + ", got : " + objectsFromDatabase.size() + ")");
         }
 
         // Check if the objects are modified
@@ -63,7 +63,7 @@ public abstract class ModificationTest<T> extends CreationTest<T> {
 
             // Check if the object is modified
             if (!object.equals(objectFromDatabase)) {
-                throw new Exception("❌ The objects are not modified");
+                throw new Exception("❌ The objects are not modified (expected : " + object + ", got : " + objectFromDatabase + ")");
             }
 
         }

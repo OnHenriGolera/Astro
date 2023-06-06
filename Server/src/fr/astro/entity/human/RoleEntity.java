@@ -81,4 +81,19 @@ public class RoleEntity {
         return "RoleEntity [accessLevel=" + accessLevel + ", name=" + name + ", roleId=" + roleId + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this)
+            return true;
+
+        if (!(obj instanceof RoleEntity))
+            return false;
+
+        RoleEntity role = (RoleEntity) obj;
+
+        return role.getRoleId() == roleId && role.getRoleName().equals(name)
+                && role.getRoleAccessLevel() == accessLevel;
+    }
+
 }

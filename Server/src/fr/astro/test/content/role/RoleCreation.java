@@ -1,20 +1,20 @@
-package fr.astro.test.content.participant;
+package fr.astro.test.content.role;
 
 import fr.astro.dao.SQLObject;
-import fr.astro.dao.human.ParticipantDAO;
-import fr.astro.entity.human.ParticipantEntity;
+import fr.astro.dao.human.RoleDAO;
+import fr.astro.entity.human.RoleEntity;
 import fr.astro.test.Test;
 import fr.astro.test.specialized.CreationTest;
 import fr.astro.util.Generator;
 
 /**
- * ParticipantTest
+ * roleTest
  * 
- * Test the ParticipantDAO
+ * Test the roleDAO
  * 
  * @see Test
  */
-public class ParticipantCreation extends CreationTest<ParticipantEntity> {
+public class RoleCreation extends CreationTest<RoleEntity> {
 
     // Instances
     private Generator generatorInstance = Generator.getInstance();
@@ -30,7 +30,7 @@ public class ParticipantCreation extends CreationTest<ParticipantEntity> {
      */
     public static void main(String[] args) throws Exception {
 
-        ParticipantCreation test = new ParticipantCreation();
+        RoleCreation test = new RoleCreation();
 
         test.test(display);
 
@@ -41,9 +41,9 @@ public class ParticipantCreation extends CreationTest<ParticipantEntity> {
      * 
      * Set the test name
      */
-    public ParticipantCreation() {
+    public RoleCreation() {
 
-        testName = "ParticipantCreation";
+        testName = "roleCreation";
 
     }
 
@@ -55,11 +55,11 @@ public class ParticipantCreation extends CreationTest<ParticipantEntity> {
      * @see Generator
      */
     @Override
-    public ParticipantEntity generateObject() throws Exception {
+    public RoleEntity generateObject() throws Exception {
 
-        ParticipantEntity participant = generatorInstance.generateParticipantEntity();
+        RoleEntity role = generatorInstance.generateRoleEntity();
 
-        return participant;
+        return role;
 
     }
 
@@ -69,9 +69,9 @@ public class ParticipantCreation extends CreationTest<ParticipantEntity> {
      * @return the DAO
      */
     @Override
-    public SQLObject<ParticipantEntity> getDao() {
+    public SQLObject<RoleEntity> getDao() {
 
-        return ParticipantDAO.getInstance();
+        return RoleDAO.getInstance();
 
     }
 

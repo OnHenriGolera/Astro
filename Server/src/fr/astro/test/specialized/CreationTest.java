@@ -81,14 +81,15 @@ public abstract class CreationTest<T> extends Test {
 
         // Check if the number of objects is the same
         if (objectsFromDatabase.size() != numberOfObjects) {
-            throw new Exception("❌ The number of objects is not the same");
+            throw new Exception("❌ The number of objects is not the same (expected : " + numberOfObjects + ", got : " + objectsFromDatabase.size() + ")");
         }
 
         // Check if the objects are the same
         for (int i = 0; i < numberOfObjects; i++) {
 
-            if (!objects.get(i).equals(objectsFromDatabase.get(i))) {
-                throw new Exception("❌ The objects are not the same");
+            // Contains
+            if (!objectsFromDatabase.contains(objects.get(i))) {
+                throw new Exception("❌ The objects are not the same (object " + i + " : " + objects.get(i) + ")");
             }
 
         }
