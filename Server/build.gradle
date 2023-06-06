@@ -2,7 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName='fr.astro.test.content.role.RoleModification'
+mainClassName='fr.astro.test.content.person.PersonModification'
 
 repositories {
     mavenCentral()

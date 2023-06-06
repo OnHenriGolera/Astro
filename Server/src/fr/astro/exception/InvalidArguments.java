@@ -1,4 +1,4 @@
-package fr.astro.exception.sql;
+package fr.astro.exception;
 
 /**
  * InvalidArguments

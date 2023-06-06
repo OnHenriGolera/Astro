@@ -6,8 +6,18 @@ import fr.astro.dao.database.Initializer;
 import fr.astro.gui.staticPages.Error404GUI;
 import fr.astro.gui.staticPages.IndexGUI;
 
+/**
+ * Server
+ * 
+ * Main class
+ */
 public class Server {
-	
+
+	/**
+	 * Main
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Configure Spark
 		staticFiles.location("/static/");
@@ -19,6 +29,11 @@ public class Server {
 
 	}
 
+	/**
+	 * Define GETs
+	 * 
+	 * Define all the GETs routes
+	 */
 	public static void defineGETs() {
 
 		get("/", (request, response) -> {

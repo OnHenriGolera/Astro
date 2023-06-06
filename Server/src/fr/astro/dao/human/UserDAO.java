@@ -87,7 +87,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         // Save as PersonEntity
-        PersonDAO.getInstance().save(object);
+        boolean success = PersonDAO.getInstance().save(object);
 
         // Save user
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
@@ -95,9 +95,11 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         statement.setInt(2, object.getPersonId());
         statement.setString(3, object.getUserPassword());
         statement.setInt(4, object.getUserRoleEntity().getRoleId());
-        statement.executeUpdate();
 
-        return true;
+        success &= statement.executeUpdate() > 0;
+
+        return success;
+
     }
 
     @Override
@@ -112,7 +114,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         // Update as PersonEntity
-        PersonDAO.getInstance().update(object);
+        boolean success = PersonDAO.getInstance().update(object);
 
         // Update user
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
@@ -120,9 +122,10 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         statement.setString(2, object.getUserPassword());
         statement.setInt(3, object.getUserRoleEntity().getRoleId());
         statement.setInt(4, object.getUserId());
-        statement.executeUpdate();
 
-        return true;
+        success &= statement.executeUpdate() > 0;
+
+        return success;
 
     }
 
@@ -140,12 +143,13 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         // Delete user
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getUserId());
-        statement.executeUpdate();
+
+        boolean success = statement.executeUpdate() > 0;
 
         // Delete as PersonEntity
-        PersonDAO.getInstance().delete(object);
+        success &= PersonDAO.getInstance().delete(object);
 
-        return true;
+        return success;
     }
 
     @Override
@@ -181,7 +185,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         // Normally, this line is never reached because of exist(id) check
-        return null;
+        throw new ObjectNotFound("UserEntity", id);
     }
 
     @Override
@@ -192,7 +196,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
-            return result.getInt(1) == 1;
+            return result.getInt(1) >= 0;
         }
 
         return false;

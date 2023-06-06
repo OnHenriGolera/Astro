@@ -71,19 +71,6 @@ public class PersonEntity {
         return surname;
     }
 
-    /**
-     * Set the personId
-     * 
-     * @param personId
-     * @return void
-     * @throws NullPointerException if personId is null
-     */
-    public void setPersonId(int personId) {
-
-        requireNonNull(personId);
-
-        this.personId = personId;
-    }
 
     /**
      * Set the name
