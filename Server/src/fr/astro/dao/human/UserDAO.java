@@ -159,12 +159,6 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
             throw new ObjectNotFound("UserEntity", id);
         }
 
-        // Get as PersonEntity
-        PersonDAO.getInstance().get(id);
-
-        // Get role
-        RoleDAO.getInstance().get(id);
-
         // Get user
         PreparedStatement statement = connection.prepareStatement(GET_QUERY);
         statement.setInt(1, id);
@@ -196,7 +190,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
-            return result.getInt(1) >= 0;
+            return result.getInt(1) > 0;
         }
 
         return false;

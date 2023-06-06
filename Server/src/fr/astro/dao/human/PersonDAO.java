@@ -159,7 +159,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
-            return result.getInt(1) >= 0;
+            return result.getInt(1) > 0;
         }
 
         return false;
