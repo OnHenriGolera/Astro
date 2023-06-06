@@ -12,7 +12,7 @@
 
     <#include "util/nav.ftl">
 
-        <div>
+        <main>
 
             <section id="top">
                 <h1 class="astro">Astro'</h1>
@@ -38,10 +38,7 @@
 
             </section>
 
-        </div>
-
-
-        </section>
+        </main>
 
 </body>
 

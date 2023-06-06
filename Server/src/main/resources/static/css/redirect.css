@@ -1,0 +1,16 @@
+main h1 {
+    font-size: 3rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+main a {
+    color: #023047;
+    font-size: 1.5rem;
+    text-decoration: underline;
+
+    transition: scale 0.2s ease-in-out;
+}
+
+main a:hover {
+    scale: 1.1;
+}

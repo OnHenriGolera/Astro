@@ -6,16 +6,12 @@ import java.util.Map;
 import spark.Request;
 import spark.Response;
 import fr.astro.exception.sql.InvalidArguments;
-import fr.astro.util.Instantiable;
 
-public abstract class Page implements Instantiable {
+public abstract class Page {
 
     // Attributes
     protected String name;
     protected String redirectPath;
-
-    // Instance
-    protected static Page instance;
 
     /**
      * Constructor
@@ -37,14 +33,6 @@ public abstract class Page implements Instantiable {
         this.name = name;
         this.redirectPath = redirectPath;
 
-    }
-
-    /**
-     * Return the instance of the Object
-     * @return the instance of the Object
-     */
-    public static Page getInstance() {
-        return instance;
     }
 
     /**

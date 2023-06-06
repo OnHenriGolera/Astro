@@ -1,32 +1,35 @@
 package fr.astro.gui.staticPages;
 
-import spark.Request;
-import spark.Response;
 import fr.astro.gui.Page;
 import fr.astro.util.Instantiable;
+import spark.Request;
+import spark.Response;
 
-public class IndexGUI extends Page implements Instantiable {
+public class Error404GUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "index.ftl";
+    public static final String ftlPath = "redirect/404.ftl";
 
     // Instance
     private static Page instance;
 
     /**
      * Constructor
+     * 
+     * @param name
      */
-    private IndexGUI() {
+    private Error404GUI() {
         super(ftlPath);
     }
 
     /**
      * Return the instance of the Object
+     * 
      * @return the instance of the Object
      */
     public static Page getInstance() {
         if (instance == null) {
-            instance = new IndexGUI();
+            instance = new Error404GUI();
         }
 
         return instance;
