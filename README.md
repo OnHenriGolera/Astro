@@ -1,7 +1,7 @@
 <br>
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./img/Logo.svg" alt="Logo" width="300" height="300">
+    <img src="./img/Logo.svg" alt="Logo" width="50%">
   </a>
 
   <h3 align="center">Astro project</h3>
@@ -12,6 +12,8 @@
 </div>
 
 👷 It is currently under development and is not yet ready for use.
+
+Version: 0.1.0 - **Orion**
 
 <!-- Table of content, wrapped in details/summary for better organization -->
 <details>
@@ -55,15 +57,23 @@ The final goal is to provide a complete solution for competition management, fro
   
 ### Features
 
+Current features:
+
 - [x] User management
 - [ ] Competition Management
 - [ ] Shop
 - [ ] Payment system
 - [ ] Documentation
 - [ ] Tests
-  - [x] User tests (creation - deletion - modification)
-  - [ ] Competition tests (creation - deletion - modification)
-  - [ ] Shop tests (creation - deletion - modification)
+  - [x] Human tests
+    - [x] Person tests
+    - [x] User tests
+    - [x] Participant tests
+  - [ ] Competition tests
+    - [x] Formula Element tests
+    - [ ] Competition tests
+    - [ ] Stage tests
+  - [ ] Shop tests
 
 
 ### License
@@ -72,7 +82,7 @@ The project is under the GNU GPLv3 license. See `LICENSE` for more information.
 
 ### Authors
 
-For now, I'm the only one on the project : ForkBench.
+For now, I'm the only one on the project: ForkBench.
 
 But this project is open to anyone who wants to contribute, so don't hesitate to contact me if you want to join the team.
 
