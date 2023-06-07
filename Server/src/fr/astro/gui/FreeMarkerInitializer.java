@@ -42,7 +42,7 @@ public class FreeMarkerInitializer {
 
     private static HashMap<Lang, Configuration> configurations = new HashMap<>();
 
-    private final static Lang DEFAULT_LANG = Lang.FR;
+    private final static Lang DEFAULT_LANG = Lang.EN;
 
     /**
      * Return the default configuration of FreeMarker
