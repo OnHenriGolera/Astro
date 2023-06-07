@@ -13,6 +13,7 @@ import fr.astro.test.Test;
  * Help making tests classes to test generations
  * 
  * @see Test
+ * @deprecated
  */
 public abstract class CreationTest<T> extends Test {
 

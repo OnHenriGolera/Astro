@@ -3,10 +3,16 @@ package fr.astro.test.specialized;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * BadModificationTest
+ * 
+ * Test if the objects are modified
+ * 
+ * @deprecated
+ */
 public abstract class BadModificationTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTest";
-
     protected List<T> objectCopy;
 
     @Override

@@ -2,6 +2,12 @@ package fr.astro.test.specialized;
 
 import fr.astro.exception.test.TestFailed;
 
+/**
+ * ExistingTest
+ * 
+ * Test if the objects exist
+ * @deprecated
+ */
 public abstract class ExistingTest<T> extends CreationTest<T> {
 
     protected String testName = "ExistingTest";

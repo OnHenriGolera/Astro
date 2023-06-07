@@ -39,8 +39,8 @@ public class FormulaElementDAO implements SQLObject<FormulaElementEntity>, Insta
     private final String COLUMN_DESCRIPTION = "description";
 
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME,
-            COLUMN_ID, COLUMN_TYPE, COLUMN_NUMBER_BEFORE, COLUMN_NUMBER_AFTER, COLUMN_DESCRIPTION);
+    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)",
+            TABLE_NAME, COLUMN_ID, COLUMN_TYPE, COLUMN_NUMBER_BEFORE, COLUMN_NUMBER_AFTER, COLUMN_DESCRIPTION);
     private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
             TABLE_NAME, COLUMN_TYPE, COLUMN_NUMBER_BEFORE, COLUMN_NUMBER_AFTER, COLUMN_DESCRIPTION, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
