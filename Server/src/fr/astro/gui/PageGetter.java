@@ -40,7 +40,7 @@ public class PageGetter {
      */
     public static String getPage(String page, Map<String, Object> input) throws IOException, TemplateException {
 
-        Configuration configuration = FreeMarkerInitializer.getContext();
+        Configuration configuration = FreeMarkerInitializer.getConfiguration();
 
         Writer output = new StringWriter();
         Template template;
