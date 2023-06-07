@@ -2,6 +2,7 @@ package fr.astro.gui;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
+import spark.Request;
 import fr.astro.Server;
 
 import java.util.HashMap;
@@ -37,6 +38,28 @@ public class FreeMarkerInitializer {
          */
         public Locale getLocale() {
             return locale;
+        }
+
+        /**
+         * Return the lang from the locale
+         * 
+         * @param locale
+         * @return
+         */
+        public static Lang getLang(Request request) {
+            String lang = request.cookie("lang");
+            if (lang == null) {
+                return Lang.EN;
+            }
+
+            switch (lang) {
+                case "fr":
+                    return Lang.FR;
+                case "en":
+                    return Lang.EN;
+                default:
+                    return Lang.EN;
+            }
         }
     }
 

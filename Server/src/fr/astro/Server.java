@@ -38,12 +38,12 @@ public class Server {
 
 		get("/", (request, response) -> {
 			System.out.println("GET /");
-			return IndexGUI.getInstance().renderPage();
+			return IndexGUI.getInstance().renderPage(request, response);
 		});
 
 		notFound((req, res) -> {
 			System.out.println("GET 404");
-			return Error404GUI.getInstance().renderPage();
+			return Error404GUI.getInstance().renderPage(req, res);
 		});
 
 	}

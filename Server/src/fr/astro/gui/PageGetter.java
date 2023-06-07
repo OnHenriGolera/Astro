@@ -24,9 +24,9 @@ public class PageGetter {
      * @throws IOException
      * @throws TemplateException
      */
-    public static String getPage(String page) throws IOException, TemplateException {
+    public static String getPage(String page, FreeMarkerInitializer.Lang lang) throws IOException, TemplateException {
 
-        return getPage(page, new HashMap<>());
+        return getPage(page, new HashMap<>(), lang);
 
     }
 
@@ -38,9 +38,9 @@ public class PageGetter {
      * @throws IOException
      * @throws TemplateException
      */
-    public static String getPage(String page, Map<String, Object> input) throws IOException, TemplateException {
+    public static String getPage(String page, Map<String, Object> input, FreeMarkerInitializer.Lang lang) throws IOException, TemplateException {
 
-        Configuration configuration = FreeMarkerInitializer.getConfiguration();
+        Configuration configuration = FreeMarkerInitializer.getConfiguration(lang);
 
         Writer output = new StringWriter();
         Template template;

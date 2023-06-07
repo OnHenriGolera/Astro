@@ -40,9 +40,9 @@ public abstract class Page {
      * @return
      * @throws Exception
      */
-    public String renderPage() throws Exception {
+    public String renderPage(Request request, Response response) throws Exception {
 
-        return renderPage(new HashMap<>());
+        return renderPage(new HashMap<>(), request, response);
 
     }
 
@@ -52,13 +52,16 @@ public abstract class Page {
      * @return the page in HTML
      * @throws Exception
      */
-    protected String renderPage(Map<String, Object> input) throws Exception {
+    protected String renderPage(Map<String, Object> input, Request request, Response response) throws Exception {
 
         if (name == null) {
             throw new InvalidArguments("Page name is null");
         }
 
-        return PageGetter.getPage(name, input);
+        // Get the lang
+        FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
+
+        return PageGetter.getPage(name, input, lang);
 
     }
 
