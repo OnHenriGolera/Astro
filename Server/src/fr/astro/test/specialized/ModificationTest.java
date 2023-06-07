@@ -9,6 +9,7 @@ import java.util.List;
  * Test if the objects are modified
  * @deprecated
  */
+@Deprecated
 public abstract class ModificationTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTest";

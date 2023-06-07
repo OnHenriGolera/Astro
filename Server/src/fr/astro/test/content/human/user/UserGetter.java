@@ -12,6 +12,7 @@ import fr.astro.util.HumanGenerator;
  * Test the getter of users
  * @deprecated
  */
+@Deprecated
 public class UserGetter extends GetterTest<UserEntity> {
 
     // Instances

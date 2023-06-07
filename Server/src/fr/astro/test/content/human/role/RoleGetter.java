@@ -12,6 +12,7 @@ import fr.astro.util.HumanGenerator;
  * Test the getter of roles
  * @deprecated
  */
+@Deprecated
 public class RoleGetter extends GetterTest<RoleEntity> {
 
     // Instances

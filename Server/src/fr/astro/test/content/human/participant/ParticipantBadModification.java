@@ -14,6 +14,7 @@ import fr.astro.util.HumanGenerator;
  * @see ParticipantCreation
  * @deprecated
  */
+@Deprecated
 public class ParticipantBadModification extends BadModificationTest<ParticipantEntity> {
 
     // Instances

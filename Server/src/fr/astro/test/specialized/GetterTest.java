@@ -8,6 +8,7 @@ import fr.astro.exception.test.TestFailed;
  * Test if the objects are get
  * @deprecated
  */
+@Deprecated
 public abstract class GetterTest<T> extends CreationTest<T> {
 
     protected String testName = "GetterTest";

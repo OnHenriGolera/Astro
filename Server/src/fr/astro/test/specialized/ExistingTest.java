@@ -8,6 +8,7 @@ import fr.astro.exception.test.TestFailed;
  * Test if the objects exist
  * @deprecated
  */
+@Deprecated
 public abstract class ExistingTest<T> extends CreationTest<T> {
 
     protected String testName = "ExistingTest";

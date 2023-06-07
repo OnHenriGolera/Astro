@@ -10,6 +10,7 @@ import java.util.List;
  * 
  * @deprecated
  */
+@Deprecated
 public abstract class BadModificationTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTest";

@@ -14,6 +14,7 @@ import fr.astro.util.HumanGenerator;
  * @see PersonCreation
  * @deprecated
  */
+@Deprecated
 public class PersonDeletion extends DeletionTest<PersonEntity> {
 
     // Instances

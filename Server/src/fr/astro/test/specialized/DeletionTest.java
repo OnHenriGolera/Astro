@@ -6,6 +6,7 @@ package fr.astro.test.specialized;
  * Test if the objects are deleted
  * @deprecated
  */
+@Deprecated
 public abstract class DeletionTest<T> extends CreationTest<T> {
 
     protected String testName = "DeletionTest";

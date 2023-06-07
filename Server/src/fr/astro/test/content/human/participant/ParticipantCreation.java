@@ -15,6 +15,7 @@ import fr.astro.util.HumanGenerator;
  * @see Test
  * @deprecated
  */
+@Deprecated
 public class ParticipantCreation extends CreationTest<ParticipantEntity> {
 
     // Instances

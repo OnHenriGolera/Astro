@@ -14,6 +14,7 @@ import fr.astro.util.HumanGenerator;
  * @see UserCreation
  * @deprecated
  */
+@Deprecated
 public class UserBadModification extends BadModificationTest<UserEntity> {
 
     // Instances

@@ -12,6 +12,7 @@ import fr.astro.util.HumanGenerator;
  * Test the getter of Participant
  * @deprecated
  */
+@Deprecated
 public class ParticipantGetter extends GetterTest<ParticipantEntity> {
 
     // Instances

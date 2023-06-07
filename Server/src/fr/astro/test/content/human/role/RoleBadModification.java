@@ -14,6 +14,7 @@ import fr.astro.util.HumanGenerator;
  * @see RoleCreation
  * @deprecated
  */
+@Deprecated
 public class RoleBadModification extends BadModificationTest<RoleEntity> {
 
     // Instances

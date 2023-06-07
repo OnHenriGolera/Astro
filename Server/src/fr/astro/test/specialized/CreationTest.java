@@ -15,6 +15,7 @@ import fr.astro.test.Test;
  * @see Test
  * @deprecated
  */
+@Deprecated
 public abstract class CreationTest<T> extends Test {
 
     protected String testName = "CreationTest";

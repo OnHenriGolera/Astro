@@ -12,6 +12,7 @@ import fr.astro.util.HumanGenerator;
  * Test the getter of persons
  * @deprecated
  */
+@Deprecated
 public class PersonGetter extends GetterTest<PersonEntity> {
 
     // Instances
