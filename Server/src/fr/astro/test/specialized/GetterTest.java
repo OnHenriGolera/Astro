@@ -2,6 +2,12 @@ package fr.astro.test.specialized;
 
 import fr.astro.exception.test.TestFailed;
 
+/**
+ * GetterTest
+ * 
+ * Test if the objects are get
+ * @deprecated
+ */
 public abstract class GetterTest<T> extends CreationTest<T> {
 
     protected String testName = "GetterTest";
