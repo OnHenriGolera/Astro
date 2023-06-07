@@ -87,9 +87,8 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getPersonName());
         statement.setString(3, object.getPersonSurname());
-        statement.executeUpdate();
-
-        return true;
+        
+        return statement.executeUpdate() > 0;
     }
 
     @Override
@@ -107,9 +106,8 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         statement.setString(1, object.getPersonName());
         statement.setString(2, object.getPersonSurname());
         statement.setInt(3, object.getPersonId());
-        statement.executeUpdate();
-
-        return true;
+        
+        return statement.executeUpdate() > 0;
 
     }
 
@@ -126,9 +124,9 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
 
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getPersonId());
-        statement.executeUpdate();
+        
+        return statement.executeUpdate() > 0;
 
-        return true;
     }
 
     @Override
@@ -149,7 +147,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         }
 
         // This should never happen because we check if the object exist before
-        return null;
+        throw new ObjectNotFound("PersonEntity", id);
 
     }
 
@@ -161,7 +159,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
-            return result.getInt(1) == 1;
+            return result.getInt(1) > 0;
         }
 
         return false;

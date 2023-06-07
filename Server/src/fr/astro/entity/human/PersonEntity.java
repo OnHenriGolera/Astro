@@ -71,19 +71,6 @@ public class PersonEntity {
         return surname;
     }
 
-    /**
-     * Set the personId
-     * 
-     * @param personId
-     * @return void
-     * @throws NullPointerException if personId is null
-     */
-    public void setPersonId(int personId) {
-
-        requireNonNull(personId);
-
-        this.personId = personId;
-    }
 
     /**
      * Set the name
@@ -136,11 +123,20 @@ public class PersonEntity {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PersonEntity) {
-            PersonEntity other = (PersonEntity) obj;
-            return this.personId == other.personId;
+        
+        if (obj == this) {
+            return true;
         }
-        return false;
+
+        if (!(obj instanceof PersonEntity)) {
+            return false;
+        }
+
+        PersonEntity personEntity = (PersonEntity) obj;
+
+        return personEntity.personId == personId
+                && personEntity.name.equals(name)
+                && personEntity.surname.equals(surname);
     }
 
     /**

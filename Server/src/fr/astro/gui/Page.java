@@ -3,9 +3,9 @@ package fr.astro.gui;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.astro.exception.InvalidArguments;
 import spark.Request;
 import spark.Response;
-import fr.astro.exception.sql.InvalidArguments;
 
 public abstract class Page {
 

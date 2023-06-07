@@ -85,16 +85,18 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             return update(object);
         }
 
-        PersonDAO.getInstance().save(object);
+        // Save as PersonEntity
+        boolean success = PersonDAO.getInstance().save(object);
 
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
         statement.setInt(1, object.getParticipantId());
         statement.setInt(2, object.getPersonId());
         statement.setString(3, object.getParticipantCategory());
         statement.setBoolean(4, object.isParticipantPresent());
-        statement.executeUpdate();
+        
+        success &= statement.executeUpdate() > 0;
 
-        return true;
+        return success;
 
     }
 
@@ -109,14 +111,18 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             throw new ObjectNotFound("ParticipantEntity", object.getParticipantId());
         }
 
+        // Update as PersonEntity
+        boolean success = PersonDAO.getInstance().update(object);
+
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getParticipantCategory());
         statement.setBoolean(3, object.isParticipantPresent());
         statement.setInt(4, object.getParticipantId());
-        statement.executeUpdate();
+        
+        success &= statement.executeUpdate() > 0;
 
-        return true;
+        return success;
 
     }
 
@@ -133,12 +139,13 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
 
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getParticipantId());
-        statement.executeUpdate();
+        
+        boolean success = statement.executeUpdate() > 0;
 
         // Delete as PersonEntity
-        PersonDAO.getInstance().delete(object);
-
-        return true;
+        success &= PersonDAO.getInstance().delete(object);
+        
+        return success;
     }
 
     @Override
@@ -166,7 +173,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         }
 
         // Never reached because of the exist(id) check
-        return null;
+        throw new ObjectNotFound("ParticipantEntity", id);
     }
 
     @Override
@@ -177,7 +184,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
-            return result.getInt(1) == 1;
+            return result.getInt(1) > 0;
         }
 
         return false;
@@ -186,15 +193,11 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
     @Override
     public boolean exist(ParticipantEntity object) throws SQLException {
 
-        PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
-        statement.setInt(1, object.getParticipantId());
-        ResultSet result = statement.executeQuery();
-
-        if (result.next()) {
-            return result.getInt(1) == 1;
+        if (object == null) {
+            return false;
         }
 
-        return false;
+        return exist(object.getParticipantId());
     }
 
     @Override
