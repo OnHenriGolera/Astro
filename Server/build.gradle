@@ -2,7 +2,20 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName='fr.astro.Server'
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
+sourceSets.main.resources.srcDirs = ['src']
 
 repositories {
     mavenCentral()
@@ -28,9 +41,9 @@ jar {
  manifest {
         attributes 'Implementation-Title': 'Astro',
                    'Implementation-Version': '1.0.0',
-                   'Main-Class': mainClassName
+                   'Main-Class': 'fr.astro.Server'
     }
 }
 
-sourceSets.main.java.srcDirs = ['src']
-sourceSets.test.java.srcDirs = ['src']
+// sourceSets.main.java.srcDirs = ['src']
+// sourceSets.test.java.srcDirs = ['src']
