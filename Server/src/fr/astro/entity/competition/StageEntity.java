@@ -93,7 +93,7 @@ public class StageEntity {
      * 
      * @return id
      */
-    public int getId() {
+    public int getStageId() {
         return id;
     }
 
@@ -102,7 +102,7 @@ public class StageEntity {
      * 
      * @return name
      */
-    public String getName() {
+    public String getStageName() {
         return name;
     }
 
@@ -120,7 +120,7 @@ public class StageEntity {
      * 
      * @return participantEntities
      */
-    public Set<ParticipantEntity> getParticipantEntities() {
+    public Set<ParticipantEntity> getStageParticipantEntities() {
         return participantEntities;
     }
 
@@ -129,7 +129,7 @@ public class StageEntity {
      * 
      * @param participantEntity
      */
-    public boolean addParticipantEntity(ParticipantEntity participantEntity) {
+    public boolean addStageParticipantEntity(ParticipantEntity participantEntity) {
         requireNonNull(participantEntity);
         return this.participantEntities.add(participantEntity);
     }
@@ -139,7 +139,7 @@ public class StageEntity {
      * 
      * @param participantEntity
      */
-    public boolean removeParticipantEntity(ParticipantEntity participantEntity) {
+    public boolean removeStageParticipantEntity(ParticipantEntity participantEntity) {
         requireNonNull(participantEntity);
         return this.participantEntities.remove(participantEntity);
     }

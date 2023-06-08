@@ -5,15 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import fr.astro.dao.SQLObject;
+import fr.astro.dao.SQLObjectAndRelatedSet;
 import fr.astro.dao.database.Connector;
+import fr.astro.entity.competition.FormulaElementEntity;
 import fr.astro.entity.competition.FormulaEntity;
 import fr.astro.exception.sql.ObjectNotFound;
 import fr.astro.util.Instantiable;
 
-public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
+public class FormulaDAO implements SQLObjectAndRelatedSet<FormulaEntity, FormulaElementEntity>, Instantiable {
 
     // Instances
     private static FormulaDAO instance;
@@ -38,6 +41,10 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
     private final String GET_ALL_LIMIT_QUERY = String.format("SELECT * FROM %s LIMIT ?", TABLE_NAME);
     private final String GET_LAST_INSERTED_ID = String.format("SELECT %s FROM %s ORDER BY %s DESC LIMIT 1", COLUMN_ID,
             TABLE_NAME, COLUMN_ID);
+
+    // Query for the Set : Select * from FormulaElementList where formulaId = ?
+    private final String GET_SET_QUERY = String.format("SELECT * FROM FormulaElementList WHERE %s = ?", COLUMN_ID);
+    private final String formulaElementId = "formulaElementId";
     /* ------------------------------------------------- */
 
     /**
@@ -82,7 +89,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public boolean update(FormulaEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new NullPointerException("FormulaEntity cannot be null");
         }
@@ -102,7 +109,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public boolean delete(FormulaEntity object) throws ObjectNotFound, SQLException {
-        
+
         if (object == null) {
             throw new NullPointerException("FormulaEntity cannot be null");
         }
@@ -120,7 +127,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public FormulaEntity get(int id) throws ObjectNotFound, SQLException {
-        
+
         if (!exist(id)) {
             throw new ObjectNotFound("FormulaEntity doesn't exist");
         }
@@ -141,7 +148,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public boolean exist(int id) throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
@@ -156,7 +163,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public boolean exist(FormulaEntity object) throws SQLException {
-        
+
         if (object == null) {
             throw new NullPointerException("FormulaEntity cannot be null");
         }
@@ -167,14 +174,14 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public List<FormulaEntity> getAll() throws SQLException {
-        
+
         return getAll(-1);
 
     }
 
     @Override
     public List<FormulaEntity> getAll(int limit) throws SQLException {
-        
+
         if (limit < 0) {
             limit = +Integer.MAX_VALUE;
         }
@@ -196,7 +203,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public int getLastInsertedId() throws SQLException {
-        
+
         PreparedStatement statement = connection.prepareStatement(GET_LAST_INSERTED_ID);
         ResultSet resultSet = statement.executeQuery();
 
@@ -210,7 +217,7 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     @Override
     public FormulaEntity copyObject(FormulaEntity object) throws ObjectNotFound {
-        
+
         if (object == null) {
             throw new NullPointerException("FormulaEntity cannot be null");
         }
@@ -219,6 +226,33 @@ public class FormulaDAO implements SQLObject<FormulaEntity>, Instantiable {
 
     }
 
-    
-    
+    @Override
+    public Set<FormulaElementEntity> getRelatedSet(FormulaEntity object) throws SQLException {
+
+        if (object == null) {
+            throw new NullPointerException("FormulaEntity cannot be null");
+        }
+
+        PreparedStatement statement = connection.prepareStatement(GET_SET_QUERY);
+        statement.setInt(1, object.getFormulaId());
+        ResultSet resultSet = statement.executeQuery();
+
+        Set<FormulaElementEntity> formulaElementEntities = new HashSet<>();
+
+        while (resultSet.next()) {
+
+            try {
+
+                formulaElementEntities.add(FormulaElementDAO.getInstance().get(resultSet.getInt(formulaElementId)));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return formulaElementEntities;
+
+    }
+
 }
