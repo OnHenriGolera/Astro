@@ -71,7 +71,6 @@ public class PersonEntity {
         return surname;
     }
 
-
     /**
      * Set the name
      * 
@@ -123,7 +122,7 @@ public class PersonEntity {
      */
     @Override
     public boolean equals(Object obj) {
-        
+
         if (obj == this) {
             return true;
         }
@@ -136,7 +135,8 @@ public class PersonEntity {
 
         return personEntity.personId == personId
                 && personEntity.name.equals(name)
-                && personEntity.surname.equals(surname);
+                && personEntity.surname.equals(surname)
+                && personEntity.hashCode() == hashCode();
     }
 
     /**

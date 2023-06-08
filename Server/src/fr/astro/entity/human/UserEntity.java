@@ -156,9 +156,13 @@ public class UserEntity extends PersonEntity {
         if (!(obj instanceof UserEntity))
             return false;
         UserEntity userEntity = (UserEntity) obj;
-        return this.userId == userEntity.getUserId() && this.password.equals(userEntity.getUserPassword())
-                && this.roleEntity.equals(userEntity.getUserRoleEntity()) && this.name.equals(userEntity.getPersonName())
-                && this.surname.equals(userEntity.getPersonSurname()) && this.personId == userEntity.getPersonId();
+        return this.userId == userEntity.getUserId()
+                && this.password.equals(userEntity.getUserPassword())
+                && this.roleEntity.equals(userEntity.getUserRoleEntity())
+                && this.name.equals(userEntity.getPersonName())
+                && this.surname.equals(userEntity.getPersonSurname())
+                && this.personId == userEntity.getPersonId()
+                && this.hashCode() == userEntity.hashCode();
     }
 
 }

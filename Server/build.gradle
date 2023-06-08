@@ -17,6 +17,8 @@ sourceSets {
 
 sourceSets.main.resources.srcDirs = ['src']
 
+mainClassName = 'fr.astro.test.content.competition.formula.FormulaFullTest'
+
 repositories {
     mavenCentral()
 }
@@ -41,7 +43,7 @@ jar {
  manifest {
         attributes 'Implementation-Title': 'Astro',
                    'Implementation-Version': '1.0.0',
-                   'Main-Class': 'fr.astro.Server'
+                   'Main-Class': 'fr.astro.test.content.competition.formulaEntity.FormulaEntityFullTest'
     }
 }
 

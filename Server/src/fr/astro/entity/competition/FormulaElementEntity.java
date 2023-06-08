@@ -182,7 +182,8 @@ public class FormulaElementEntity {
                 && formulaElementEntity.type.equals(type)
                 && formulaElementEntity.numberBefore == numberBefore
                 && formulaElementEntity.numberAfter == numberAfter
-                && formulaElementEntity.description.equals(description);
+                && formulaElementEntity.description.equals(description)
+                && formulaElementEntity.hashCode() == hashCode();
     }
 
     /**
@@ -194,6 +195,5 @@ public class FormulaElementEntity {
     public int hashCode() {
         return Integer.hashCode(formulaElementId);
     }
-
 
 }

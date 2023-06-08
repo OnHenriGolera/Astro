@@ -119,8 +119,10 @@ public class RoleEntity {
 
         RoleEntity role = (RoleEntity) obj;
 
-        return role.getRoleId() == roleId && role.getRoleName().equals(name)
-                && role.getRoleAccessLevel() == accessLevel;
+        return role.getRoleId() == roleId
+                && role.getRoleName().equals(name)
+                && role.getRoleAccessLevel() == accessLevel
+                && role.hashCode() == hashCode();
     }
 
 }

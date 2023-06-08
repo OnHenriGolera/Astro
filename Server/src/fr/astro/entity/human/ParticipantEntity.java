@@ -144,11 +144,10 @@ public class ParticipantEntity extends PersonEntity {
 
         ParticipantEntity that = (ParticipantEntity) o;
 
-        if (getParticipantId() != that.getParticipantId())
-            return false;
-        if (isParticipantPresent() != that.isParticipantPresent())
-            return false;
-        return getParticipantCategory().equals(that.getParticipantCategory());
+        return participantId == that.participantId
+                && category.equals(that.category)
+                && present == that.present
+                && this.hashCode() == that.hashCode();
     }
 
     /**
