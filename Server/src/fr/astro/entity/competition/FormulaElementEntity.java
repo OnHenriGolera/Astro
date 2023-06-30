@@ -178,6 +178,7 @@ public class FormulaElementEntity {
 
         FormulaElementEntity formulaElementEntity = (FormulaElementEntity) obj;
 
+        // Check each attribute
         return formulaElementEntity.formulaElementId == formulaElementId
                 && formulaElementEntity.type.equals(type)
                 && formulaElementEntity.numberBefore == numberBefore
@@ -192,7 +193,14 @@ public class FormulaElementEntity {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(formulaElementId);
+        
+        // Hashcode has to be according to equals()
+        return formulaElementId
+                + type.hashCode()
+                + numberBefore
+                + numberAfter
+                + description.hashCode();
+
     }
 
 

@@ -226,10 +226,30 @@ public class UserEntity {
             return false;
         if (!(obj instanceof UserEntity))
             return false;
+
         UserEntity userEntity = (UserEntity) obj;
-        return this.userId == userEntity.getUserId() && this.password.equals(userEntity.getUserPassword())
-                && this.roleEntity.equals(userEntity.getUserRoleEntity())
-                && this.personEntity.equals(userEntity.getPersonEntity());
+
+        // Check each attribute
+        return userEntity.getUserId() == userId &&
+                userEntity.getUserPassword().equals(password) &&
+                userEntity.getUserRoleEntity().equals(roleEntity) &&
+                userEntity.getPersonEntity().equals(personEntity);
+    }
+
+    /**
+     * HashCode method
+     * 
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+
+        // HashCode has to be according to the equals method
+        return 31 * userId
+                + password.hashCode()
+                + roleEntity.hashCode()
+                + personEntity.hashCode();
+
     }
 
 }

@@ -108,6 +108,12 @@ public class RoleEntity {
         return "RoleEntity [accessLevel=" + accessLevel + ", name=" + name + ", roleId=" + roleId + "]";
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     * 
+     * @param obj the reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
 
@@ -119,8 +125,24 @@ public class RoleEntity {
 
         RoleEntity role = (RoleEntity) obj;
 
-        return role.getRoleId() == roleId && role.getRoleName().equals(name)
+        // Check each field
+        return role.getRoleId() == roleId
+                && role.getRoleName().equals(name)
                 && role.getRoleAccessLevel() == accessLevel;
+
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     * 
+     * @return a hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+
+        // Hashcode has to be according to equals()
+        return roleId + name.hashCode() + accessLevel;
+
     }
 
 }

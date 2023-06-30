@@ -193,13 +193,14 @@ public class ParticipantEntity {
         if (!(o instanceof ParticipantEntity))
             return false;
 
-        ParticipantEntity that = (ParticipantEntity) o;
+        ParticipantEntity participant = (ParticipantEntity) o;
 
-        if (getParticipantId() != that.getParticipantId())
-            return false;
-        if (isParticipantPresent() != that.isParticipantPresent())
-            return false;
-        return getParticipantCategory().equals(that.getParticipantCategory());
+        // Check each field
+        return this.participantId == participant.participantId
+                && this.category.equals(participant.category)
+                && this.present == participant.present
+                && this.personEntity.equals(participant.personEntity);
+
     }
 
     /**
@@ -209,7 +210,13 @@ public class ParticipantEntity {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.participantId);
+
+        // Hashcode has to be according to equals()
+        return personEntity.hashCode()
+                + participantId
+                + category.hashCode()
+                + (present ? 1 : 0);
+
     }
 
 }

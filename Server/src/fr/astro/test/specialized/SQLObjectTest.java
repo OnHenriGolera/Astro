@@ -2,6 +2,7 @@ package fr.astro.test.specialized;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import fr.astro.dao.SQLObject;
 import fr.astro.exception.test.TestFailed;
@@ -106,8 +107,17 @@ public abstract class SQLObjectTest<T> extends Test {
 
         // Check if the objects are the same
         for (T object : objects) {
+            
+            // Test equals
             if (!getDao().get(getIdFromObject(object)).equals(object)) {
-                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao " + getDao().get(getIdFromObject(object)));
+                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao "
+                        + getDao().get(getIdFromObject(object)));
+            }
+            
+            // Test hashCode
+            if (getDao().get(getIdFromObject(object)).hashCode() != object.hashCode()) {
+                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao "
+                        + getDao().get(getIdFromObject(object)));
             }
         }
 
@@ -125,15 +135,24 @@ public abstract class SQLObjectTest<T> extends Test {
     public boolean validateGetAll() throws Exception {
 
         List<T> objectsImported = getDao().getAll();
+        Set<T> objectsImportedSet = Set.copyOf(objectsImported);
 
         // Check if the objects are the same
         for (T object : objects) {
+
+            // Test equals
             if (!objectsImported.contains(object)) {
                 throw new TestFailed("❌ The object " + object + " is not in the database");
             }
+
+            // Test hashCode
+            if (!objectsImportedSet.contains(object)) {
+                throw new TestFailed("❌ The object " + object + " is not in the database");
+            }
+
         }
 
-        return objectsImported.size() == objects.size();
+        return objectsImported.size() == objects.size() && objectsImportedSet.size() == objects.size();
 
     }
 

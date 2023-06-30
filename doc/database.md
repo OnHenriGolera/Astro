@@ -96,6 +96,26 @@ We need to store the following data for each participant:
 
 With all those information, we can create a database structure :
 
-<div align="center">
+<!-- <div align="center">
   <img src="./externals/database.svg" alt="Database structure" width="80%">
-</div>
+</div> -->
+
+```plantuml
+@startuml
+
+class StageElement
+class Stage
+class Participant
+class Formula
+class Competition
+class Person
+
+StageElement <-- Stage : has a
+Stage "0..*" --> "0..*" Participant : participants
+Competition "0..*" --> "1" Stage : stages
+Competition "0..1" --> "0..*" Formula : formulas
+Formula "1..1" --> "0..*" StageElement : components
+Participant "0..1" --> "0..1" Person : person
+
+@enduml
+```
