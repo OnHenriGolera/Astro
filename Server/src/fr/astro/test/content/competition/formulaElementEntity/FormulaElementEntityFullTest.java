@@ -1,4 +1,4 @@
-package fr.astro.test.content.competition.formulaEntity;
+package fr.astro.test.content.competition.formulaElementEntity;
 
 import fr.astro.dao.SQLObject;
 import fr.astro.dao.competition.FormulaElementDAO;
@@ -6,7 +6,7 @@ import fr.astro.entity.competition.FormulaElementEntity;
 import fr.astro.test.specialized.SQLObjectTest;
 import fr.astro.util.CompetitionGenerator;
 
-public class FormulaEntityFullTest extends SQLObjectTest<FormulaElementEntity> {
+public class FormulaElementEntityFullTest extends SQLObjectTest<FormulaElementEntity> {
 
     private CompetitionGenerator competitionGeneratorInstance = CompetitionGenerator.getInstance();
     private final static boolean display = true;
@@ -19,7 +19,7 @@ public class FormulaEntityFullTest extends SQLObjectTest<FormulaElementEntity> {
      */
     public static void main(String[] args) throws Exception {
 
-        FormulaEntityFullTest test = new FormulaEntityFullTest();
+        FormulaElementEntityFullTest test = new FormulaElementEntityFullTest();
 
         test.test(display);
 
@@ -30,9 +30,9 @@ public class FormulaEntityFullTest extends SQLObjectTest<FormulaElementEntity> {
      *
      * Set the name of the test
      */
-    public FormulaEntityFullTest() {
+    public FormulaElementEntityFullTest() {
 
-        testName = "FormulaEntityFullTest";
+        testName = "FormulaElementEntityFullTest";
 
     }
 
