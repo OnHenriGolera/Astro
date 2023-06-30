@@ -94,27 +94,165 @@ We need to store the following data for each participant:
 
 # Database structure
 
-With all those information, we can create a database structure :
+With all those information, we can create a OOP structure :
 
 <!-- <div align="center">
   <img src="./externals/database.svg" alt="Database structure" width="80%">
 </div> -->
 
+
 ```plantuml
 @startuml
 
-class StageElement
-class Stage
-class Participant
-class Formula
-class Competition
-class Person
+class StageElement {
+	- id : int
+    - numberOfParticipants : int
+    - numberOfParticipantsThatQualify : int
+	- name : String
+	- description : String
+	- type : String
+}
+
+class Stage {
+	- id : int
+	- stageElement : StageElement
+	- participants : List<Participant>
+}
+
+class Person {
+	- id : int
+	- name : String
+	- surname : String
+}
+
+class Participant {
+	- id : int
+	- person : Person
+	- category : String
+	- present : boolean
+}
+
+class Formula {
+	- id : int
+	- name : String
+	- stageElements : List<StageElement>
+}
+
+class Competition {
+	- id : int
+	- name : String
+	- formula : Formula
+	- stages : List<Stage>
+	- participants : List<Participant>
+	- status : String
+	- category : String
+}
 
 StageElement <-- Stage : has a
 Stage "0..*" --> "0..*" Participant : participants
 Competition "0..*" --> "1" Stage : stages
-Competition "0..1" --> "0..*" Formula : formulas
+Competition "0..1" --> "0..*" Formula : formula
 Formula "1..1" --> "0..*" StageElement : components
+Participant "0..1" --> "0..1" Person : person
+
+@enduml
+```
+
+In the database, it will look like this:
+
+<!-- <div align="center">
+  <img src="./externals/database.png" alt="Database structure" width="80%">
+</div> -->
+
+```plantuml
+@startuml
+
+
+!define primary_key(name, type) <b><color:#b8861b><&key></color> <u>name</u> : <color:#e76f51><i>type</i></color></b>
+!define foreign_key(name, type) <color:#aaaaaa><&key></color> name : <color:#e76f51><i>type</i></color>
+!define column(name, type) <color:#efefef><&media-record></color> name : <color:#e76f51><i>type</i></color>
+!define table(x) entity x << (T, white) >>
+
+hide methods
+
+table(StageElement) {
+	primary_key(id, int)
+	column(numberOfParticipants, int)
+	column(numberOfParticipantsThatQualify, int)
+	column(name, String)
+	column(description, String)
+	column(type, String)
+}
+
+table(Stage) {
+	primary_key(id, int)
+	foreign_key(stageElementId, int)
+	column(name, String)
+}
+
+table(Person) {
+	primary_key(id, int)
+	column(name, String)
+	column(surname, String)
+}
+
+table(Participant) {
+	primary_key(id, int)
+	foreign_key(personId, int)
+	column(category, String)
+	column(present, boolean)
+}
+
+table(Formula) {
+	primary_key(id, int)
+	column(name, String)
+	column(description, String)
+}
+
+table(Competition) {
+	primary_key(id, int)
+	foreign_key(formulaId, int)
+	column(name, String)
+	column(status, String)
+	column(category, String)
+}
+
+StageElement "0..*" <-- "0..1" Stage : has a
+' Stage "0..*" --> "0..*" Participant : participants -> Has to be replaced by a table
+
+table(StageParticipants) {
+	primary_key(id, int)
+	foreign_key(stageId, int)
+	foreign_key(participantId, int)
+}
+
+Stage "0..*" <-- "0..1" StageParticipants
+StageParticipants "0..*" --> "0..1" Participant
+
+
+' Competition "0..*" --> "1" Stage : stages -> Has to be replaced by a table
+
+table(CompetitionStages) {
+	primary_key(id, int)
+	foreign_key(competitionId, int)
+	foreign_key(stageId, int)
+}
+
+Competition "0..*" <-- "0..1" CompetitionStages
+CompetitionStages "0..*" --> "0..1" Stage
+Competition "0..1" --> "0..*" Formula : formula 
+
+' Formula "1..1" --> "0..*" StageElement : components -> Has to be replaced by a table
+
+table(FormulaStageElements) {
+	primary_key(id, int)
+	foreign_key(formulaId, int)
+	foreign_key(stageElementId, int)
+}
+
+Formula "1..1" <-- "0..1" FormulaStageElements
+FormulaStageElements "0..*" --> "0..1" StageElement
+
 Participant "0..1" --> "0..1" Person : person
 
 @enduml

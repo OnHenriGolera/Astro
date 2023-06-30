@@ -2,9 +2,6 @@ package fr.astro.util;
 
 // import com.github.javafaker.Faker;
 
-import fr.astro.dao.competition.FormulaElementDAO;
-import fr.astro.entity.competition.FormulaElementEntity;
-
 public class CompetitionGenerator implements Instantiable {
     
     // Instance
@@ -66,22 +63,6 @@ public class CompetitionGenerator implements Instantiable {
      */
     public String generateFormulaElementDescription() {
         return "description"; // TODO
-    }
-    
-    /**
-     * Return a FormulaElementEntity
-     * 
-     * @return a FormulaElementEntity
-     */
-    public FormulaElementEntity generateFormulaElementEntity() throws Exception {
-        int formulaElementId = FormulaElementDAO.getInstance().getLastInsertedId() + 1;
-
-        String type = generateFormulaEntityType();
-        int numberBefore = generateFormulaElementNumberBefore();
-        int numberAfter = generateFormulaElementNumberAfter();
-        String description = generateFormulaElementDescription();
-
-        return FormulaElementEntity.of(formulaElementId, type, numberBefore, numberAfter, description);
     }
 
 }

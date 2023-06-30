@@ -60,15 +60,15 @@ public class Initializer {
 				"CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, FOREIGN KEY (personId) REFERENCES Person(personId))");
 		preparedStatement.executeUpdate();
 
-		// Create the table "FormulaElement" : formulaElementId, type, numberBefore,
-		// numberAfter, description
+
+		// Create the table StageElement : stageElementId, numberOfParticipants, numberOfParticipantsThatQualify, name, description, type
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS FormulaElement (formulaElementId INT PRIMARY KEY AUTO_INCREMENT, type VARCHAR(255), numberBefore INT, numberAfter INT, description VARCHAR(255))");
+				"CREATE TABLE IF NOT EXISTS StageElement (stageElementId INT PRIMARY KEY AUTO_INCREMENT, numberOfParticipants INT, numberOfParticipantsThatQualify INT, name VARCHAR(255), description VARCHAR(255), type VARCHAR(255))");
 		preparedStatement.executeUpdate();
 
-		// Create the table : "Stage" : stageId, name, formulaElementId
+		// Create the table : "Stage" : stageId, stageElementId, name
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS Stage (stageId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), formulaElementId INT, FOREIGN KEY (formulaElementId) REFERENCES FormulaElement(formulaElementId))");
+				"CREATE TABLE IF NOT EXISTS Stage (stageId INT PRIMARY KEY AUTO_INCREMENT, stageElementId INT, name VARCHAR(255), FOREIGN KEY (stageElementId) REFERENCES StageElement(stageElementId))");
 		preparedStatement.executeUpdate();
 
 		// Create the table : "Formula" : formulaId, name, description
@@ -82,14 +82,20 @@ public class Initializer {
 				"CREATE TABLE IF NOT EXISTS Competition (competitionId INT PRIMARY KEY AUTO_INCREMENT, formulaId INT, name VARCHAR(255), status VARCHAR(255), category VARCHAR(255), FOREIGN KEY (formulaId) REFERENCES Formula(formulaId))");
 		preparedStatement.executeUpdate();
 
-		// Create the table : "StageList" : stageId, competitionId
+		
+		// Create the table FormulaStageElements : formulaStageElementId, formulaId, stageElementId
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS StageList (stageId INT, competitionId INT, FOREIGN KEY (stageId) REFERENCES Stage(stageId), FOREIGN KEY (competitionId) REFERENCES Competition(competitionId))");
+				"CREATE TABLE IF NOT EXISTS FormulaStageElements (formulaStageElementId INT PRIMARY KEY AUTO_INCREMENT, formulaId INT, stageElementId INT, FOREIGN KEY (formulaId) REFERENCES Formula(formulaId), FOREIGN KEY (stageElementId) REFERENCES StageElement(stageElementId))");
 		preparedStatement.executeUpdate();
 
-		// Create the table : "FormulaElementList" : formulaId, formulaElementId
+		// Create the table : "CompetitionStages" : competitionStageId, competitionId, stageId
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS FormulaElementList (formulaId INT, formulaElementId INT, FOREIGN KEY (formulaId) REFERENCES Formula(formulaId), FOREIGN KEY (formulaElementId) REFERENCES FormulaElement(formulaElementId))");
+				"CREATE TABLE IF NOT EXISTS CompetitionStages (competitionStageId INT PRIMARY KEY AUTO_INCREMENT, competitionId INT, stageId INT, FOREIGN KEY (competitionId) REFERENCES Competition(competitionId), FOREIGN KEY (stageId) REFERENCES Stage(stageId))");
+		preparedStatement.executeUpdate();
+
+		// Create the table : "StageParticipants" : stageParticipantId, stageId, participantId
+		preparedStatement = connect.prepareStatement(
+				"CREATE TABLE IF NOT EXISTS StageParticipants (stageParticipantId INT PRIMARY KEY AUTO_INCREMENT, stageId INT, participantId INT, FOREIGN KEY (stageId) REFERENCES Stage(stageId), FOREIGN KEY (participantId) REFERENCES Participant(participantId))");
 		preparedStatement.executeUpdate();
 
 	}
