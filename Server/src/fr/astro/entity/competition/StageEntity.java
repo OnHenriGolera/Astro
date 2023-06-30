@@ -18,7 +18,7 @@ public class StageEntity {
     // Attributes
     private int id;
     private String name;
-    private FormulaElementEntity formulaElementEntity;
+    private FormulaEntity formulaEntity;
     private Set<ParticipantEntity> participantEntities;
 
     /**
@@ -26,14 +26,14 @@ public class StageEntity {
      * 
      * @param id
      * @param name
-     * @param formulaElementEntity
+     * @param formulaEntity
      * @param participantEntities
      */
-    private StageEntity(int id, String name, FormulaElementEntity formulaElementEntity,
+    private StageEntity(int id, String name, FormulaEntity formulaEntity,
             Set<ParticipantEntity> participantEntities) {
         this.id = id;
         this.name = name;
-        this.formulaElementEntity = formulaElementEntity;
+        this.formulaEntity = formulaEntity;
         this.participantEntities = participantEntities;
     }
 
@@ -42,13 +42,13 @@ public class StageEntity {
      * 
      * @param id
      * @param name
-     * @param formulaElementEntity
+     * @param formulaEntity
      * @return
      */
-    private StageEntity(int id, String name, FormulaElementEntity formulaElementEntity) {
+    private StageEntity(int id, String name, FormulaEntity formulaEntity) {
         this.id = id;
         this.name = name;
-        this.formulaElementEntity = formulaElementEntity;
+        this.formulaEntity = formulaEntity;
         this.participantEntities = new HashSet<>();
     }
 
@@ -57,18 +57,18 @@ public class StageEntity {
      * 
      * @param id
      * @param name
-     * @param formulaElementEntity
+     * @param formulaEntity
      * @param participantEntities
      * @return StageEntity
      */
-    public static StageEntity of(int id, String name, FormulaElementEntity formulaElementEntity,
+    public static StageEntity of(int id, String name, FormulaEntity formulaEntity,
             Set<ParticipantEntity> participantEntities) {
 
         requireNonNull(name);
-        requireNonNull(formulaElementEntity);
+        requireNonNull(formulaEntity);
         requireNonNull(participantEntities);
 
-        return new StageEntity(id, name, formulaElementEntity, participantEntities);
+        return new StageEntity(id, name, formulaEntity, participantEntities);
     }
 
     /**
@@ -76,15 +76,15 @@ public class StageEntity {
      * 
      * @param id
      * @param name
-     * @param formulaElementEntity
+     * @param formulaEntity
      * @return StageEntity
      */
-    public static StageEntity of(int id, String name, FormulaElementEntity formulaElementEntity) {
+    public static StageEntity of(int id, String name, FormulaEntity formulaEntity) {
 
         requireNonNull(name);
-        requireNonNull(formulaElementEntity);
+        requireNonNull(formulaEntity);
 
-        return new StageEntity(id, name, formulaElementEntity);
+        return new StageEntity(id, name, formulaEntity);
 
     }
 
@@ -107,12 +107,12 @@ public class StageEntity {
     }
 
     /**
-     * Returns the formulaElementEntity
+     * Returns the formulaEntity
      * 
-     * @return formulaElementEntity
+     * @return formulaEntity
      */
-    public FormulaElementEntity getFormulaElementEntity() {
-        return formulaElementEntity;
+    public FormulaEntity getFormulaEntity() {
+        return formulaEntity;
     }
 
     /**
@@ -145,13 +145,43 @@ public class StageEntity {
     }
 
     /**
+     * Set the name
+     * 
+     * @param name
+     */
+    public void setStageName(String name) {
+        requireNonNull(name);
+        this.name = name;
+    }
+
+    /**
+     * Set the formulaEntity
+     * 
+     * @param formulaEntity
+     */
+    public void setStageFormulaEntity(FormulaEntity formulaEntity) {
+        requireNonNull(formulaEntity);
+        this.formulaEntity = formulaEntity;
+    }
+
+    /**
+     * Set the participantEntities
+     * 
+     * @param participantEntities
+     */
+    public void setStageParticipantEntities(Set<ParticipantEntity> participantEntities) {
+        requireNonNull(participantEntities);
+        this.participantEntities = participantEntities;
+    }
+    
+    /**
      * Returns a String representation of the object
      * 
      * @return String
      */
     @Override
     public String toString() {
-        return "StageEntity [formulaElementEntity=" + formulaElementEntity + ", id=" + id + ", name=" + name
+        return "StageEntity [formulaEntity=" + formulaEntity + ", id=" + id + ", name=" + name
                 + ", participantEntities=" + participantEntities + "]";
     }
 
@@ -178,7 +208,7 @@ public class StageEntity {
 
             return stageEntity.id == id
                     && stageEntity.name.equals(name)
-                    && stageEntity.formulaElementEntity.equals(formulaElementEntity)
+                    && stageEntity.formulaEntity.equals(formulaEntity)
                     && stageEntity.participantEntities.equals(participantEntities)
                     && this.hashCode() == stageEntity.hashCode();
         }

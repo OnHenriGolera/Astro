@@ -8,6 +8,7 @@ import fr.astro.util.CompetitionGenerator;
 
 public class FormulaFullTest extends SQLObjectTest<FormulaEntity> {
 
+
     private CompetitionGenerator competitionGeneratorInstance = CompetitionGenerator.getInstance();
     private final static boolean display = true;
 

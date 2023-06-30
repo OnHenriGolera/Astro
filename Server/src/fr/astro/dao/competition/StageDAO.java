@@ -46,6 +46,10 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
     // Query for the Set : Select * from ParticipantList where stageId = ?
     private final String GET_SET_QUERY = String.format("SELECT * FROM ParticipantList WHERE %s = ?", COLUMN_ID);
     private final String participantId = "participantId";
+    // Remove every data about participant list when deleting a stage (don't delete
+    // participant, juste remove line from participant list)
+    private final String REMOVE_PARTICIPANT_LIST = String.format("DELETE FROM ParticipantList WHERE %s = ?", COLUMN_ID);
+
     /* ------------------------------------------------- */
 
     /**
@@ -79,12 +83,36 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
             return update(object);
         }
 
+        // Put the connection in manual commit (to rollback if an error occurs)
+        connection.setAutoCommit(false);
+
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
         preparedStatement.setInt(1, object.getStageId());
         preparedStatement.setString(2, object.getStageName());
-        preparedStatement.setInt(3, object.getFormulaElementEntity().getFormulaElementId());
+        preparedStatement.setInt(3, object.getFormulaEntity().getFormulaId());
 
-        return preparedStatement.executeUpdate() > 0;
+        boolean success = preparedStatement.executeUpdate() > 0;
+
+        // Save the formulaEntity
+        success = success && FormulaDAO.getInstance().save(object.getFormulaEntity());
+
+        // Save the set
+        for (ParticipantEntity participantEntity : object.getStageParticipantEntities()) {
+            success = success && ParticipantDAO.getInstance().save(participantEntity);
+        }
+
+        // Commit or rollback
+        if (success) {
+            connection.commit();
+        } else {
+            connection.rollback();
+            throw new SQLException("An error occured while saving the stage");
+        }
+
+        // Put the connection in auto commit
+        connection.setAutoCommit(true);
+
+        return success;
 
     }
 
@@ -99,12 +127,36 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
             throw new ObjectNotFound("StageEntity cannot be found in the database");
         }
 
+        // Put the connection in manual commit (to rollback if an error occurs)
+        connection.setAutoCommit(false);
+
         PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
         preparedStatement.setString(1, object.getStageName());
-        preparedStatement.setInt(2, object.getFormulaElementEntity().getFormulaElementId());
+        preparedStatement.setInt(2, object.getFormulaEntity().getFormulaId());
         preparedStatement.setInt(3, object.getStageId());
 
-        return preparedStatement.executeUpdate() > 0;
+        boolean success = preparedStatement.executeUpdate() > 0;
+
+        // Update the formulaEntity
+        success = success && FormulaDAO.getInstance().update(object.getFormulaEntity());
+
+        // Update the set
+        for (ParticipantEntity participantEntity : object.getStageParticipantEntities()) {
+            success = success && ParticipantDAO.getInstance().update(participantEntity);
+        }
+
+        // Commit or rollback
+        if (success) {
+            connection.commit();
+        } else {
+            connection.rollback();
+            throw new SQLException("An error occured while updating the stage");
+        }
+
+        // Put the connection in auto commit
+        connection.setAutoCommit(true);
+
+        return success;
 
     }
 
@@ -119,10 +171,33 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
             throw new ObjectNotFound("StageEntity cannot be found in the database");
         }
 
+        // Set the connection in manual commit (to rollback if an error occurs)
+        connection.setAutoCommit(false);
+
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY);
         preparedStatement.setInt(1, object.getStageId());
 
-        return preparedStatement.executeUpdate() > 0;
+        boolean success = preparedStatement.executeUpdate() > 0;
+
+        // Delete the set (only the participant list)
+        preparedStatement = connection.prepareStatement(REMOVE_PARTICIPANT_LIST);
+        preparedStatement.setInt(1, object.getStageId());
+
+        success = success && preparedStatement.executeUpdate() > 0;
+
+        // Commit or rollback
+        if (success) {
+            connection.commit();
+        } else {
+            connection.rollback();
+            connection.setAutoCommit(true);
+            throw new SQLException("An error occured while deleting the stage");
+        }
+
+        // Put the connection in auto commit
+        connection.setAutoCommit(true);
+
+        return success;
 
     }
 
@@ -139,7 +214,7 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
 
         if (resultSet.next()) {
             return StageEntity.of(resultSet.getInt(COLUMN_ID), resultSet.getString(COLUMN_NAME),
-                    FormulaElementDAO.getInstance().get(resultSet.getInt(COLUMN_FORMULA_ELEMENT_ID)));
+                    FormulaDAO.getInstance().get(resultSet.getInt(COLUMN_FORMULA_ELEMENT_ID)));
         }
 
         // Should never happen
@@ -195,8 +270,14 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
 
         while (resultSet.next()) {
             try {
-                stageEntities.add(StageEntity.of(resultSet.getInt(COLUMN_ID), resultSet.getString(COLUMN_NAME),
-                        FormulaElementDAO.getInstance().get(resultSet.getInt(COLUMN_FORMULA_ELEMENT_ID))));
+                StageEntity entity = StageEntity.of(resultSet.getInt(COLUMN_ID), resultSet.getString(COLUMN_NAME),
+                        FormulaDAO.getInstance().get(resultSet.getInt(COLUMN_FORMULA_ELEMENT_ID)));
+                
+                // Add the set
+                entity.setStageParticipantEntities(getRelatedSet(entity));
+                
+                stageEntities.add(entity);
+
             } catch (ObjectNotFound e) {
                 // Should never happen except if the database is corrupted
                 e.printStackTrace();
@@ -228,7 +309,7 @@ public class StageDAO implements SQLObjectAndRelatedSet<StageEntity, Participant
             throw new ObjectNotFound("StageEntity cannot be null");
         }
 
-        return StageEntity.of(object.getStageId(), object.getStageName(), object.getFormulaElementEntity());
+        return StageEntity.of(object.getStageId(), object.getStageName(), object.getFormulaEntity());
 
     }
 
