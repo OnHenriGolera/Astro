@@ -87,7 +87,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         // Save as PersonEntity
-        boolean success = PersonDAO.getInstance().save(object);
+        boolean success = PersonDAO.getInstance().save(object.getPersonEntity());
 
         // Save user
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
@@ -114,7 +114,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         // Update as PersonEntity
-        boolean success = PersonDAO.getInstance().update(object);
+        boolean success = PersonDAO.getInstance().update(object.getPersonEntity());
 
         // Update user
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
@@ -147,7 +147,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         boolean success = statement.executeUpdate() > 0;
 
         // Delete as PersonEntity
-        success &= PersonDAO.getInstance().delete(object);
+        success &= PersonDAO.getInstance().delete(object.getPersonEntity());
 
         return success;
     }

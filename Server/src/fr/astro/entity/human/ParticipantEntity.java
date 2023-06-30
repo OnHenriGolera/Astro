@@ -7,11 +7,12 @@ import static java.util.Objects.requireNonNull;
  * 
  * @see PersonEntity
  */
-public class ParticipantEntity extends PersonEntity {
+public class ParticipantEntity {
 
     private int participantId;
     private String category;
     private boolean present;
+    private PersonEntity personEntity;
 
     /**
      * Constructor
@@ -29,7 +30,7 @@ public class ParticipantEntity extends PersonEntity {
     private ParticipantEntity(int personId, String name, String surname, int participantId, String category,
             boolean present) {
 
-        super(personId, name, surname);
+        this.personEntity = PersonEntity.of(personId, name, surname);
 
         requireNonNull(category);
         requireNonNull(present);
@@ -110,6 +111,60 @@ public class ParticipantEntity extends PersonEntity {
     }
 
     /**
+     * Return the personId
+     * 
+     * @return personId
+     */
+    public int getPersonId() {
+        return personEntity.getPersonId();
+    }
+
+    /**
+     * Return the name
+     * 
+     * @return name
+     */
+    public String getPersonName() {
+        return personEntity.getPersonName();
+    }
+
+    /**
+     * Return the surname
+     * 
+     * @return surname
+     */
+    public String getPersonSurname() {
+        return personEntity.getPersonSurname();
+    }
+
+    /**
+     * Set the name
+     * 
+     * @param name
+     */
+    public void setPersonName(String name) {
+        personEntity.setPersonName(name);
+    }
+
+    /**
+     * Set the surname
+     * 
+     * @param surname
+     */
+    public void setPersonSurname(String surname) {
+        personEntity.setPersonSurname(surname);
+    }
+
+    /**
+     * Return the personEntity
+     * 
+     * @return personEntity
+     */
+    public PersonEntity getPersonEntity() {
+        return personEntity;
+    }
+
+    /**
      * Return a String representation of Participant
      * 
      * @return a String representation of Participant
@@ -120,9 +175,7 @@ public class ParticipantEntity extends PersonEntity {
                 "participantId=" + participantId +
                 ", category='" + category + '\'' +
                 ", present=" + present +
-                ", personId=" + personId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", personEntity=" + personEntity +
                 '}';
     }
 
@@ -138,8 +191,6 @@ public class ParticipantEntity extends PersonEntity {
         if (this == o)
             return true;
         if (!(o instanceof ParticipantEntity))
-            return false;
-        if (!super.equals(o))
             return false;
 
         ParticipantEntity that = (ParticipantEntity) o;

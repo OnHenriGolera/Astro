@@ -6,12 +6,14 @@ import static java.util.Objects.requireNonNull;
  * UserEntity
  * 
  * @see PersonEntity
+ * @see RoleEntity
  */
-public class UserEntity extends PersonEntity {
+public class UserEntity {
 
-    protected RoleEntity roleEntity;
-    protected int userId;
-    protected String password;
+    private RoleEntity roleEntity;
+    private int userId;
+    private String password;
+    private PersonEntity personEntity;
 
     /**
      * Constructor
@@ -24,11 +26,10 @@ public class UserEntity extends PersonEntity {
      *                              because of auto-increment)
      */
     private UserEntity(int personId, String name, String surname, int userId, String password, RoleEntity roleEntity) {
-
-        super(personId, name, surname);
-
         requireNonNull(roleEntity);
         requireNonNull(password);
+
+        this.personEntity = PersonEntity.of(personId, name, surname);
 
         this.roleEntity = roleEntity;
         this.password = password;
@@ -52,8 +53,13 @@ public class UserEntity extends PersonEntity {
     }
 
     public static UserEntity Of(UserEntity userEntity) {
-        return new UserEntity(userEntity.getPersonId(), userEntity.getPersonName(), userEntity.getPersonSurname(),
-                userEntity.getUserId(), userEntity.getUserPassword(), userEntity.getUserRoleEntity());
+        return new UserEntity(
+                userEntity.getPersonId(),
+                userEntity.getPersonName(),
+                userEntity.getPersonSurname(),
+                userEntity.getUserId(),
+                userEntity.getUserPassword(),
+                userEntity.getUserRoleEntity());
     }
 
     /**
@@ -122,6 +128,55 @@ public class UserEntity extends PersonEntity {
     }
 
     /**
+     * Return the name
+     * 
+     * @return name
+     */
+    public String getPersonName() {
+        return personEntity.getPersonName();
+    }
+
+    /**
+     * Return the surname
+     * 
+     * @return surname
+     */
+    public String getPersonSurname() {
+        return personEntity.getPersonSurname();
+    }
+
+    /**
+     * Return the personId
+     * 
+     * @return personId
+     */
+    public int getPersonId() {
+        return personEntity.getPersonId();
+    }
+
+    /**
+     * Set the name
+     * 
+     * @param name
+     * @throws NullPointerException if name is null
+     */
+    public void setPersonName(String name) {
+        requireNonNull(name);
+        personEntity.setPersonName(name);
+    }
+
+    /**
+     * Set the surname
+     * 
+     * @param surname
+     * @throws NullPointerException if surname is null
+     */
+    public void setPersonSurname(String surname) {
+        requireNonNull(surname);
+        personEntity.setPersonSurname(surname);
+    }
+
+    /**
      * Set the RoleEntity
      * 
      * @param roleEntity
@@ -133,14 +188,30 @@ public class UserEntity extends PersonEntity {
     }
 
     /**
+     * Return the PersonEntity
+     * 
+     * @return personEntity
+     */
+    public PersonEntity getPersonEntity() {
+        return personEntity;
+    }
+
+    /**
      * Give a String representation of the UserEntity
      * 
      * @return a String representation of the UserEntity
      */
     @Override
     public String toString() {
-        return "UserEntity [userId=" + userId + ", password=" + password + ", roleEntity=" + roleEntity + ", name="
-                + name + ", surname=" + surname + ", personId=" + personId + "]";
+        return "UserEntity [userId=" +
+                userId +
+                ", password=" +
+                password +
+                ", roleEntity=" +
+                roleEntity +
+                ", personEntity=" +
+                personEntity +
+                "]";
     }
 
     /**
@@ -157,8 +228,8 @@ public class UserEntity extends PersonEntity {
             return false;
         UserEntity userEntity = (UserEntity) obj;
         return this.userId == userEntity.getUserId() && this.password.equals(userEntity.getUserPassword())
-                && this.roleEntity.equals(userEntity.getUserRoleEntity()) && this.name.equals(userEntity.getPersonName())
-                && this.surname.equals(userEntity.getPersonSurname()) && this.personId == userEntity.getPersonId();
+                && this.roleEntity.equals(userEntity.getUserRoleEntity())
+                && this.personEntity.equals(userEntity.getPersonEntity());
     }
 
 }
