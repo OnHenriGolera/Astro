@@ -62,7 +62,7 @@ public class PageGetter {
      */
     public static String getInvalidPage(FreeMarkerInitializer.Lang lang) throws IOException, TemplateException {
 
-        return getPage("redirect/invalidTemplate", lang);
+        return getPage("Default Light/redirect/invalidTemplate", lang);
 
     }
 

@@ -12,6 +12,8 @@ import freemarker.template.TemplateException;
  */
 public class WebTemplate {
 
+    private final static String defaultTheme = "Default_Light";
+
     // Attributes
     private String pageName;
     private String templateName;
@@ -142,7 +144,7 @@ public class WebTemplate {
 
             } else {
 
-                page = PageGetter.getPage(pageName + "-" + templateName, input, lang);
+                page = PageGetter.getPage(templateName + "/" + pageName, input, lang);
 
             }
 
@@ -151,7 +153,7 @@ public class WebTemplate {
             // PageName is the default page in case of error
             try {
 
-                page = PageGetter.getPage(pageName, input, lang);
+                page = PageGetter.getPage(defaultTheme + "/" + pageName, input, lang);
 
             } catch (Exception e2) {
 

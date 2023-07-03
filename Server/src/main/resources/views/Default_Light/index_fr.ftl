@@ -3,7 +3,7 @@
 
 <head>
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="Default_Light/css/index.css">
 
     <#include "util/head.ftl">
 </head>

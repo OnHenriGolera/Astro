@@ -28,6 +28,8 @@ public class Server {
 
 		defineGETs();
 
+		definePOSTs();
+
 	}
 
 	/**
@@ -53,12 +55,42 @@ public class Server {
 			System.out.println("GET /template-chooser");
 
 			return TemplateChooserGUI.getInstance().renderPage(request, response);
-			
+
 		});
 
 		notFound((req, res) -> {
 			System.out.println("GET 404");
 			return Error404GUI.getInstance().renderPage(req, res);
+		});
+
+	}
+
+	/**
+	 * Define POSTs
+	 * 
+	 * Define all the POSTs routes
+	 */
+	public static void definePOSTs() {
+
+		post("/template-chooser", (request, response) -> {
+
+			String theme = request.queryParams("template");
+
+			System.out.println(theme);
+
+			if (theme == null || theme.isEmpty()) {
+				response.redirect("/template-chooser");
+				return null;
+			}
+
+			System.out.println("POST /template-chooser");
+
+			response.cookie("theme", theme);
+
+			response.redirect("/");
+
+			return null;
+
 		});
 
 	}
