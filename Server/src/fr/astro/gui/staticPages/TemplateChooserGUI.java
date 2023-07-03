@@ -8,7 +8,7 @@ import spark.Response;
 public class TemplateChooserGUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "templateChooser";
+    public static final String ftlPath = "redirect/templateChooser";
 
     // Instance
     private static Page instance;

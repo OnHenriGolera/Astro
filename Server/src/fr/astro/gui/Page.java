@@ -15,6 +15,7 @@ public abstract class Page {
 
     /**
      * Constructor
+     * 
      * @param name
      */
     protected Page(String name) {
@@ -25,6 +26,7 @@ public abstract class Page {
 
     /**
      * Constructor
+     * 
      * @param name
      * @param redirectPath
      */
@@ -37,6 +39,7 @@ public abstract class Page {
 
     /**
      * Render the page without any input
+     * 
      * @return
      * @throws Exception
      */
@@ -48,44 +51,38 @@ public abstract class Page {
 
     /**
      * Render the page with the input
+     * 
      * @param input
      * @return the page in HTML
      * @throws Exception
      */
     protected String renderPage(Map<String, Object> input, Request request, Response response) throws Exception {
 
-        try {
-
-            if (name == null) {
-                throw new InvalidArguments("Page name is null");
-            }
-            
-            // Get the theme cookie
-            String theme = request.cookie("theme");
-
-            // If the theme cookie is null, set it to the page name
-            if (theme == null) {
-                response.cookie("theme", "");
-                theme = "";
-            }
-
-            WebTemplate template = WebTemplate.getTemplate(name, theme);
-
-            // Get the lang
-            FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
-
-            return template.loadTemplate(lang);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+        if (name == null) {
+            throw new InvalidArguments("Page name is null");
         }
+
+        // Get the theme cookie
+        String theme = request.cookie("theme");
+
+        // If the theme cookie is null, set it to the page name
+        if (theme == null) {
+            response.cookie("theme", "");
+            theme = "";
+        }
+
+        WebTemplate template = WebTemplate.getTemplate(name, theme);
+
+        // Get the lang
+        FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
+
+        return template.loadTemplate(lang);
 
     }
 
     /**
      * Redirect the user if he has to be redirected
+     * 
      * @param request
      * @param response
      * @return true if the user is redirected, false otherwise
@@ -110,9 +107,9 @@ public abstract class Page {
 
     /**
      * Return true if the user has to be redirected, false otherwise
+     * 
      * @return true if the user has to be redirected, false otherwise
      */
     protected abstract boolean hasToRedirect(Request request, Response response) throws Exception;
 
 }
-

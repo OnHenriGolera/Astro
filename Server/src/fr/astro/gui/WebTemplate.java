@@ -155,6 +155,8 @@ public class WebTemplate {
 
             } catch (Exception e2) {
 
+                e2.printStackTrace();
+
                 // If the default page is not found, return the invalid page
                 page = PageGetter.getInvalidPage(lang);
             }
