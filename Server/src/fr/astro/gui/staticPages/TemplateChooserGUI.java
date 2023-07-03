@@ -5,10 +5,10 @@ import fr.astro.util.Instantiable;
 import spark.Request;
 import spark.Response;
 
-public class Error404GUI extends Page implements Instantiable {
+public class TemplateChooserGUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "redirect/404";
+    public static final String ftlPath = "templateChooser";
 
     // Instance
     private static Page instance;
@@ -18,7 +18,7 @@ public class Error404GUI extends Page implements Instantiable {
      * 
      * @param name
      */
-    private Error404GUI() {
+    private TemplateChooserGUI() {
         super(ftlPath);
     }
 
@@ -29,7 +29,7 @@ public class Error404GUI extends Page implements Instantiable {
      */
     public static Page getInstance() {
         if (instance == null) {
-            instance = new Error404GUI();
+            instance = new TemplateChooserGUI();
         }
 
         return instance;
@@ -39,5 +39,5 @@ public class Error404GUI extends Page implements Instantiable {
     protected boolean hasToRedirect(Request request, Response response) throws Exception {
         return false;
     }
-
+    
 }

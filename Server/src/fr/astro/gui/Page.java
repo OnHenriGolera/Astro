@@ -54,14 +54,33 @@ public abstract class Page {
      */
     protected String renderPage(Map<String, Object> input, Request request, Response response) throws Exception {
 
-        if (name == null) {
-            throw new InvalidArguments("Page name is null");
+        try {
+
+            if (name == null) {
+                throw new InvalidArguments("Page name is null");
+            }
+            
+            // Get the theme cookie
+            String theme = request.cookie("theme");
+
+            // If the theme cookie is null, set it to the page name
+            if (theme == null) {
+                response.cookie("theme", "");
+                theme = "";
+            }
+
+            WebTemplate template = WebTemplate.getTemplate(name, theme);
+
+            // Get the lang
+            FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
+
+            return template.loadTemplate(lang);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
-
-        // Get the lang
-        FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
-
-        return PageGetter.getPage(name, input, lang);
 
     }
 

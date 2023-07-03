@@ -9,6 +9,7 @@
         <a href="/competition" class="nav-link">Competition</a>
         <a href="/contact" class="nav-link">Contact</a>
         <a href="/login" class="nav-link" class="login">Login</a>
+        <a href="/template-chooser" class="nav-link" class="login">Template Chooser</a>
     </div>
 
 </nav>

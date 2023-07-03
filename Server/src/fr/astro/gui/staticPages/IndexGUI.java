@@ -8,7 +8,7 @@ import fr.astro.util.Instantiable;
 public class IndexGUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "index.ftl";
+    public static final String ftlPath = "index";
 
     // Instance
     private static Page instance;

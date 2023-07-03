@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import fr.astro.dao.database.Initializer;
 import fr.astro.gui.staticPages.Error404GUI;
 import fr.astro.gui.staticPages.IndexGUI;
+import fr.astro.gui.staticPages.TemplateChooserGUI;
 
 /**
  * Server
@@ -39,6 +40,20 @@ public class Server {
 		get("/", (request, response) -> {
 			System.out.println("GET /");
 			return IndexGUI.getInstance().renderPage(request, response);
+		});
+
+		get("/default-template", (request, response) -> {
+			System.out.println("GET /default-template");
+
+			return IndexGUI.getInstance().renderPage(request, response);
+		});
+
+		get("/template-chooser", (request, response) -> {
+
+			System.out.println("GET /template-chooser");
+
+			return TemplateChooserGUI.getInstance().renderPage(request, response);
+			
 		});
 
 		notFound((req, res) -> {
