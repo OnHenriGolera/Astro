@@ -10,6 +10,7 @@ import fr.astro.util.HumanGenerator;
  * ParticipantExisting
  * 
  * Test the existence of participants
+ * 
  * @see ParticipantCreation
  * @see ExistingTest
  * @deprecated
@@ -33,7 +34,7 @@ public class ParticipantExisting extends ExistingTest<ParticipantEntity> {
         test.test(display);
 
     }
-    
+
     /**
      * Constructor
      * 

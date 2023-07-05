@@ -87,7 +87,7 @@ public class RoleDAO implements SQLObject<RoleEntity>, Instantiable {
         statement.setInt(1, object.getRoleId());
         statement.setString(2, object.getRoleName());
         statement.setInt(3, object.getRoleAccessLevel());
-        
+
         return statement.executeUpdate() > 0;
     }
 
@@ -106,7 +106,7 @@ public class RoleDAO implements SQLObject<RoleEntity>, Instantiable {
         statement.setString(1, object.getRoleName());
         statement.setInt(2, object.getRoleAccessLevel());
         statement.setInt(3, object.getRoleId());
-        
+
         return statement.executeUpdate() > 0;
 
     }
@@ -124,7 +124,7 @@ public class RoleDAO implements SQLObject<RoleEntity>, Instantiable {
 
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getRoleId());
-        
+
         return statement.executeUpdate() > 0;
     }
 

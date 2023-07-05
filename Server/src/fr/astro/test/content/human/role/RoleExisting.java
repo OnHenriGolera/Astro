@@ -10,6 +10,7 @@ import fr.astro.util.HumanGenerator;
  * RoleExisting
  * 
  * Test the existence of roles
+ * 
  * @see RoleCreation
  * @see ExistingTest
  * @deprecated
@@ -33,7 +34,7 @@ public class RoleExisting extends ExistingTest<RoleEntity> {
         test.test(display);
 
     }
-    
+
     /**
      * Constructor
      * 

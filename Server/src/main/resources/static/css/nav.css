@@ -5,12 +5,13 @@
     height: 100vh;
     width: 100vw;
     z-index: -1;
-    
+
     background-color: #f8f9fa;
     opacity: 0.2;
-    background-image:  radial-gradient(#2B2D42 1.35px, transparent 1.35px), radial-gradient(#2B2D42 1.35px, #f8f9fa 1.35px);
+    background-image: radial-gradient(#2b2d42 1.35px, transparent 1.35px),
+        radial-gradient(#2b2d42 1.35px, #f8f9fa 1.35px);
     background-size: 54px 54px;
-    background-position: 0 0,27px 27px;
+    background-position: 0 0, 27px 27px;
 }
 
 nav {

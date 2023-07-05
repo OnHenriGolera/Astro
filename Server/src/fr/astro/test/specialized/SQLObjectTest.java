@@ -107,13 +107,13 @@ public abstract class SQLObjectTest<T> extends Test {
 
         // Check if the objects are the same
         for (T object : objects) {
-            
+
             // Test equals
             if (!getDao().get(getIdFromObject(object)).equals(object)) {
                 throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao "
                         + getDao().get(getIdFromObject(object)));
             }
-            
+
             // Test hashCode
             if (getDao().get(getIdFromObject(object)).hashCode() != object.hashCode()) {
                 throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao "
@@ -199,7 +199,8 @@ public abstract class SQLObjectTest<T> extends Test {
         // Check if the objects are the same
         for (T object : objects) {
             if (!getDao().get(getIdFromObject(object)).equals(object)) {
-                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao " + getDao().get(getIdFromObject(object)));
+                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao "
+                        + getDao().get(getIdFromObject(object)));
             }
         }
 
@@ -310,7 +311,6 @@ public abstract class SQLObjectTest<T> extends Test {
 
             // Validate the test
             validate();
-
 
         } catch (Exception e) {
             e.printStackTrace();

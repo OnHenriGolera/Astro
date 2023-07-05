@@ -6,8 +6,9 @@ root {
 
 /* ------------------------------------------- */
 /* Global default */
-html, body {
-    font-family: 'Quicksand', sans-serif;
+html,
+body {
+    font-family: "Quicksand", sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -24,14 +25,12 @@ main {
     align-items: center;
     justify-content: center;
 
-    
     animation: fadeIn 0.5s ease-in-out;
     -webkit-animation: fadeIn 0.5s ease-in-out;
     -moz-animation: fadeIn 0.5s ease-in-out;
     -o-animation: fadeIn 0.5s ease-in-out;
     -ms-animation: fadeIn 0.5s ease-in-out;
 }
-
 
 a {
     color: #000;
@@ -50,8 +49,9 @@ li {
     padding: 0;
 }
 
-h1, .astro {
-    font-family: 'Wallington Regular', cursive;
+h1,
+.astro {
+    font-family: "Wallington Regular", cursive;
 }
 
 @font-face {

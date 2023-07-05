@@ -34,25 +34,25 @@ public class PersonFullTest extends SQLObjectTest<PersonEntity> {
 
     @Override
     public int getIdFromObject(PersonEntity object) {
-        
+
         return object.getPersonId();
 
     }
 
     @Override
     public SQLObject<PersonEntity> getDao() {
-        
+
         return PersonDAO.getInstance();
 
     }
 
     @Override
     public void modifyObject(PersonEntity object) {
-        
+
         // Modify the object
         object.setPersonName(generatorInstance.generateName());
         object.setPersonSurname(generatorInstance.generateSurname());
 
     }
-    
+
 }

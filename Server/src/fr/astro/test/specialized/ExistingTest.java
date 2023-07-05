@@ -6,6 +6,7 @@ import fr.astro.exception.test.TestFailed;
  * ExistingTest
  * 
  * Test if the objects exist
+ * 
  * @deprecated
  */
 @Deprecated

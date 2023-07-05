@@ -75,7 +75,6 @@ public class FreeMarkerInitializer {
     public static Configuration getConfiguration() {
         return getConfiguration(DEFAULT_LANG);
     }
-        
 
     /**
      * Return the configuration of FreeMarker

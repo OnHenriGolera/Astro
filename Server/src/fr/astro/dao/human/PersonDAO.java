@@ -87,7 +87,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getPersonName());
         statement.setString(3, object.getPersonSurname());
-        
+
         return statement.executeUpdate() > 0;
     }
 
@@ -106,7 +106,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         statement.setString(1, object.getPersonName());
         statement.setString(2, object.getPersonSurname());
         statement.setInt(3, object.getPersonId());
-        
+
         return statement.executeUpdate() > 0;
 
     }
@@ -124,7 +124,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
 
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getPersonId());
-        
+
         return statement.executeUpdate() > 0;
 
     }

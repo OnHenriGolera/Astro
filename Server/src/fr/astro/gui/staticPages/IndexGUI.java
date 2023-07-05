@@ -22,6 +22,7 @@ public class IndexGUI extends Page implements Instantiable {
 
     /**
      * Return the instance of the Object
+     * 
      * @return the instance of the Object
      */
     public static Page getInstance() {

@@ -15,6 +15,7 @@ public abstract class Page {
 
     /**
      * Constructor
+     * 
      * @param name
      */
     protected Page(String name) {
@@ -25,6 +26,7 @@ public abstract class Page {
 
     /**
      * Constructor
+     * 
      * @param name
      * @param redirectPath
      */
@@ -37,6 +39,7 @@ public abstract class Page {
 
     /**
      * Render the page without any input
+     * 
      * @return
      * @throws Exception
      */
@@ -48,6 +51,7 @@ public abstract class Page {
 
     /**
      * Render the page with the input
+     * 
      * @param input
      * @return the page in HTML
      * @throws Exception
@@ -67,6 +71,7 @@ public abstract class Page {
 
     /**
      * Redirect the user if he has to be redirected
+     * 
      * @param request
      * @param response
      * @return true if the user is redirected, false otherwise
@@ -91,9 +96,9 @@ public abstract class Page {
 
     /**
      * Return true if the user has to be redirected, false otherwise
+     * 
      * @return true if the user has to be redirected, false otherwise
      */
     protected abstract boolean hasToRedirect(Request request, Response response) throws Exception;
 
 }
-

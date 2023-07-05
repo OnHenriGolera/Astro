@@ -10,6 +10,7 @@ import fr.astro.util.HumanGenerator;
  * UserGetter
  * 
  * Test the getter of users
+ * 
  * @deprecated
  */
 @Deprecated
@@ -54,14 +55,14 @@ public class UserGetter extends GetterTest<UserEntity> {
     public int getIdFromObject(UserEntity object) {
 
         return object.getUserId();
-    
+
     }
 
     @Override
     public SQLObject<UserEntity> getDao() {
-    
+
         return UserDAO.getInstance();
-    
+
     }
 
 }

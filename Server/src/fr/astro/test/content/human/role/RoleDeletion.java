@@ -19,10 +19,9 @@ public class RoleDeletion extends DeletionTest<RoleEntity> {
 
     // Instances
     private HumanGenerator generatorInstance = HumanGenerator.getInstance();
-    
+
     // Display
     private final static boolean display = true;
-
 
     /**
      * Main
@@ -70,7 +69,6 @@ public class RoleDeletion extends DeletionTest<RoleEntity> {
      */
     @Override
     public SQLObject<RoleEntity> getDao() {
-        
 
         return RoleDAO.getInstance();
 

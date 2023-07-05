@@ -93,7 +93,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         statement.setInt(2, object.getPersonId());
         statement.setString(3, object.getParticipantCategory());
         statement.setBoolean(4, object.isParticipantPresent());
-        
+
         success &= statement.executeUpdate() > 0;
 
         return success;
@@ -119,7 +119,7 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         statement.setString(2, object.getParticipantCategory());
         statement.setBoolean(3, object.isParticipantPresent());
         statement.setInt(4, object.getParticipantId());
-        
+
         success &= statement.executeUpdate() > 0;
 
         return success;
@@ -139,12 +139,12 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
 
         PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
         statement.setInt(1, object.getParticipantId());
-        
+
         boolean success = statement.executeUpdate() > 0;
 
         // Delete as PersonEntity
         success &= PersonDAO.getInstance().delete(object.getPersonEntity());
-        
+
         return success;
     }
 

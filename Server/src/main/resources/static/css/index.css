@@ -12,7 +12,7 @@
     font-weight: bold;
     margin-bottom: 1rem;
 
-    animation: blink .5s step-end infinite alternate;
+    animation: blink 0.5s step-end infinite alternate;
     white-space: nowrap;
     overflow: hidden;
 
@@ -97,15 +97,14 @@ mark {
 #mark1 {
     background: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=ffb703);
     margin: -2px -6px;
-    padding:  2px  6px;
+    padding: 2px 6px;
 }
 
 #mark2 {
     background: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=FFD60A);
     margin: -2px -6px;
-    padding:  2px  6px;
+    padding: 2px 6px;
 }
-
 
 /* Animation for scale (goes up and down) */
 @keyframes scale {
@@ -122,6 +121,6 @@ mark {
 
 @keyframes blink {
     50% {
-        border-color: transparent
+        border-color: transparent;
     }
 }

@@ -19,10 +19,9 @@ public class PersonDeletion extends DeletionTest<PersonEntity> {
 
     // Instances
     private HumanGenerator generatorInstance = HumanGenerator.getInstance();
-    
+
     // Display
     private final static boolean display = true;
-
 
     /**
      * Main
@@ -70,7 +69,6 @@ public class PersonDeletion extends DeletionTest<PersonEntity> {
      */
     @Override
     public SQLObject<PersonEntity> getDao() {
-        
 
         return PersonDAO.getInstance();
 

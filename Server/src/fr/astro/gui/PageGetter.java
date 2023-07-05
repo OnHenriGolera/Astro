@@ -19,6 +19,7 @@ public class PageGetter {
 
     /**
      * Return a page in HTML with the page name
+     * 
      * @param page
      * @return
      * @throws IOException
@@ -32,13 +33,15 @@ public class PageGetter {
 
     /**
      * Return a page in HTML with the page name and the input
+     * 
      * @param page
      * @param input - HashMap with the input
      * @return
      * @throws IOException
      * @throws TemplateException
      */
-    public static String getPage(String page, Map<String, Object> input, FreeMarkerInitializer.Lang lang) throws IOException, TemplateException {
+    public static String getPage(String page, Map<String, Object> input, FreeMarkerInitializer.Lang lang)
+            throws IOException, TemplateException {
 
         Configuration configuration = FreeMarkerInitializer.getConfiguration(lang);
 

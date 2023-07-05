@@ -102,7 +102,6 @@ public class HumanGenerator implements Instantiable {
         return true; // TODO
     }
 
-    
     /**
      * Generate PersonEntity
      * 

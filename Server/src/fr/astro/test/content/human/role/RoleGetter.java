@@ -10,6 +10,7 @@ import fr.astro.util.HumanGenerator;
  * RoleGetter
  * 
  * Test the getter of roles
+ * 
  * @deprecated
  */
 @Deprecated
@@ -54,14 +55,14 @@ public class RoleGetter extends GetterTest<RoleEntity> {
     public int getIdFromObject(RoleEntity object) {
 
         return object.getRoleId();
-    
+
     }
 
     @Override
     public SQLObject<RoleEntity> getDao() {
-    
+
         return RoleDAO.getInstance();
-    
+
     }
 
 }

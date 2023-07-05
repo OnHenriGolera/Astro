@@ -20,7 +20,6 @@ public abstract class CreationTest<T> extends Test {
 
     protected String testName = "CreationTest";
 
-
     // Utils
     protected List<T> objects;
     protected List<T> objectsFromDatabase;
@@ -84,7 +83,8 @@ public abstract class CreationTest<T> extends Test {
 
         // Check if the number of objects is the same
         if (objectsFromDatabase.size() != numberOfObjects) {
-            throw new TestFailed("❌ The number of objects is not the same (expected : " + numberOfObjects + ", got : " + objectsFromDatabase.size() + ")");
+            throw new TestFailed("❌ The number of objects is not the same (expected : " + numberOfObjects + ", got : "
+                    + objectsFromDatabase.size() + ")");
         }
 
         // Check if the objects are the same

@@ -10,6 +10,7 @@ import fr.astro.util.HumanGenerator;
  * PersonExisting
  * 
  * Test the existence of persons
+ * 
  * @see PersonCreation
  * @see ExistingTest
  * @deprecated
@@ -33,7 +34,7 @@ public class PersonExisting extends ExistingTest<PersonEntity> {
         test.test(display);
 
     }
-    
+
     /**
      * Constructor
      * 

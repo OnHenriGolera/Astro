@@ -4,6 +4,7 @@ package fr.astro.test.specialized;
  * DeletionTest
  * 
  * Test if the objects are deleted
+ * 
  * @deprecated
  */
 @Deprecated
@@ -35,7 +36,8 @@ public abstract class DeletionTest<T> extends CreationTest<T> {
 
         // Check if the objects are deleted
         if (objectsFromDatabase.size() != 0) {
-            throw new Exception("❌ The objects are not deleted (expected : 0, got : " + objectsFromDatabase.size() + ")");
+            throw new Exception(
+                    "❌ The objects are not deleted (expected : 0, got : " + objectsFromDatabase.size() + ")");
         }
 
         System.out.println("✅ " + testName + " validated.");

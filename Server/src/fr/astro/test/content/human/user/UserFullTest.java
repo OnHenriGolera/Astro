@@ -39,26 +39,26 @@ public class UserFullTest extends SQLObjectTest<UserEntity> {
 
     @Override
     public int getIdFromObject(UserEntity object) {
-        
+
         return object.getUserId();
 
     }
 
     @Override
     public SQLObject<UserEntity> getDao() {
-        
+
         return UserDAO.getInstance();
 
     }
 
     @Override
     public void modifyObject(UserEntity object) {
-        
+
         // Modify the object
         object.setUserPassword(generatorInstance.generatePassword());
         object.setPersonName(generatorInstance.generateName());
         object.setPersonSurname(generatorInstance.generateSurname());
 
     }
-    
+
 }

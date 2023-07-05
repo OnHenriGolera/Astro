@@ -6,6 +6,7 @@ import fr.astro.exception.test.TestFailed;
  * GetterTest
  * 
  * Test if the objects are get
+ * 
  * @deprecated
  */
 @Deprecated
@@ -34,7 +35,8 @@ public abstract class GetterTest<T> extends CreationTest<T> {
             // Check if the object is the same
             if (!object.equals(objectFromDao)) {
 
-                throw new TestFailed("❌ The object " + object + " is not the same as the object from the dao " + objectFromDao);
+                throw new TestFailed(
+                        "❌ The object " + object + " is not the same as the object from the dao " + objectFromDao);
 
             }
 
@@ -51,6 +53,5 @@ public abstract class GetterTest<T> extends CreationTest<T> {
      * @return
      */
     public abstract int getIdFromObject(T object);
-
 
 }

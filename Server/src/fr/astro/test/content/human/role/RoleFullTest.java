@@ -34,25 +34,25 @@ public class RoleFullTest extends SQLObjectTest<RoleEntity> {
 
     @Override
     public int getIdFromObject(RoleEntity object) {
-        
+
         return object.getRoleId();
 
     }
 
     @Override
     public SQLObject<RoleEntity> getDao() {
-        
+
         return RoleDAO.getInstance();
 
     }
 
     @Override
     public void modifyObject(RoleEntity object) {
-        
+
         // Modify the object
         object.setRoleAccessLevel(generatorInstance.generateRoleAccessLevel());
         object.setRoleName(generatorInstance.generateRoleName());
 
     }
-    
+
 }

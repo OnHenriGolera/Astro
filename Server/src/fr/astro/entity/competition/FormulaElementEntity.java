@@ -193,7 +193,7 @@ public class FormulaElementEntity {
      */
     @Override
     public int hashCode() {
-        
+
         // Hashcode has to be according to equals()
         return formulaElementId
                 + type.hashCode()
@@ -202,6 +202,5 @@ public class FormulaElementEntity {
                 + description.hashCode();
 
     }
-
 
 }

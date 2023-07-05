@@ -20,10 +20,9 @@ public class UserCreation extends CreationTest<UserEntity> {
 
     // Instances
     private HumanGenerator generatorInstance = HumanGenerator.getInstance();
-    
+
     // Display
     private final static boolean display = true;
-
 
     /**
      * Main

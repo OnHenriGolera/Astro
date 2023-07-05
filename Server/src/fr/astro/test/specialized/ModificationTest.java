@@ -7,6 +7,7 @@ import java.util.List;
  * ModificationTest
  * 
  * Test if the objects are modified
+ * 
  * @deprecated
  */
 @Deprecated
@@ -15,7 +16,6 @@ public abstract class ModificationTest<T> extends CreationTest<T> {
     protected String testName = "DeletionTest";
 
     protected List<T> objectCopy;
-
 
     @Override
     public void run() throws Exception {
@@ -58,7 +58,8 @@ public abstract class ModificationTest<T> extends CreationTest<T> {
 
         // Check if the objects are deleted
         if (objectsFromDatabase.size() != objects.size()) {
-            throw new Exception("❌ The objects are not modified (expected : " + objects.size() + ", got : " + objectsFromDatabase.size() + ")");
+            throw new Exception("❌ The objects are not modified (expected : " + objects.size() + ", got : "
+                    + objectsFromDatabase.size() + ")");
         }
 
         // Check if the objects are modified
@@ -70,7 +71,8 @@ public abstract class ModificationTest<T> extends CreationTest<T> {
 
             // Check if the object is modified
             if (!object.equals(objectFromDatabase)) {
-                throw new Exception("❌ The objects are not modified (expected : " + object + ", got : " + objectFromDatabase + ")");
+                throw new Exception(
+                        "❌ The objects are not modified (expected : " + object + ", got : " + objectFromDatabase + ")");
             }
 
         }

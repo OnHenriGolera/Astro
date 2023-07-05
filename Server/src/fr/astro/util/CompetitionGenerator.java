@@ -3,7 +3,7 @@ package fr.astro.util;
 // import com.github.javafaker.Faker;
 
 public class CompetitionGenerator implements Instantiable {
-    
+
     // Instance
     private static CompetitionGenerator instance;
     // private Faker fakerInstance;
