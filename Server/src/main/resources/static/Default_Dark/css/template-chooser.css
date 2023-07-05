@@ -1,0 +1,35 @@
+.template {
+    background-color: #393646;
+    opacity: 1;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(153, 109, 93, 0.13) 0,
+        rgba(153, 109, 93, 0.13) 1px,
+        #393646 0,
+        #393646 50%
+    );
+}
+
+.selected {
+    border: 2px solid #27ae60;
+}
+
+.template img {
+    /* Box shadow under */
+    box-shadow: 0px 10px 5px -6px rgba(244, 238, 224, 0.3);
+}
+
+
+#submit-button {
+    /* F4EEE0 in rgba is rgb(244, 238, 224) */
+    box-shadow: 0px 4px 3px 0px rgba(244, 238, 224, 0.3);
+    background: #393646;
+    color: #fff;
+}
+
+#submit-button:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background: #393646;
+}

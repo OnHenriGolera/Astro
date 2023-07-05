@@ -1,0 +1,9 @@
+*{
+    color: #F4EEE0;
+}
+
+a {
+    color: #F4EEE0;
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,22 +1,24 @@
 package fr.astro.gui.staticPages;
 
-import spark.Request;
-import spark.Response;
 import fr.astro.gui.Page;
 import fr.astro.util.Instantiable;
+import spark.Request;
+import spark.Response;
 
-public class IndexGUI extends Page implements Instantiable {
+public class TemplateChooserGUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "index";
+    public static final String ftlPath = "redirect/templateChooser";
 
     // Instance
     private static Page instance;
 
     /**
      * Constructor
+     * 
+     * @param name
      */
-    private IndexGUI() {
+    private TemplateChooserGUI() {
         super(ftlPath);
     }
 
@@ -27,7 +29,7 @@ public class IndexGUI extends Page implements Instantiable {
      */
     public static Page getInstance() {
         if (instance == null) {
-            instance = new IndexGUI();
+            instance = new TemplateChooserGUI();
         }
 
         return instance;
@@ -37,5 +39,5 @@ public class IndexGUI extends Page implements Instantiable {
     protected boolean hasToRedirect(Request request, Response response) throws Exception {
         return false;
     }
-
+    
 }

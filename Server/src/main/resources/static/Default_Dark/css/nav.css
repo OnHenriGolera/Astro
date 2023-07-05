@@ -1,0 +1,21 @@
+.background {
+    background-color: #393646;
+    opacity: 1;
+    background-image: radial-gradient(
+            rgba(152, 109, 93, 1) 1.6500000000000001px,
+            transparent 1.6500000000000001px
+        ),
+        radial-gradient(
+            rgba(152, 109, 93, 1) 1.6500000000000001px,
+            #393646 1.6500000000000001px
+        );
+    background-size: 66px 66px;
+    background-position: 0 0, 33px 33px;
+}
+
+nav {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.01);
+    color: #000;
+}

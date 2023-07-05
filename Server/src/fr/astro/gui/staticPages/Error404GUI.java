@@ -8,7 +8,7 @@ import spark.Response;
 public class Error404GUI extends Page implements Instantiable {
 
     // Constant
-    public static final String ftlPath = "redirect/404.ftl";
+    public static final String ftlPath = "redirect/404";
 
     // Instance
     private static Page instance;

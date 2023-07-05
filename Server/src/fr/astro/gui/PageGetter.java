@@ -47,15 +47,24 @@ public class PageGetter {
 
         Writer output = new StringWriter();
         Template template;
-        try {
-            template = configuration.getTemplate(page);
-            template.setOutputEncoding("UTF-8");
-            template.process(input, output);
-            return output.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error on the page " + page;
-        }
+        
+        template = configuration.getTemplate(page + ".ftl");
+        template.setOutputEncoding("UTF-8");
+        template.process(input, output);
+        return output.toString();
+        
+    }
+    
+    /**
+     * Return the invalid template page
+     * 
+     * @return the invalid template page
+     * @throws IOException
+     * @throws TemplateException
+     */
+    public static String getInvalidPage(FreeMarkerInitializer.Lang lang) throws IOException, TemplateException {
+
+        return getPage("Default Light/redirect/invalidTemplate", lang);
 
     }
 

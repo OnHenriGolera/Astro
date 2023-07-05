@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import fr.astro.dao.database.Initializer;
 import fr.astro.gui.staticPages.Error404GUI;
 import fr.astro.gui.staticPages.IndexGUI;
+import fr.astro.gui.staticPages.TemplateChooserGUI;
 
 /**
  * Server
@@ -27,6 +28,8 @@ public class Server {
 
 		defineGETs();
 
+		definePOSTs();
+
 	}
 
 	/**
@@ -41,9 +44,53 @@ public class Server {
 			return IndexGUI.getInstance().renderPage(request, response);
 		});
 
+		get("/default-template", (request, response) -> {
+			System.out.println("GET /default-template");
+
+			return IndexGUI.getInstance().renderPage(request, response);
+		});
+
+		get("/template-chooser", (request, response) -> {
+
+			System.out.println("GET /template-chooser");
+
+			return TemplateChooserGUI.getInstance().renderPage(request, response);
+
+		});
+
 		notFound((req, res) -> {
 			System.out.println("GET 404");
 			return Error404GUI.getInstance().renderPage(req, res);
+		});
+
+	}
+
+	/**
+	 * Define POSTs
+	 * 
+	 * Define all the POSTs routes
+	 */
+	public static void definePOSTs() {
+
+		post("/template-chooser", (request, response) -> {
+
+			String theme = request.queryParams("template");
+
+			System.out.println(theme);
+
+			if (theme == null || theme.isEmpty()) {
+				response.redirect("/template-chooser");
+				return null;
+			}
+
+			System.out.println("POST /template-chooser");
+
+			response.cookie("theme", theme);
+
+			response.redirect("/");
+
+			return null;
+
 		});
 
 	}

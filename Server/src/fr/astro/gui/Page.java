@@ -62,10 +62,21 @@ public abstract class Page {
             throw new InvalidArguments("Page name is null");
         }
 
+        // Get the theme cookie
+        String theme = request.cookie("theme");
+
+        // If the theme cookie is null, set it to the page name
+        if (theme == null) {
+            response.cookie("theme", "");
+            theme = "";
+        }
+
+        WebTemplate template = WebTemplate.getTemplate(name, theme);
+
         // Get the lang
         FreeMarkerInitializer.Lang lang = FreeMarkerInitializer.Lang.getLang(request);
 
-        return PageGetter.getPage(name, input, lang);
+        return template.loadTemplate(lang);
 
     }
 

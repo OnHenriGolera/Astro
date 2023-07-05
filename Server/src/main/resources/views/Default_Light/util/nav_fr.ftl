@@ -5,10 +5,10 @@
     </div>
 
     <div class="nav-links">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/competition" class="nav-link">Competition</a>
+        <a href="/" class="nav-link">Index</a>
+        <a href="/competition" class="nav-link">Compétition</a>
         <a href="/contact" class="nav-link">Contact</a>
-        <a href="/login" class="nav-link" class="login">Login</a>
+        <a href="/login" class="nav-link" class="login">Connexion</a>
     </div>
 
 </nav>

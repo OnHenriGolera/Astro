@@ -6,7 +6,9 @@
 
     <#include "../util/head.ftl">
 
-    <link rel="stylesheet" href="/css/redirect.css">
+    <link rel="stylesheet" href="Default_Light/css/redirect.css">
+    <link rel="stylesheet" href="Default_Dark/css/redirect.css">
+
 
 </head>
 
