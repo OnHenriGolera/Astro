@@ -33,3 +33,6 @@ bin/
 
 # CSV
 *.csv
+
+# Commit script
+commit.sh

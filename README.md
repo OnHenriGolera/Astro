@@ -120,7 +120,3 @@ chmod +x gradlew # This command gives the execution rights to the gradlew file
 
 - The documentation is available [here](/doc/).
 - The `FFF` documentation is available [here](/doc/FFF-Format.pdf).
-
-## Contact
-
-ForkBench - [Mail](mailto:robinvandemerghel@protonmail.com)
