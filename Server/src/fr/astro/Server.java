@@ -3,6 +3,7 @@ package fr.astro;
 import static spark.Spark.*;
 
 import fr.astro.dao.database.Initializer;
+import fr.astro.dao.human.ParticipantDAO;
 import fr.astro.gui.staticPages.Error404GUI;
 import fr.astro.gui.staticPages.IndexGUI;
 import fr.astro.gui.staticPages.TemplateChooserGUI;
@@ -29,6 +30,15 @@ public class Server {
 		defineGETs();
 
 		definePOSTs();
+
+		try {
+				
+			// ParticipantDAO.getInstance().importFromFFF("hello.FFF");
+			
+			ParticipantDAO.getInstance().importFromFFF("hello2.FFF");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

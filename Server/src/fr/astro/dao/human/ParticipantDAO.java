@@ -13,6 +13,7 @@ import fr.astro.entity.human.ParticipantEntity;
 import fr.astro.entity.human.PersonEntity;
 import fr.astro.exception.sql.ObjectNotFound;
 import fr.astro.util.Instantiable;
+import fr.astro.util.buffers.FileManagement;
 
 /**
  * ParticipantDAO
@@ -259,6 +260,31 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
 
         return ParticipantEntity.of(object.getPersonId(), object.getPersonName(), object.getPersonSurname(),
                 object.getParticipantId(), object.getParticipantCategory(), object.isParticipantPresent());
+    }
+
+    /**
+     * Import a list of Participant from a file with .FFF format
+     * 
+     * @param path the path of the file
+     * @return the list of Participant
+     */
+    public List<ParticipantEntity> importFromFFF(String path) throws Exception {
+        
+        // Initialize the list
+        List<ParticipantEntity> participants = new ArrayList<>();
+
+        // Read the file
+        String content = FileManagement.getInstance().readLinesFromFile(path);
+
+        if (content == null) {
+            throw new Exception("File not found");
+        }
+
+        // Split the content
+        String[] lines = content.split("\n");
+
+        return participants;
+
     }
 
 }
