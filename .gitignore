@@ -20,9 +20,6 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-# Tiledmap
-tiledmap
-
 .DS_Store
 .metals
 .vscode
@@ -34,4 +31,5 @@ bin/
 **/*.err
 **/plantuml-images
 
-mise_en_commun.org
+# CSV
+*.csv

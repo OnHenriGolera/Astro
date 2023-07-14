@@ -1,8 +1,5 @@
 @startuml
 
-' !define primary_key(x) <b><color:#b8861b><&key></color> x</b>
-' !define foreign_key(x) <color:#aaaaaa><&key></color> x
-' !define column(x) <color:#efefef><&media-record></color> x
 
 !define primary_key(name, type) <b><color:#b8861b><&key></color> <u>name</u> : <color:#e76f51><i>type</i></color></b>
 !define foreign_key(name, type) <color:#aaaaaa><&key></color> name : <color:#e76f51><i>type</i></color>
@@ -11,92 +8,84 @@
 
 hide methods
 
-skinparam class {
-    BackgroundColor edede9
-    ArrowColor #aaaaaa
-    BorderColor #aaaaaa
-    BackgroundColor<< (T, white) >> #aaaaaa
-}
-
-table(Person) {
-    primary_key(Id, Int)
-    column(Name, String)
-    column(Surname, String)
-}
-
-table(User) {
-    primary_key(UserId, Int)
-    foreign_key(PersonId, Int)
-    foreign_key(RoleId, Int)
-    column(Password, String)
-}
-
-table(Role) {
-    primary_key(Id, Int)
-    column(Name, String)
-    column(AccessLevel, Int)
+table(StageElement) {
+	primary_key(id, int)
+	column(numberOfParticipants, int)
+	column(numberOfParticipantsThatQualify, int)
+	column(name, String)
+	column(description, String)
+	column(type, String)
 }
 
 table(Stage) {
-    primary_key(Id, Int)
-    foreign_key(FormulaElementId, Int)
-    column(Name, String)
+	primary_key(id, int)
+	foreign_key(stageElementId, int)
+	column(name, String)
 }
 
-table(StageList) {
-	foreign_key(StageId, Int)
-	foreign_key(CompetitionId, Int)
-}
-
-table(ParticipantList) {
-	foreign_key(ParticipantId, Int)
-	foreign_key(StageId, Int)
-}
-
-table(Competition) {
-    primary_key(Id, Int)
-    foreign_key(FormulaId, Int)
-    column(Name, String)
-    column(Status, String)
-    column(Category, String)
-}
-
-table(Formula) {
-    primary_key(Id, Int)
-    column(Name, String)
-    column(Description, String)
-}
-
-table(FormulaElementList) {
-	foreign_key(FormulaId, Int)
-	foreign_key(FormulaElementId, Int)
-}
-
-table(FormulaElement) {
-    primary_key(Id, Int)
-    column(Type, String)
-    column(NumberBefore, Int)
-    column(NumberAfter, Int)
-    column(Description, String)
+table(Person) {
+	primary_key(id, int)
+	column(name, String)
+	column(surname, String)
 }
 
 table(Participant) {
-    primary_key(ParticipantId, Int)
-    foreign_key(PersonId, Int)
-    column(Category, String)
-	column(Present, Boolean)
+	primary_key(id, int)
+	foreign_key(personId, int)
+	column(category, String)
+	column(present, boolean)
 }
 
-User --> Person
-Stage --> FormulaElement
-Competition --> Formula
-StageList --> Stage
-Stage --> ParticipantList
-ParticipantList --> Participant
-Formula --> FormulaElementList
-FormulaElementList --> FormulaElement
-Participant --> Person
-User --> Role
-StageList <-- Competition
+table(Formula) {
+	primary_key(id, int)
+	column(name, String)
+	column(description, String)
+}
+
+table(Competition) {
+	primary_key(id, int)
+	foreign_key(formulaId, int)
+	column(name, String)
+	column(status, String)
+	column(category, String)
+}
+
+StageElement "0..*" <-- "0..1" Stage : has a
+' Stage "0..*" --> "0..*" Participant : participants -> Has to be replaced by a table
+
+table(StageParticipants) {
+	primary_key(id, int)
+	foreign_key(stageId, int)
+	foreign_key(participantId, int)
+}
+
+Stage "0..*" <-- "0..1" StageParticipants
+StageParticipants "0..*" --> "0..1" Participant
+
+
+' Competition "0..*" --> "1" Stage : stages -> Has to be replaced by a table
+
+table(CompetitionStages) {
+	primary_key(id, int)
+	foreign_key(competitionId, int)
+	foreign_key(stageId, int)
+}
+
+Competition "0..*" <-- "0..1" CompetitionStages
+CompetitionStages "0..*" --> "0..1" Stage
+Competition "0..1" --> "0..*" Formula : formula 
+
+' Formula "1..1" --> "0..*" StageElement : components -> Has to be replaced by a table
+
+table(FormulaStageElements) {
+	primary_key(id, int)
+	foreign_key(formulaId, int)
+	foreign_key(stageElementId, int)
+}
+
+Formula "1..1" <-- "0..1" FormulaStageElements
+FormulaStageElements "0..*" --> "0..1" StageElement
+
+Participant "0..1" --> "0..1" Person : person
 
 @enduml

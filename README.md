@@ -118,7 +118,8 @@ chmod +x gradlew # This command gives the execution rights to the gradlew file
 
 ## Documentation
 
-The documentation is available [here](/doc/).
+- The documentation is available [here](/doc/).
+- The `FFF` documentation is available [here](/doc/FFF-Format.pdf).
 
 ## Contact
 
