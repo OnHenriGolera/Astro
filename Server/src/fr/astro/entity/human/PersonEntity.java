@@ -2,14 +2,18 @@ package fr.astro.entity.human;
 
 import static java.util.Objects.requireNonNull;
 
+import fr.astro.entity.field.Gender;
+
 /**
  * PersonEntity
  */
 public class PersonEntity {
 
-    protected int personId;
-    protected String name;
-    protected String surname;
+    private int personId;
+    private String name;
+    private String surname;
+    private Gender gender;
+    private String birthDate;
 
     /**
      * Constructor
@@ -20,14 +24,17 @@ public class PersonEntity {
      * @throws NullPointerException if name or surname is null (personId can be
      *                              because of auto-increment)
      */
-    public PersonEntity(int personId, String name, String surname) {
+    public PersonEntity(int personId, String name, String surname, String gender, String birthDate) {
 
         requireNonNull(name);
         requireNonNull(surname);
+        requireNonNull(gender);
 
         this.personId = personId;
         this.name = name;
         this.surname = surname;
+        this.gender = Gender.of(gender);
+        this.birthDate = birthDate;
     }
 
     /**
@@ -40,8 +47,8 @@ public class PersonEntity {
      * @throws NullPointerException if name or surname is null (personId can be
      *                              because of auto-increment)
      */
-    public static PersonEntity of(int personId, String name, String surname) {
-        return new PersonEntity(personId, name, surname);
+    public static PersonEntity of(int personId, String name, String surname, String gender, String birthDate) {
+        return new PersonEntity(personId, name, surname, gender, birthDate);
     }
 
     /**
@@ -69,6 +76,24 @@ public class PersonEntity {
      */
     public String getPersonSurname() {
         return surname;
+    }
+
+    /**
+     * Get the gender
+     * 
+     * @return gender
+     */
+    public Gender getPersonGender() {
+        return gender;
+    }
+
+    /**
+     * Get the birthDate
+     * 
+     * @param birthDate
+     */
+    public String getPersonBirthDate() {
+        return birthDate;
     }
 
     /**
@@ -136,7 +161,9 @@ public class PersonEntity {
         // Check each field
         return personEntity.personId == this.personId
                 && personEntity.name.equals(this.name)
-                && personEntity.surname.equals(this.surname);
+                && personEntity.surname.equals(this.surname)
+                && personEntity.gender.equals(this.gender)
+                && personEntity.birthDate.equals(this.birthDate);
     }
 
     /**
@@ -151,7 +178,9 @@ public class PersonEntity {
         // Hashcode has to be according to equals
         return 31 * (personId
                 + name.hashCode()
-                + surname.hashCode());
+                + surname.hashCode())
+                + gender.hashCode()
+                + birthDate.hashCode();
 
     }
 

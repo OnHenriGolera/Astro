@@ -2,6 +2,7 @@ package fr.astro.test.content.human.participant;
 
 import fr.astro.dao.SQLObject;
 import fr.astro.dao.human.ParticipantDAO;
+import fr.astro.entity.field.Category;
 import fr.astro.entity.human.ParticipantEntity;
 import fr.astro.test.specialized.BadModificationTest;
 import fr.astro.util.HumanGenerator;
@@ -62,7 +63,7 @@ public class ParticipantBadModification extends BadModificationTest<ParticipantE
         // Modify the object
         object.setPersonName(generatorInstance.generateName());
         object.setPersonSurname(generatorInstance.generateSurname());
-        object.setParticipantCategory(generatorInstance.generateCategory());
+        object.setParticipantCategory(Category.of(Category.randomElement()));
         object.setParticipantPresent(generatorInstance.generatePresent());
 
     }

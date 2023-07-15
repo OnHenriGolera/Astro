@@ -42,7 +42,7 @@ public class Initializer {
 
 		// Create the table "Person" : id, name, surname
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS Person (personId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255))");
+				"CREATE TABLE IF NOT EXISTS Person (personId INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), surname VARCHAR(255), gender VARCHAR(255), birthDate VARCHAR(255))");
 		preparedStatement.executeUpdate();
 
 		// Create the table "Role" : id, name, accessLevel
@@ -57,7 +57,7 @@ public class Initializer {
 
 		// Create the table "Participant" : participantId, personId, category, present
 		preparedStatement = connect.prepareStatement(
-				"CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, FOREIGN KEY (personId) REFERENCES Person(personId))");
+				"CREATE TABLE IF NOT EXISTS Participant (participantId INT PRIMARY KEY AUTO_INCREMENT, personId INT, category VARCHAR(255), present BOOLEAN, license VARCHAR(255), initialLocalRanking INT, initialInternationalRanking INT, league VARCHAR(255), club VARCHAR(255), nationality VARCHAR(255), FOREIGN KEY (personId) REFERENCES Person(personId))");
 		preparedStatement.executeUpdate();
 
 		// Create the table StageElement : stageElementId, numberOfParticipants,

@@ -9,6 +9,7 @@ import java.util.List;
 
 import fr.astro.dao.SQLObject;
 import fr.astro.dao.database.Connector;
+import fr.astro.entity.field.Gender;
 import fr.astro.entity.human.PersonEntity;
 import fr.astro.entity.human.RoleEntity;
 import fr.astro.entity.human.UserEntity;
@@ -172,10 +173,12 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
             PersonEntity person = PersonDAO.getInstance().get(personId);
             String personName = person.getPersonName();
             String personSurname = person.getPersonSurname();
+            Gender personGender = person.getPersonGender();
+            String personBirthDate = person.getPersonBirthDate();
 
             RoleEntity role = RoleDAO.getInstance().get(roleId);
 
-            return UserEntity.of(id, personName, personSurname, id, password, role);
+            return UserEntity.of(personId, personName, personSurname, personGender, personBirthDate, id, password, role);
         }
 
         // Normally, this line is never reached because of exist(id) check
@@ -235,10 +238,13 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
                 PersonEntity person = PersonDAO.getInstance().get(personId);
                 String personName = person.getPersonName();
                 String personSurname = person.getPersonSurname();
+                Gender personGender = person.getPersonGender();
+                String personBirthDate = person.getPersonBirthDate();
 
                 RoleEntity role = RoleDAO.getInstance().get(roleId);
 
-                users.add(UserEntity.of(userId, personName, personSurname, personId, password, role));
+                users.add(UserEntity.of(personId, personName, personSurname, personGender, personBirthDate, userId,
+                        password, role));
 
             } catch (ObjectNotFound e) {
                 e.printStackTrace();
@@ -271,6 +277,7 @@ public class UserDAO implements SQLObject<UserEntity>, Instantiable {
         }
 
         return UserEntity.of(object.getUserId(), object.getPersonName(), object.getPersonSurname(),
+                object.getPersonGender(), object.getPersonBirthDate(),
                 object.getPersonId(),
                 object.getUserPassword(), object.getUserRoleEntity());
 

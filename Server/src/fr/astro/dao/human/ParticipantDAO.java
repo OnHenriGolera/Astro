@@ -13,6 +13,7 @@ import fr.astro.entity.human.ParticipantEntity;
 import fr.astro.entity.human.PersonEntity;
 import fr.astro.exception.sql.ObjectNotFound;
 import fr.astro.util.Instantiable;
+import fr.astro.util.buffers.FFF;
 import fr.astro.util.buffers.FileManagement;
 
 /**
@@ -37,12 +38,23 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
     private final String COLUMN_PERSON_ID = "personId";
     private final String COLUMN_CATEGORY = "category";
     private final String COLUMN_PRESENT = "present";
+    private final String COLUMN_LICENSE = "license";
+    private final String COLUMN_INITIAL_LOCAL_RANKING = "initialLocalRanking";
+    private final String COLUMN_INITIAL_INTERNATIONAL_RANKING = "initialInternationalRanking";
+    private final String COLUMN_LEAGUE = "league";
+    private final String COLUMN_CLUB = "club";
+    private final String COLUMN_NATIONALITY = "nationality";
 
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME,
-            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT);
-    private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
-            COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT, COLUMN_ID);
+    private final String INSERT_QUERY = String.format(
+            "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", TABLE_NAME,
+            COLUMN_ID, COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT, COLUMN_LICENSE, COLUMN_INITIAL_LOCAL_RANKING,
+            COLUMN_INITIAL_INTERNATIONAL_RANKING, COLUMN_LEAGUE, COLUMN_CLUB, COLUMN_NATIONALITY);
+    private final String UPDATE_QUERY = String.format(
+            "UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
+            TABLE_NAME,
+            COLUMN_PERSON_ID, COLUMN_CATEGORY, COLUMN_PRESENT, COLUMN_LICENSE, COLUMN_INITIAL_LOCAL_RANKING,
+            COLUMN_INITIAL_INTERNATIONAL_RANKING, COLUMN_LEAGUE, COLUMN_CLUB, COLUMN_NATIONALITY, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
@@ -92,8 +104,14 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
         PreparedStatement statement = connection.prepareStatement(INSERT_QUERY);
         statement.setInt(1, object.getParticipantId());
         statement.setInt(2, object.getPersonId());
-        statement.setString(3, object.getParticipantCategory());
+        statement.setString(3, object.getParticipantCategory().getName());
         statement.setBoolean(4, object.isParticipantPresent());
+        statement.setString(5, object.getParticipantLicense());
+        statement.setInt(6, object.getParticipantInitialLocalRanking());
+        statement.setInt(7, object.getParticipantInitialInternationalRanking());
+        statement.setString(8, object.getParticipantLeague().getName());
+        statement.setString(9, object.getParticipantClub().getName());
+        statement.setString(10, object.getParticipantNationality().getName());
 
         success &= statement.executeUpdate() > 0;
 
@@ -117,9 +135,15 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
 
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
         statement.setInt(1, object.getPersonId());
-        statement.setString(2, object.getParticipantCategory());
+        statement.setString(2, object.getParticipantCategory().getName());
         statement.setBoolean(3, object.isParticipantPresent());
-        statement.setInt(4, object.getParticipantId());
+        statement.setString(4, object.getParticipantLicense());
+        statement.setInt(5, object.getParticipantInitialLocalRanking());
+        statement.setInt(6, object.getParticipantInitialInternationalRanking());
+        statement.setString(7, object.getParticipantLeague().getName());
+        statement.setString(8, object.getParticipantClub().getName());
+        statement.setString(9, object.getParticipantNationality().getName());
+        statement.setInt(10, object.getParticipantId());
 
         success &= statement.executeUpdate() > 0;
 
@@ -164,12 +188,21 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             int personId = result.getInt(COLUMN_PERSON_ID);
             String category = result.getString(COLUMN_CATEGORY);
             boolean present = result.getBoolean(COLUMN_PRESENT);
+            String license = result.getString(COLUMN_LICENSE);
+            int initialLocalRanking = result.getInt(COLUMN_INITIAL_LOCAL_RANKING);
+            int initialInternationalRanking = result.getInt(COLUMN_INITIAL_INTERNATIONAL_RANKING);
+            String league = result.getString(COLUMN_LEAGUE);
+            String club = result.getString(COLUMN_CLUB);
+            String nationality = result.getString(COLUMN_NATIONALITY);
 
             PersonEntity person = PersonDAO.getInstance().get(personId);
             String name = person.getPersonName();
             String surname = person.getPersonSurname();
+            String gender = person.getPersonGender().getName();
+            String birthDate = person.getPersonBirthDate();
 
-            return ParticipantEntity.of(personId, name, surname, id, category, present);
+            return ParticipantEntity.of(personId, name, surname, gender, birthDate, id, category, present, license,
+                    initialLocalRanking, initialInternationalRanking, league, club, nationality);
 
         }
 
@@ -224,12 +257,23 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
                 int personId = result.getInt(COLUMN_PERSON_ID);
                 String category = result.getString(COLUMN_CATEGORY);
                 boolean present = result.getBoolean(COLUMN_PRESENT);
+                String license = result.getString(COLUMN_LICENSE);
+                int initialLocalRanking = result.getInt(COLUMN_INITIAL_LOCAL_RANKING);
+                int initialInternationalRanking = result.getInt(COLUMN_INITIAL_INTERNATIONAL_RANKING);
+                String league = result.getString(COLUMN_LEAGUE);
+                String club = result.getString(COLUMN_CLUB);
+                String nationality = result.getString(COLUMN_NATIONALITY);
+                int id = result.getInt(COLUMN_ID);
 
                 PersonEntity person = PersonDAO.getInstance().get(personId);
                 String name = person.getPersonName();
                 String surname = person.getPersonSurname();
+                String gender = person.getPersonGender().getName();
+                String birthDate = person.getPersonBirthDate();
 
-                participants.add(ParticipantEntity.of(personId, name, surname, personId, category, present));
+                participants.add(
+                        ParticipantEntity.of(personId, name, surname, gender, birthDate, id, category, present, license,
+                                initialLocalRanking, initialInternationalRanking, league, club, nationality));
             } catch (ObjectNotFound e) {
                 e.printStackTrace();
             }
@@ -258,8 +302,22 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
             throw new ObjectNotFound("ParticipantEntity", "null");
         }
 
-        return ParticipantEntity.of(object.getPersonId(), object.getPersonName(), object.getPersonSurname(),
-                object.getParticipantId(), object.getParticipantCategory(), object.isParticipantPresent());
+        PersonEntity person = object.getPersonEntity();
+
+        return ParticipantEntity.of(person.getPersonId(),
+                person.getPersonName(),
+                person.getPersonSurname(),
+                person.getPersonGender().getName(),
+                person.getPersonBirthDate(),
+                object.getParticipantId(),
+                object.getParticipantCategory().getName(),
+                object.isParticipantPresent(),
+                object.getParticipantLicense(),
+                object.getParticipantInitialLocalRanking(),
+                object.getParticipantInitialInternationalRanking(),
+                object.getParticipantLeague().getName(),
+                object.getParticipantClub().getName(),
+                object.getParticipantNationality().getName());
     }
 
     /**
@@ -269,19 +327,13 @@ public class ParticipantDAO implements SQLObject<ParticipantEntity>, Instantiabl
      * @return the list of Participant
      */
     public List<ParticipantEntity> importFromFFF(String path) throws Exception {
-        
+
         // Initialize the list
         List<ParticipantEntity> participants = new ArrayList<>();
 
-        // Read the file
-        String content = FileManagement.getInstance().readLinesFromFile(path);
+        FFF fff = new FFF(FileManagement.getInstance().getFile(path));
 
-        if (content == null) {
-            throw new Exception("File not found");
-        }
-
-        // Split the content
-        String[] lines = content.split("\n");
+        // TODO
 
         return participants;
 

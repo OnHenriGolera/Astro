@@ -3,6 +3,8 @@ package fr.astro.util.buffers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
+import java.util.ArrayList;
 
 import fr.astro.util.Instantiable;
 
@@ -67,17 +69,24 @@ public class FileReaderManagement implements Instantiable {
      * @param file the file
      * @return the content of the file
      */
-    public String getFileContent(File file) throws Exception {
+    public List<String> getFileContent(File file) throws Exception {
 
         // Get a buffer reader
         getBufferedWriter(file);
 
         // Read the file
-        String fileContent = "";
+        List<String> fileContent = new ArrayList<>();
         String line;
 
         while ((line = lastFileReader.readLine()) != null) {
-            fileContent += line + "\n";
+            // Remove the last \n or \n\r
+            if (line.endsWith("\n\r")) {
+                line = line.substring(0, line.length() - 2);
+            } else if (line.endsWith("\n") || line.endsWith("\r")) {
+                line = line.substring(0, line.length() - 1);
+            }
+
+            fileContent.add(line);
         }
 
         // Return the content of the file

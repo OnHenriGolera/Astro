@@ -18,7 +18,7 @@ sourceSets {
     }
 }
 
-mainClassName = 'fr.astro.Server'
+mainClassName = 'fr.astro.test.content.human.participant.ParticipantFullTest'
 
 repositories {
     mavenCentral()

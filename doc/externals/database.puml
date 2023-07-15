@@ -27,6 +27,9 @@ table(Person) {
 	primary_key(id, int)
 	column(name, String)
 	column(surname, String)
+	' new :
+	column(gender, String)
+	column(birthDate, String)
 }
 
 table(Participant) {
@@ -34,6 +37,13 @@ table(Participant) {
 	foreign_key(personId, int)
 	column(category, String)
 	column(present, boolean)
+	' new :
+	column(license, String)
+	column(initialLocalRanking, int)
+	column(initialInternationalRanking, int)
+	column(league, String)
+	column(club, String)
+	column(nationality, String)
 }
 
 table(Formula) {

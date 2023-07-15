@@ -1,6 +1,7 @@
 package fr.astro.util.buffers;
 
 import java.io.File;
+import java.util.List;
 
 import fr.astro.util.Instantiable;
 
@@ -311,7 +312,7 @@ public class FileManagement implements Instantiable {
      * @param fileName the name of the file
      * @return the lines
      */
-    public String readLinesFromFile(String fileName) throws Exception {
+    public List<String> readLinesFromFile(String fileName) throws Exception {
         File file = getFile(fileName);
 
         if (fileExists(file)) {

@@ -34,12 +34,14 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
     private final String COLUMN_ID = "personId";
     private final String COLUMN_FIRSTNAME = "name";
     private final String COLUMN_SURNAME = "surname";
+    private final String COLUMN_GENDER = "gender";
+    private final String COLUMN_BIRTH_DATE = "birthDate";
 
     // Queries
-    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?)", TABLE_NAME,
-            COLUMN_ID, COLUMN_FIRSTNAME, COLUMN_SURNAME);
-    private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
-            COLUMN_FIRSTNAME, COLUMN_SURNAME, COLUMN_ID);
+    private final String INSERT_QUERY = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)", TABLE_NAME,
+            COLUMN_ID, COLUMN_FIRSTNAME, COLUMN_SURNAME, COLUMN_GENDER, COLUMN_BIRTH_DATE);
+    private final String UPDATE_QUERY = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?", TABLE_NAME,
+            COLUMN_FIRSTNAME, COLUMN_SURNAME, COLUMN_GENDER, COLUMN_BIRTH_DATE, COLUMN_ID);
     private final String DELETE_QUERY = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String GET_QUERY = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
     private final String EXIST_QUERY = String.format("SELECT COUNT(*) FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID);
@@ -87,6 +89,8 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         statement.setInt(1, object.getPersonId());
         statement.setString(2, object.getPersonName());
         statement.setString(3, object.getPersonSurname());
+        statement.setString(4, object.getPersonGender().getName());
+        statement.setString(5, object.getPersonBirthDate());
 
         return statement.executeUpdate() > 0;
     }
@@ -105,7 +109,10 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
         statement.setString(1, object.getPersonName());
         statement.setString(2, object.getPersonSurname());
-        statement.setInt(3, object.getPersonId());
+        statement.setString(3, object.getPersonGender().getName());
+        statement.setString(4, object.getPersonBirthDate());
+        statement.setInt(5, object.getPersonId());
+        
 
         return statement.executeUpdate() > 0;
 
@@ -143,7 +150,9 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
         if (result.next()) {
             String name = result.getString(COLUMN_FIRSTNAME);
             String surname = result.getString(COLUMN_SURNAME);
-            return new PersonEntity(id, name, surname);
+            String gender = result.getString(COLUMN_GENDER);
+            String birthDate = result.getString(COLUMN_BIRTH_DATE);
+            return new PersonEntity(id, name, surname, gender, birthDate);
         }
 
         // This should never happen because we check if the object exist before
@@ -155,6 +164,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
     public boolean exist(int id) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement(EXIST_QUERY);
+
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
 
@@ -200,7 +210,9 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
             int id = result.getInt(COLUMN_ID);
             String name = result.getString(COLUMN_FIRSTNAME);
             String surname = result.getString(COLUMN_SURNAME);
-            list.add(new PersonEntity(id, name, surname));
+            String gender = result.getString(COLUMN_GENDER);
+            String birthDate = result.getString(COLUMN_BIRTH_DATE);
+            list.add(new PersonEntity(id, name, surname, gender, birthDate));
         }
 
         return list;
@@ -228,7 +240,7 @@ public class PersonDAO implements SQLObject<PersonEntity>, Instantiable {
             throw new ObjectNotFound("PersonEntity", "null");
         }
 
-        return new PersonEntity(object.getPersonId(), object.getPersonName(), object.getPersonSurname());
+        return new PersonEntity(object.getPersonId(), object.getPersonName(), object.getPersonSurname(), object.getPersonGender().getName(), object.getPersonBirthDate());
 
     }
 

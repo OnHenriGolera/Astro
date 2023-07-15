@@ -7,6 +7,11 @@ import com.github.javafaker.Faker;
 import fr.astro.dao.human.ParticipantDAO;
 import fr.astro.dao.human.PersonDAO;
 import fr.astro.dao.human.RoleDAO;
+import fr.astro.entity.field.Category;
+import fr.astro.entity.field.Club;
+import fr.astro.entity.field.Gender;
+import fr.astro.entity.field.League;
+import fr.astro.entity.field.Nationality;
 import fr.astro.entity.human.ParticipantEntity;
 import fr.astro.entity.human.PersonEntity;
 import fr.astro.entity.human.RoleEntity;
@@ -85,15 +90,6 @@ public class HumanGenerator implements Instantiable {
     }
 
     /**
-     * Generate a category
-     *
-     * @return a category
-     */
-    public String generateCategory() {
-        return "category"; // TODO
-    }
-
-    /**
      * Generate a present
      *
      * @return a present
@@ -103,12 +99,34 @@ public class HumanGenerator implements Instantiable {
     }
 
     /**
+     * Generate a random birth date
+     * 
+     * @return a birth date
+     */
+    public String generateBirthDate() {
+        return fakerInstance.date().birthday().toString();
+    }
+
+    /**
+     * Generate a random fencing license
+     * 
+     * @return a fencing license
+     */
+    public String generateFencingLicense() {
+        return fakerInstance.idNumber().valid();
+    }
+
+    /**
      * Generate PersonEntity
      * 
      * @return a PersonEntity
      */
     public PersonEntity generatePersonEntity() throws SQLException {
-        return PersonEntity.of(PersonDAO.getInstance().getLastInsertedId() + 1, generateName(), generateSurname());
+        return PersonEntity.of(PersonDAO.getInstance().getLastInsertedId() + 1,
+                generateName(),
+                generateSurname(),
+                Gender.randomElement(),
+                generateBirthDate());
     }
 
     /**
@@ -163,7 +181,9 @@ public class HumanGenerator implements Instantiable {
                 personEntity.getPersonId(),
                 personEntity.getPersonName(),
                 personEntity.getPersonSurname(),
-                personEntity.getPersonId(),
+                personEntity.getPersonGender().getName(),
+                personEntity.getPersonBirthDate(),
+                PersonDAO.getInstance().getLastInsertedId() + 1,
                 generatePassword(),
                 roleEntity);
     }
@@ -184,9 +204,18 @@ public class HumanGenerator implements Instantiable {
                 personEntity.getPersonId(),
                 personEntity.getPersonName(),
                 personEntity.getPersonSurname(),
+                personEntity.getPersonGender().getName(),
+                personEntity.getPersonBirthDate(),
                 ParticipantDAO.getInstance().getLastInsertedId() + 1,
-                generateCategory(),
-                generatePresent());
+                Category.randomElement(),
+                generatePresent(),
+                generateFencingLicense(),
+                -1,
+                -1,
+                League.randomElement(),
+                Club.randomElement(),
+                Nationality.randomElement());
+
     }
 
 }

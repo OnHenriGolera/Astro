@@ -31,14 +31,14 @@ public class Server {
 
 		definePOSTs();
 
-		try {
+		// try {
 				
-			// ParticipantDAO.getInstance().importFromFFF("hello.FFF");
+		// 	// ParticipantDAO.getInstance().importFromFFF("hello.FFF");
 			
-			ParticipantDAO.getInstance().importFromFFF("hello2.FFF");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// 	ParticipantDAO.getInstance().importFromFFF("hello2.FFF");
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
 
 	}
 

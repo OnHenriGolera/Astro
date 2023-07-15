@@ -2,6 +2,8 @@ package fr.astro.entity.human;
 
 import static java.util.Objects.requireNonNull;
 
+import fr.astro.entity.field.Gender;
+
 /**
  * UserEntity
  * 
@@ -25,11 +27,12 @@ public class UserEntity {
      *                              roleEntity is null (personId and userId can be
      *                              because of auto-increment)
      */
-    private UserEntity(int personId, String name, String surname, int userId, String password, RoleEntity roleEntity) {
+    private UserEntity(int personId, String name, String surname, String gender, String birthDate, int userId,
+            String password, RoleEntity roleEntity) {
         requireNonNull(roleEntity);
         requireNonNull(password);
 
-        this.personEntity = PersonEntity.of(personId, name, surname);
+        this.personEntity = PersonEntity.of(personId, name, surname, gender, birthDate);
 
         this.roleEntity = roleEntity;
         this.password = password;
@@ -47,16 +50,34 @@ public class UserEntity {
      *                              roleEntity is null (personId and userId can be
      *                              because of auto-increment)
      */
-    public static UserEntity of(int personId, String name, String surname, int userId, String password,
-            RoleEntity roleEntity) {
-        return new UserEntity(personId, name, surname, userId, password, roleEntity);
+    public static UserEntity of(int personId, String name, String surname, String gender, String birthDate, int userId,
+            String password, RoleEntity roleEntity) {
+        return new UserEntity(personId, name, surname, gender, birthDate, userId, password, roleEntity);
     }
 
-    public static UserEntity Of(UserEntity userEntity) {
-        return new UserEntity(
+    /**
+     * Return a UserEntity
+     * 
+     * @param userEntity
+     * @param roleEntity
+     * @param password
+     * @return a UserEntity
+     * @throws NullPointerException if name, surname, password or
+     *                              roleEntity is null (personId and userId can be
+     *                              because of auto-increment)
+     */
+    public static UserEntity of(int personId, String name, String surname, Gender gender, String birthDate, int userId,
+            String password, RoleEntity roleEntity) {
+        return new UserEntity(personId, name, surname, gender.getName(), birthDate, userId, password, roleEntity);
+    }
+
+    public static UserEntity of(UserEntity userEntity) {
+        return UserEntity.of(
                 userEntity.getPersonId(),
                 userEntity.getPersonName(),
                 userEntity.getPersonSurname(),
+                userEntity.getPersonGender(),
+                userEntity.getPersonBirthDate(),
                 userEntity.getUserId(),
                 userEntity.getUserPassword(),
                 userEntity.getUserRoleEntity());
@@ -155,6 +176,24 @@ public class UserEntity {
     }
 
     /**
+     * Get the person gender
+     * 
+     * @param gender
+     */
+    public Gender getPersonGender() {
+        return personEntity.getPersonGender();
+    }
+
+    /**
+     * Get the person birth date
+     * 
+     * @param birthDate
+     */
+    public String getPersonBirthDate() {
+        return personEntity.getPersonBirthDate();
+    }
+
+    /**
      * Set the name
      * 
      * @param name
@@ -230,10 +269,15 @@ public class UserEntity {
         UserEntity userEntity = (UserEntity) obj;
 
         // Check each attribute
-        return userEntity.getUserId() == userId &&
-                userEntity.getUserPassword().equals(password) &&
-                userEntity.getUserRoleEntity().equals(roleEntity) &&
-                userEntity.getPersonEntity().equals(personEntity);
+        return userEntity.getUserId() == userId
+                && userEntity.getUserPassword().equals(password)
+                && userEntity.getUserRoleEntity().equals(roleEntity)
+                && userEntity.getPersonEntity().equals(personEntity)
+                && userEntity.getPersonName().equals(personEntity.getPersonName())
+                && userEntity.getPersonSurname().equals(personEntity.getPersonSurname())
+                && userEntity.getPersonGender().equals(personEntity.getPersonGender())
+                && userEntity.getPersonBirthDate().equals(personEntity.getPersonBirthDate());
+
     }
 
     /**
@@ -248,7 +292,11 @@ public class UserEntity {
         return 31 * userId
                 + password.hashCode()
                 + roleEntity.hashCode()
-                + personEntity.hashCode();
+                + personEntity.hashCode()
+                + personEntity.getPersonName().hashCode()
+                + personEntity.getPersonSurname().hashCode()
+                + personEntity.getPersonGender().hashCode()
+                + personEntity.getPersonBirthDate().hashCode();
 
     }
 

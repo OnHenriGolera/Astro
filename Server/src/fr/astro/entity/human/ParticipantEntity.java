@@ -2,6 +2,11 @@ package fr.astro.entity.human;
 
 import static java.util.Objects.requireNonNull;
 
+import fr.astro.entity.field.Category;
+import fr.astro.entity.field.Club;
+import fr.astro.entity.field.League;
+import fr.astro.entity.field.Nationality;
+
 /**
  * Participant
  * 
@@ -10,9 +15,15 @@ import static java.util.Objects.requireNonNull;
 public class ParticipantEntity {
 
     private int participantId;
-    private String category;
+    private Category category;
     private boolean present;
     private PersonEntity personEntity;
+    private String license;
+    private int initialLocalRanking;
+    private int initialInternationalRanking;
+    private League league;
+    private Club club;
+    private Nationality nationality;
 
     /**
      * Constructor
@@ -27,17 +38,43 @@ public class ParticipantEntity {
      *                              present is null (personId can be
      *                              because of auto-increment)
      */
-    private ParticipantEntity(int personId, String name, String surname, int participantId, String category,
-            boolean present) {
+    private ParticipantEntity(int personId,
+            String name,
+            String surname,
+            String gender,
+            String birthDate,
+            int participantId,
+            String category,
+            boolean present,
+            String license,
+            int initialLocalRanking,
+            int initialInternationalRanking,
+            String league,
+            String club,
+            String nationality) {
 
-        this.personEntity = PersonEntity.of(personId, name, surname);
+        this.personEntity = PersonEntity.of(personId, name, surname, gender, birthDate);
 
         requireNonNull(category);
         requireNonNull(present);
 
+        if (initialInternationalRanking == -1) {
+            initialInternationalRanking = 10001;
+        }
+
+        if (initialLocalRanking == -1) {
+            initialLocalRanking = 10001;
+        }
+
         this.participantId = participantId;
-        this.category = category;
+        this.category = Category.of(category);
         this.present = present;
+        this.license = license;
+        this.initialLocalRanking = initialLocalRanking;
+        this.initialInternationalRanking = initialInternationalRanking;
+        this.league = League.of(league);
+        this.club = Club.of(club);
+        this.nationality = Nationality.of(nationality);
     }
 
     /**
@@ -52,9 +89,23 @@ public class ParticipantEntity {
      *                              present is null (personId can be
      *                              because of auto-increment)
      */
-    public static ParticipantEntity of(int personId, String name, String surname, int participantId, String category,
-            boolean present) {
-        return new ParticipantEntity(personId, name, surname, participantId, category, present);
+    public static ParticipantEntity of(int personId,
+            String name,
+            String surname,
+            String gender,
+            String birthDate,
+            int participantId,
+            String category,
+            boolean present,
+            String license,
+            int initialLocalRanking,
+            int initialInternationalRanking,
+            String league,
+            String club,
+            String nationality) {
+        return new ParticipantEntity(personId, name, surname, gender, birthDate, participantId, category, present,
+                license,
+                initialLocalRanking, initialInternationalRanking, league, club, nationality);
     }
 
     /**
@@ -71,7 +122,7 @@ public class ParticipantEntity {
      * 
      * @return category
      */
-    public String getParticipantCategory() {
+    public Category getParticipantCategory() {
         return category;
     }
 
@@ -90,7 +141,7 @@ public class ParticipantEntity {
      * @param category
      * @throws NullPointerException if category is null
      */
-    public void setParticipantCategory(String category) {
+    public void setParticipantCategory(Category category) {
 
         requireNonNull(category);
 
@@ -138,6 +189,60 @@ public class ParticipantEntity {
     }
 
     /**
+     * Return the license
+     * 
+     * @return license
+     */
+    public String getParticipantLicense() {
+        return license;
+    }
+
+    /**
+     * Return the initialLocalRanking
+     * 
+     * @return initialLocalRanking
+     */
+    public int getParticipantInitialLocalRanking() {
+        return initialLocalRanking;
+    }
+
+    /**
+     * Return the initialInternationalRanking
+     * 
+     * @return initialInternationalRanking
+     */
+    public int getParticipantInitialInternationalRanking() {
+        return initialInternationalRanking;
+    }
+
+    /**
+     * Return the league
+     * 
+     * @return league
+     */
+    public League getParticipantLeague() {
+        return league;
+    }
+
+    /**
+     * Return the club
+     * 
+     * @return club
+     */
+    public Club getParticipantClub() {
+        return club;
+    }
+
+    /**
+     * Return the nationality
+     * 
+     * @param nationality
+     */
+    public Nationality getParticipantNationality() {
+        return nationality;
+    }
+
+    /**
      * Set the name
      * 
      * @param name
@@ -147,21 +252,21 @@ public class ParticipantEntity {
     }
 
     /**
-     * Set the surname
-     * 
-     * @param surname
-     */
-    public void setPersonSurname(String surname) {
-        personEntity.setPersonSurname(surname);
-    }
-
-    /**
      * Return the personEntity
      * 
      * @return personEntity
      */
     public PersonEntity getPersonEntity() {
         return personEntity;
+    }
+
+    /**
+     * Set the surname
+     * 
+     * @param surname
+     */
+    public void setPersonSurname(String surname) {
+        personEntity.setPersonSurname(surname);
     }
 
     /**
@@ -199,7 +304,13 @@ public class ParticipantEntity {
         return this.participantId == participant.participantId
                 && this.category.equals(participant.category)
                 && this.present == participant.present
-                && this.personEntity.equals(participant.personEntity);
+                && this.personEntity.equals(participant.personEntity) // TODO change access
+                && this.license.equals(participant.license)
+                && this.initialLocalRanking == participant.initialLocalRanking
+                && this.initialInternationalRanking == participant.initialInternationalRanking
+                && this.league.equals(participant.league)
+                && this.club.equals(participant.club)
+                && this.nationality.equals(participant.nationality);
 
     }
 
@@ -215,7 +326,13 @@ public class ParticipantEntity {
         return personEntity.hashCode()
                 + participantId
                 + category.hashCode()
-                + (present ? 1 : 0);
+                + (present ? 1 : 0)
+                + license.hashCode()
+                + initialLocalRanking
+                + initialInternationalRanking
+                + league.hashCode()
+                + club.hashCode()
+                + nationality.hashCode();
 
     }
 
