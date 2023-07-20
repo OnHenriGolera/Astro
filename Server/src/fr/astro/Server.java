@@ -2,15 +2,21 @@ package fr.astro;
 
 import static spark.Spark.*;
 
+import java.util.List;
+
 import fr.astro.dao.database.Initializer;
 import fr.astro.dao.human.ParticipantDAO;
+import fr.astro.entity.human.ParticipantEntity;
 import fr.astro.gui.staticPages.Error404GUI;
 import fr.astro.gui.staticPages.IndexGUI;
+import fr.astro.gui.staticPages.PlayerListGUI;
 import fr.astro.gui.staticPages.TemplateChooserGUI;
+
+import com.google.gson.Gson;
+import fr.astro.test.content.human.participant.ParticipantFullTest;
 
 /**
  * Server
- * 
  * Main class
  */
 public class Server {
@@ -18,33 +24,27 @@ public class Server {
 	/**
 	 * Main
 	 * 
-	 * @param args
+	 * @param args Arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// Configure Spark
 		staticFiles.location("/static/");
 		port(8081);
 
 		Initializer.Init();
 
+		// Create a test for Participant
+		ParticipantFullTest participantFullTest = new ParticipantFullTest();
+
 		defineGETs();
 
 		definePOSTs();
 
-		// try {
-				
-		// 	// ParticipantDAO.getInstance().importFromFFF("hello.FFF");
-			
-		// 	ParticipantDAO.getInstance().importFromFFF("hello2.FFF");
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// }
 
 	}
 
 	/**
 	 * Define GETs
-	 * 
 	 * Define all the GETs routes
 	 */
 	public static void defineGETs() {
@@ -73,11 +73,27 @@ public class Server {
 			return Error404GUI.getInstance().renderPage(req, res);
 		});
 
+		get("/player-list", (request, response) -> {
+			System.out.println("GET /player-list");
+
+			return PlayerListGUI.getInstance().renderPage(request, response);
+		});
+
+		get("/api/players", (request, response) -> {
+
+			// Return a json with all the players
+			response.type("application/json");
+
+			List<ParticipantEntity> participants = ParticipantDAO.getInstance().getAll();
+
+			return new Gson().toJson(participants);
+
+		});
+
 	}
 
 	/**
 	 * Define POSTs
-	 * 
 	 * Define all the POSTs routes
 	 */
 	public static void definePOSTs() {
