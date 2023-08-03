@@ -11,7 +11,7 @@
 
 <body>
 
-    <#include "util/nav.ftl">
+    <#include "util/nav_en.ftl">
 
         <main>
 

@@ -40,7 +40,6 @@ public class Server {
 
 		definePOSTs();
 
-
 	}
 
 	/**
