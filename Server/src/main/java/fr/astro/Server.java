@@ -14,6 +14,7 @@ import fr.astro.gui.staticPages.TemplateChooserGUI;
 
 import com.google.gson.Gson;
 import fr.astro.test.content.human.participant.ParticipantFullTest;
+import org.apache.log4j.BasicConfigurator;
 
 /**
  * Server
@@ -27,6 +28,9 @@ public class Server {
 	 * @param args Arguments
 	 */
 	public static void main(String[] args) throws Exception {
+
+		BasicConfigurator.configure();
+
 		// Configure Spark
 		staticFiles.location("/static/");
 		port(8081);

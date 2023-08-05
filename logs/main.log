@@ -1,0 +1,114 @@
+2023-08-05 12:28:55,659 +0200 [main] INFO  (StaticFilesConfiguration.java:142) - StaticResourceHandler configured with folder = /static/
+2023-08-05 12:28:56,097 +0200 [main] DEBUG (Routes.java:177) - Adds route: get, /, spark.RouteImpl$1@2e8c1c9b
+2023-08-05 12:28:56,098 +0200 [main] DEBUG (Routes.java:177) - Adds route: get, /default-template, spark.RouteImpl$1@449a4f23
+2023-08-05 12:28:56,101 +0200 [main] DEBUG (Routes.java:177) - Adds route: get, /template-chooser, spark.RouteImpl$1@76b1e9b8
+2023-08-05 12:28:56,103 +0200 [main] DEBUG (Routes.java:177) - Adds route: get, /player-list, spark.RouteImpl$1@54422e18
+2023-08-05 12:28:56,103 +0200 [main] DEBUG (Routes.java:177) - Adds route: get, /api/players, spark.RouteImpl$1@3e27ba32
+2023-08-05 12:28:56,105 +0200 [main] DEBUG (Routes.java:177) - Adds route: post, /template-chooser, spark.RouteImpl$1@3b0fe47a
+2023-08-05 12:28:56,119 +0200 [Thread-1] DEBUG (Log.java:180) - Logging to org.slf4j.impl.Log4jLoggerAdapter(org.eclipse.jetty.util.log) via org.eclipse.jetty.util.log.Slf4jLog
+2023-08-05 12:28:56,137 +0200 [Thread-1] INFO  (Log.java:192) - Logging initialized @821ms to org.eclipse.jetty.util.log.Slf4jLog
+2023-08-05 12:28:56,149 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.Server@71b4a64 added {qtp181007580{STOPPED,8<=0<=200,i=0,q=0},AUTO}
+2023-08-05 12:28:56,160 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - HttpConnectionFactory@64feeeec[HTTP/1.1] added {HttpConfiguration@7c686d05{32768/8192,8192/8192,https://:0,[ForwardedRequestCustomizer@42675485]},POJO}
+2023-08-05 12:28:56,166 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{null,[]}{0.0.0.0:0} added {org.eclipse.jetty.server.Server@71b4a64,UNMANAGED}
+2023-08-05 12:28:56,166 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{null,[]}{0.0.0.0:0} added {qtp181007580{STOPPED,8<=0<=200,i=0,q=0},AUTO}
+2023-08-05 12:28:56,167 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{null,[]}{0.0.0.0:0} added {org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@1df01853,AUTO}
+2023-08-05 12:28:56,167 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{null,[]}{0.0.0.0:0} added {org.eclipse.jetty.io.ArrayByteBufferPool@19e1b22e,POJO}
+2023-08-05 12:28:56,168 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{null,[http/1.1]}{0.0.0.0:0} added {HttpConnectionFactory@64feeeec[HTTP/1.1],AUTO}
+2023-08-05 12:28:56,169 +0200 [Thread-1] DEBUG (AbstractConnector.java:406) - ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:0} added HttpConnectionFactory@64feeeec[HTTP/1.1]
+2023-08-05 12:28:56,170 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:0} added {org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6,MANAGED}
+2023-08-05 12:28:56,171 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.Server@71b4a64 added {ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081},AUTO}
+2023-08-05 12:28:56,172 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.Server@71b4a64 added {spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1,MANAGED}
+2023-08-05 12:28:56,172 +0200 [Thread-1] INFO  (EmbeddedJettyServer.java:127) - == Spark has ignited ...
+2023-08-05 12:28:56,172 +0200 [Thread-1] INFO  (EmbeddedJettyServer.java:128) - >> Listening on 0.0.0.0:8081
+2023-08-05 12:28:56,172 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.Server@71b4a64
+2023-08-05 12:28:56,174 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.Server@71b4a64 added {org.eclipse.jetty.server.handler.ErrorHandler@75deaf7c,AUTO}
+2023-08-05 12:28:56,175 +0200 [Thread-1] INFO  (Server.java:372) - jetty-9.4.4.v20170414
+2023-08-05 12:28:56,183 +0200 [Thread-1] DEBUG (AbstractHandler.java:110) - starting org.eclipse.jetty.server.Server@71b4a64
+2023-08-05 12:28:56,183 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting qtp181007580{STOPPED,8<=0<=200,i=0,q=0}
+2023-08-05 12:28:56,185 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @869ms qtp181007580{STARTED,8<=8<=200,i=8,q=0}
+2023-08-05 12:28:56,185 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1
+2023-08-05 12:28:56,192 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1 added {org.eclipse.jetty.server.session.DefaultSessionCache@53f08fae[evict=-1,removeUnloadable=false,saveOnCreate=false,saveOnInactiveEvict=false],AUTO}
+2023-08-05 12:28:56,193 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.session.DefaultSessionCache@53f08fae[evict=-1,removeUnloadable=false,saveOnCreate=false,saveOnInactiveEvict=false] added {org.eclipse.jetty.server.session.NullSessionDataStore@17b8104f[passivating=false,graceSec=3600],AUTO}
+2023-08-05 12:28:56,194 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.session.DefaultSessionIdManager@555aff2d[worker=null]
+2023-08-05 12:28:56,196 +0200 [Thread-1] INFO  (DefaultSessionIdManager.java:364) - DefaultSessionIdManager workerName=node0
+2023-08-05 12:28:56,196 +0200 [Thread-1] INFO  (DefaultSessionIdManager.java:369) - No SessionScavenger set, using defaults
+2023-08-05 12:28:56,197 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.session.DefaultSessionIdManager@555aff2d[worker=node0] added {org.eclipse.jetty.server.session.HouseKeeper@44ac12c5[interval=600000, ownscheduler=false],MANAGED}
+2023-08-05 12:28:56,197 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.session.HouseKeeper@44ac12c5[interval=600000, ownscheduler=false]
+2023-08-05 12:28:56,198 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@45bab0e1
+2023-08-05 12:28:56,199 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @884ms org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@45bab0e1
+2023-08-05 12:28:56,200 +0200 [Thread-1] DEBUG (HouseKeeper.java:127) - Using own scheduler for scavenging
+2023-08-05 12:28:56,200 +0200 [Thread-1] INFO  (HouseKeeper.java:149) - Scavenging every 600000ms
+2023-08-05 12:28:56,201 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @886ms org.eclipse.jetty.server.session.HouseKeeper@44ac12c5[interval=600000, ownscheduler=true]
+2023-08-05 12:28:56,201 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @886ms org.eclipse.jetty.server.session.DefaultSessionIdManager@555aff2d[worker=node0]
+2023-08-05 12:28:56,201 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.Server@71b4a64 added {org.eclipse.jetty.server.session.DefaultSessionIdManager@555aff2d[worker=node0],MANAGED}
+2023-08-05 12:28:56,202 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1 added {org.eclipse.jetty.server.session.DefaultSessionIdManager@555aff2d[worker=node0],UNMANAGED}
+2023-08-05 12:28:56,202 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@1e91c738
+2023-08-05 12:28:56,202 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @887ms org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@1e91c738
+2023-08-05 12:28:56,202 +0200 [Thread-1] DEBUG (AbstractHandler.java:110) - starting spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1
+2023-08-05 12:28:56,203 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.session.DefaultSessionCache@53f08fae[evict=-1,removeUnloadable=false,saveOnCreate=false,saveOnInactiveEvict=false]
+2023-08-05 12:28:56,203 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.session.NullSessionDataStore@17b8104f[passivating=false,graceSec=3600]
+2023-08-05 12:28:56,203 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @888ms org.eclipse.jetty.server.session.NullSessionDataStore@17b8104f[passivating=false,graceSec=3600]
+2023-08-05 12:28:56,203 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @888ms org.eclipse.jetty.server.session.DefaultSessionCache@53f08fae[evict=-1,removeUnloadable=false,saveOnCreate=false,saveOnInactiveEvict=false]
+2023-08-05 12:28:56,203 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @888ms spark.embeddedserver.jetty.JettyHandler1149041050==dftMaxIdleSec=-1
+2023-08-05 12:28:56,204 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.handler.ErrorHandler@75deaf7c
+2023-08-05 12:28:56,204 +0200 [Thread-1] DEBUG (AbstractHandler.java:110) - starting org.eclipse.jetty.server.handler.ErrorHandler@75deaf7c
+2023-08-05 12:28:56,204 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @889ms org.eclipse.jetty.server.handler.ErrorHandler@75deaf7c
+2023-08-05 12:28:56,204 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+2023-08-05 12:28:56,209 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081} added {sun.nio.ch.ServerSocketChannelImpl[/0:0:0:0:0:0:0:0:8081],POJO}
+2023-08-05 12:28:56,210 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@1df01853
+2023-08-05 12:28:56,210 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @895ms org.eclipse.jetty.util.thread.ScheduledExecutorScheduler@1df01853
+2023-08-05 12:28:56,210 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting HttpConnectionFactory@64feeeec[HTTP/1.1]
+2023-08-05 12:28:56,210 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @895ms HttpConnectionFactory@64feeeec[HTTP/1.1]
+2023-08-05 12:28:56,210 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6
+2023-08-05 12:28:56,213 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.io.ManagedSelector@be2143e id=0 keys=-1 selected=-1 added {EatWhatYouKill@1118fb3d/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@616060a0/IDLE/0/1,AUTO}
+2023-08-05 12:28:56,213 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6 added {org.eclipse.jetty.io.ManagedSelector@be2143e id=0 keys=-1 selected=-1,AUTO}
+2023-08-05 12:28:56,213 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.io.ManagedSelector@4bd33f51 id=1 keys=-1 selected=-1 added {EatWhatYouKill@508b91f1/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@69c49ce/IDLE/0/1,AUTO}
+2023-08-05 12:28:56,214 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6 added {org.eclipse.jetty.io.ManagedSelector@4bd33f51 id=1 keys=-1 selected=-1,AUTO}
+2023-08-05 12:28:56,214 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.io.ManagedSelector@641b5cdd id=2 keys=-1 selected=-1 added {EatWhatYouKill@36e0ceb8/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@3ae8c58c/IDLE/0/1,AUTO}
+2023-08-05 12:28:56,214 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6 added {org.eclipse.jetty.io.ManagedSelector@641b5cdd id=2 keys=-1 selected=-1,AUTO}
+2023-08-05 12:28:56,214 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.io.ManagedSelector@5e5e3926 id=3 keys=-1 selected=-1 added {EatWhatYouKill@601d6b84/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@5038fc31/IDLE/0/1,AUTO}
+2023-08-05 12:28:56,215 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6 added {org.eclipse.jetty.io.ManagedSelector@5e5e3926 id=3 keys=-1 selected=-1,AUTO}
+2023-08-05 12:28:56,215 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.io.ManagedSelector@be2143e id=0 keys=-1 selected=-1
+2023-08-05 12:28:56,215 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting EatWhatYouKill@1118fb3d/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@616060a0/IDLE/0/1
+2023-08-05 12:28:56,215 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @900ms EatWhatYouKill@1118fb3d/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@616060a0/IDLE/0/1
+2023-08-05 12:28:56,217 +0200 [Thread-1] DEBUG (QueuedThreadPool.java:380) - queue org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@46f6e4fc
+2023-08-05 12:28:56,217 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @902ms org.eclipse.jetty.io.ManagedSelector@be2143e id=0 keys=0 selected=0
+2023-08-05 12:28:56,217 +0200 [qtp181007580-19] DEBUG (QueuedThreadPool.java:589) - run org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@46f6e4fc
+2023-08-05 12:28:56,218 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.io.ManagedSelector@4bd33f51 id=1 keys=-1 selected=-1
+2023-08-05 12:28:56,218 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting EatWhatYouKill@508b91f1/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@69c49ce/IDLE/0/1
+2023-08-05 12:28:56,218 +0200 [qtp181007580-19] DEBUG (EatWhatYouKill.java:123) - EatWhatYouKill@1118fb3d/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@616060a0/PRODUCING/0/1 execute true
+2023-08-05 12:28:56,218 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @903ms EatWhatYouKill@508b91f1/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@69c49ce/IDLE/0/1
+2023-08-05 12:28:56,219 +0200 [Thread-1] DEBUG (QueuedThreadPool.java:380) - queue org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@2369c76e
+2023-08-05 12:28:56,219 +0200 [qtp181007580-20] DEBUG (QueuedThreadPool.java:589) - run org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@2369c76e
+2023-08-05 12:28:56,219 +0200 [qtp181007580-19] DEBUG (EatWhatYouKill.java:206) - EatWhatYouKill@1118fb3d/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@616060a0/PRODUCING/0/1 produce non-blocking
+2023-08-05 12:28:56,219 +0200 [qtp181007580-20] DEBUG (EatWhatYouKill.java:123) - EatWhatYouKill@508b91f1/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@69c49ce/PRODUCING/0/1 execute true
+2023-08-05 12:28:56,219 +0200 [qtp181007580-19] DEBUG (ManagedSelector.java:233) - Selector loop waiting on select
+2023-08-05 12:28:56,220 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @904ms org.eclipse.jetty.io.ManagedSelector@4bd33f51 id=1 keys=0 selected=0
+2023-08-05 12:28:56,219 +0200 [qtp181007580-20] DEBUG (EatWhatYouKill.java:206) - EatWhatYouKill@508b91f1/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@69c49ce/PRODUCING/0/1 produce non-blocking
+2023-08-05 12:28:56,220 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.io.ManagedSelector@641b5cdd id=2 keys=-1 selected=-1
+2023-08-05 12:28:56,220 +0200 [qtp181007580-20] DEBUG (ManagedSelector.java:233) - Selector loop waiting on select
+2023-08-05 12:28:56,220 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting EatWhatYouKill@36e0ceb8/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@3ae8c58c/IDLE/0/1
+2023-08-05 12:28:56,221 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @905ms EatWhatYouKill@36e0ceb8/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@3ae8c58c/IDLE/0/1
+2023-08-05 12:28:56,221 +0200 [Thread-1] DEBUG (QueuedThreadPool.java:380) - queue org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@a0e2695
+2023-08-05 12:28:56,221 +0200 [qtp181007580-18] DEBUG (QueuedThreadPool.java:589) - run org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@a0e2695
+2023-08-05 12:28:56,221 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @906ms org.eclipse.jetty.io.ManagedSelector@641b5cdd id=2 keys=0 selected=0
+2023-08-05 12:28:56,221 +0200 [qtp181007580-18] DEBUG (EatWhatYouKill.java:123) - EatWhatYouKill@36e0ceb8/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@3ae8c58c/PRODUCING/0/1 execute true
+2023-08-05 12:28:56,221 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting org.eclipse.jetty.io.ManagedSelector@5e5e3926 id=3 keys=-1 selected=-1
+2023-08-05 12:28:56,221 +0200 [qtp181007580-18] DEBUG (EatWhatYouKill.java:206) - EatWhatYouKill@36e0ceb8/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@3ae8c58c/PRODUCING/0/1 produce non-blocking
+2023-08-05 12:28:56,222 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:185) - starting EatWhatYouKill@601d6b84/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@5038fc31/IDLE/0/1
+2023-08-05 12:28:56,222 +0200 [qtp181007580-18] DEBUG (ManagedSelector.java:233) - Selector loop waiting on select
+2023-08-05 12:28:56,222 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @907ms EatWhatYouKill@601d6b84/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@5038fc31/IDLE/0/1
+2023-08-05 12:28:56,222 +0200 [Thread-1] DEBUG (QueuedThreadPool.java:380) - queue org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@6731d20d
+2023-08-05 12:28:56,222 +0200 [qtp181007580-23] DEBUG (QueuedThreadPool.java:589) - run org.eclipse.jetty.io.ManagedSelector$$Lambda$84/0x00000008001e7c40@6731d20d
+2023-08-05 12:28:56,222 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @907ms org.eclipse.jetty.io.ManagedSelector@5e5e3926 id=3 keys=0 selected=0
+2023-08-05 12:28:56,222 +0200 [qtp181007580-23] DEBUG (EatWhatYouKill.java:123) - EatWhatYouKill@601d6b84/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@5038fc31/PRODUCING/0/1 execute true
+2023-08-05 12:28:56,223 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @907ms org.eclipse.jetty.server.ServerConnector$ServerConnectorManager@5d76c9d6
+2023-08-05 12:28:56,223 +0200 [qtp181007580-23] DEBUG (EatWhatYouKill.java:206) - EatWhatYouKill@601d6b84/org.eclipse.jetty.io.ManagedSelector$SelectorProducer@5038fc31/PRODUCING/0/1 produce non-blocking
+2023-08-05 12:28:56,223 +0200 [qtp181007580-23] DEBUG (ManagedSelector.java:233) - Selector loop waiting on select
+2023-08-05 12:28:56,223 +0200 [Thread-1] DEBUG (ContainerLifeCycle.java:322) - ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081} added {acceptor-0@46851119,POJO}
+2023-08-05 12:28:56,224 +0200 [Thread-1] DEBUG (QueuedThreadPool.java:380) - queue acceptor-0@46851119
+2023-08-05 12:28:56,224 +0200 [Thread-1] INFO  (AbstractConnector.java:280) - Started ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+2023-08-05 12:28:56,224 +0200 [qtp181007580-21] DEBUG (QueuedThreadPool.java:589) - run acceptor-0@46851119
+2023-08-05 12:28:56,224 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @909ms ServerConnector@3c73b4e6{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}
+2023-08-05 12:28:56,225 +0200 [Thread-1] INFO  (Server.java:444) - Started @909ms
+2023-08-05 12:28:56,225 +0200 [Thread-1] DEBUG (AbstractLifeCycle.java:177) - STARTED @910ms org.eclipse.jetty.server.Server@71b4a64

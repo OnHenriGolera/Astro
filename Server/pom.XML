@@ -23,6 +23,12 @@
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-kotlin</artifactId>
       <version>1.0.0-alpha</version>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
     <dependency>
@@ -37,6 +43,12 @@
       <version>1.0.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.26</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
     <dependency>
       <groupId>org.freemarker</groupId>
@@ -49,12 +61,6 @@
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <version>1.4.200</version>
-    </dependency>
-
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.2</version>
     </dependency>
 
   </dependencies>
