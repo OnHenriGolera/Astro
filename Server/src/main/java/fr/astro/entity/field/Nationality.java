@@ -8,8 +8,8 @@ public class Nationality extends OptionalField {
             "fra",
             "esp",
             "ita",
-            "ger",
-            "eng");
+            "deu",
+            "egy");
 
     public Nationality(String name) {
         super(name);

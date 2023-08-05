@@ -38,7 +38,8 @@ public class Server {
 		Initializer.Init();
 
 		// Create a test for Participant
-		ParticipantFullTest participantFullTest = new ParticipantFullTest();
+//		ParticipantFullTest participantFullTest = new ParticipantFullTest();
+//		participantFullTest.fillDatabase();
 
 		defineGETs();
 
@@ -87,6 +88,7 @@ public class Server {
 			// Return a json with all the players
 			response.type("application/json");
 
+			// TODO : Add token to prevent sensitive data to be sent to anyone
 			List<ParticipantEntity> participants = ParticipantDAO.getInstance().getAll();
 
 			return new Gson().toJson(participants);

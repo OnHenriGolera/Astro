@@ -40,6 +40,9 @@ const HEADERS = {
         name: "Nationality",
         val: (object) => {
             return object.nationality.name;
+        },
+        img: (object) => {
+            return getCountryFlag(object.nationality.name);
         }
     },
     category: {
@@ -205,7 +208,7 @@ function getHeader(players) {
                 if (val !== "Unknown" && val !== undefined && val !== null) {
 
                     // Add the header
-                    header[key] = {name: HEADERS[key].name, val: HEADERS[key].val};
+                    header[key] = {name: HEADERS[key].name, val: HEADERS[key].val, img: HEADERS[key].img};
                 }
             }
         }
@@ -236,8 +239,17 @@ function playerToHTML(player) {
     // For each header
     $.each(header, function (index, header) {
 
+        if (header.name === "Present") {
+            html += `<td class="centering"><input type="checkbox" ${header.val(player) ? "checked" : ""} disabled></td>`;
+            return;
+        }
+
         // Append the value
-        html += `<td>${header.val(player)}</td>`;
+        if (header.img === undefined) {
+            html += `<td>${header.val(player)}</td>`;
+        } else {
+            html += `<td class="centering"><img class="flag" src="${header.img(player)}" alt="${header.val(player)}"></td>`;
+        }
 
     });
 

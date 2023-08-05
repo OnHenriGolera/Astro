@@ -5,11 +5,9 @@ import java.util.Set;
 public class Club extends OptionalField {
 
     private static Set<String> elementsSet = Set.of(
-            "fra",
-            "esp",
-            "ita",
-            "ger",
-            "eng");
+            "poitiers",
+            "paris",
+            "lyon");
 
     public Club(String name) {
         super(name);
