@@ -3,15 +3,15 @@
 
 <head>
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="Default_Light/css/index.css">
-    <link rel="stylesheet" type="text/css" href="Default_Dark/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/Default_Light/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/Default_Dark/css/index.css">
 
-    <#include "util/head.ftl">
+    <#include "/Default_Dark/util/head.ftl">
 </head>
 
 <body>
 
-    <#include "util/nav_en.ftl">
+    <#include "/Default_Dark/util/nav_en.ftl">
 
         <main>
 

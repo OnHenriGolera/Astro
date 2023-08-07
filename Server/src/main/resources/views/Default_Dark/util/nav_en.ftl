@@ -6,7 +6,7 @@
 
     <div class="nav-links">
         <a href="/" class="nav-link">Home</a>
-        <a href="/competition" class="nav-link">Competition</a>
+        <a href="/competitions" class="nav-link">Competitions</a>
         <a href="/contact" class="nav-link">Contact</a>
         <a href="/login" class="nav-link" class="login">Login</a>
         <a href="/template-chooser" class="nav-link" class="login">Template Chooser</a>
@@ -14,4 +14,4 @@
 
 </nav>
 
-<#include "background.ftl">
+<#include "/Default_Dark/util/background.ftl">

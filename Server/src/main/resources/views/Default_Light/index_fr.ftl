@@ -3,14 +3,14 @@
 
 <head>
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="Default_Light/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/Default_Light/css/index.css">
 
-    <#include "util/head.ftl">
+    <#include "/Default_Light/util/head.ftl">
 </head>
 
 <body>
 
-    <#include "util/nav_en.ftl">
+    <#include "/Default_Light/util/nav_en.ftl">
 
         <main>
 

@@ -2,13 +2,13 @@
     {
         "name": "Default Light",
         "description": "Default Light is a light theme that uses a light color scheme and light colored components.",
-        "image": "/img/Default_Light.png",
+        "image": "img/Default_Light.png",
         "author": "Fork"
     },
     {
         "name": "Default Dark",
         "description": "Default Dark is a dark theme that uses a dark color scheme and dark colored components.",
-        "image": "/img/Default_Dark.png",
+        "image": "img/Default_Dark.png",
         "author": "Fork"
     }
 ]

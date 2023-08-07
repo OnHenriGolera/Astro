@@ -4,15 +4,15 @@
 <head>
     <title>404 error</title>
 
-    <#include "../util/head.ftl">
+    <#include "/Default_Light/util/head.ftl">
 
-    <link rel="stylesheet" href="Default_Light/css/redirect.css">
+    <link rel="stylesheet" href="/Default_Light/css/redirect.css">
 
 </head>
 
 <body>
 
-    <#include "../util/nav_en.ftl">
+    <#include "/Default_Light/util/nav_en.ftl">
 
     <main>
 
