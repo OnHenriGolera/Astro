@@ -6,7 +6,7 @@ import fr.astro.entity.field.Gender;
 
 /**
  * UserEntity
- * 
+ *
  * @see PersonEntity
  * @see RoleEntity
  */
@@ -19,8 +19,11 @@ public class UserEntity {
 
     /**
      * Constructor
-     * 
-     * @param userEntity
+     *
+     * @param personId
+     * @param name
+     * @param surname
+     * @param userId
      * @param roleEntity
      * @param password
      * @throws NullPointerException if name, surname, password or
@@ -28,7 +31,7 @@ public class UserEntity {
      *                              because of auto-increment)
      */
     private UserEntity(int personId, String name, String surname, String gender, String birthDate, int userId,
-            String password, RoleEntity roleEntity) {
+                       String password, RoleEntity roleEntity) {
         requireNonNull(roleEntity);
         requireNonNull(password);
 
@@ -41,8 +44,11 @@ public class UserEntity {
 
     /**
      * Return a UserEntity
-     * 
-     * @param userEntity
+     *
+     * @param personId
+     * @param name
+     * @param surname
+     * @param userId
      * @param roleEntity
      * @param password
      * @return a UserEntity
@@ -51,14 +57,17 @@ public class UserEntity {
      *                              because of auto-increment)
      */
     public static UserEntity of(int personId, String name, String surname, String gender, String birthDate, int userId,
-            String password, RoleEntity roleEntity) {
+                                String password, RoleEntity roleEntity) {
         return new UserEntity(personId, name, surname, gender, birthDate, userId, password, roleEntity);
     }
 
     /**
      * Return a UserEntity
-     * 
-     * @param userEntity
+     *
+     * @param personId
+     * @param name
+     * @param surname
+     * @param userId
      * @param roleEntity
      * @param password
      * @return a UserEntity
@@ -67,7 +76,7 @@ public class UserEntity {
      *                              because of auto-increment)
      */
     public static UserEntity of(int personId, String name, String surname, Gender gender, String birthDate, int userId,
-            String password, RoleEntity roleEntity) {
+                                String password, RoleEntity roleEntity) {
         return new UserEntity(personId, name, surname, gender.getName(), birthDate, userId, password, roleEntity);
     }
 
@@ -85,7 +94,7 @@ public class UserEntity {
 
     /**
      * Return the userId
-     * 
+     *
      * @return userId
      */
     public int getUserId() {
@@ -94,7 +103,7 @@ public class UserEntity {
 
     /**
      * Return the roleId
-     * 
+     *
      * @return roleId
      */
     public int getUserRoleId() {
@@ -103,7 +112,7 @@ public class UserEntity {
 
     /**
      * Return the name
-     * 
+     *
      * @return name
      */
     public String getUserRoleName() {
@@ -112,7 +121,7 @@ public class UserEntity {
 
     /**
      * Return the accessLevel
-     * 
+     *
      * @return accessLevel
      */
     public int getUserAccessLevel() {
@@ -121,7 +130,7 @@ public class UserEntity {
 
     /**
      * Return the password
-     * 
+     *
      * @return password
      */
     public String getUserPassword() {
@@ -130,7 +139,7 @@ public class UserEntity {
 
     /**
      * Set the password
-     * 
+     *
      * @param password
      * @throws NullPointerException if password is null
      */
@@ -141,7 +150,7 @@ public class UserEntity {
 
     /**
      * Return the RoleEntity
-     * 
+     *
      * @return roleEntity
      */
     public RoleEntity getUserRoleEntity() {
@@ -149,75 +158,8 @@ public class UserEntity {
     }
 
     /**
-     * Return the name
-     * 
-     * @return name
-     */
-    public String getPersonName() {
-        return personEntity.getPersonName();
-    }
-
-    /**
-     * Return the surname
-     * 
-     * @return surname
-     */
-    public String getPersonSurname() {
-        return personEntity.getPersonSurname();
-    }
-
-    /**
-     * Return the personId
-     * 
-     * @return personId
-     */
-    public int getPersonId() {
-        return personEntity.getPersonId();
-    }
-
-    /**
-     * Get the person gender
-     * 
-     * @param gender
-     */
-    public Gender getPersonGender() {
-        return personEntity.getPersonGender();
-    }
-
-    /**
-     * Get the person birth date
-     * 
-     * @param birthDate
-     */
-    public String getPersonBirthDate() {
-        return personEntity.getPersonBirthDate();
-    }
-
-    /**
-     * Set the name
-     * 
-     * @param name
-     * @throws NullPointerException if name is null
-     */
-    public void setPersonName(String name) {
-        requireNonNull(name);
-        personEntity.setPersonName(name);
-    }
-
-    /**
-     * Set the surname
-     * 
-     * @param surname
-     * @throws NullPointerException if surname is null
-     */
-    public void setPersonSurname(String surname) {
-        requireNonNull(surname);
-        personEntity.setPersonSurname(surname);
-    }
-
-    /**
      * Set the RoleEntity
-     * 
+     *
      * @param roleEntity
      * @throws NullPointerException if roleEntity is null
      */
@@ -227,8 +169,71 @@ public class UserEntity {
     }
 
     /**
+     * Return the name
+     *
+     * @return name
+     */
+    public String getPersonName() {
+        return personEntity.getPersonName();
+    }
+
+    /**
+     * Set the name
+     *
+     * @param name
+     * @throws NullPointerException if name is null
+     */
+    public void setPersonName(String name) {
+        requireNonNull(name);
+        personEntity.setPersonName(name);
+    }
+
+    /**
+     * Return the surname
+     *
+     * @return surname
+     */
+    public String getPersonSurname() {
+        return personEntity.getPersonSurname();
+    }
+
+    /**
+     * Set the surname
+     *
+     * @param surname
+     * @throws NullPointerException if surname is null
+     */
+    public void setPersonSurname(String surname) {
+        requireNonNull(surname);
+        personEntity.setPersonSurname(surname);
+    }
+
+    /**
+     * Return the personId
+     *
+     * @return personId
+     */
+    public int getPersonId() {
+        return personEntity.getPersonId();
+    }
+
+    /**
+     * Get the person gender
+     */
+    public Gender getPersonGender() {
+        return personEntity.getPersonGender();
+    }
+
+    /**
+     * Get the person birthdate
+     */
+    public String getPersonBirthDate() {
+        return personEntity.getPersonBirthDate();
+    }
+
+    /**
      * Return the PersonEntity
-     * 
+     *
      * @return personEntity
      */
     public PersonEntity getPersonEntity() {
@@ -237,7 +242,7 @@ public class UserEntity {
 
     /**
      * Give a String representation of the UserEntity
-     * 
+     *
      * @return a String representation of the UserEntity
      */
     @Override
@@ -255,7 +260,7 @@ public class UserEntity {
 
     /**
      * Equals method
-     * 
+     *
      * @param obj
      * @return true if the two objects are equals, false otherwise
      */
@@ -282,7 +287,7 @@ public class UserEntity {
 
     /**
      * HashCode method
-     * 
+     *
      * @return hashCode
      */
     @Override

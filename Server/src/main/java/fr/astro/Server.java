@@ -22,108 +22,108 @@ import org.apache.log4j.BasicConfigurator;
  */
 public class Server {
 
-	/**
-	 * Main
-	 * 
-	 * @param args Arguments
-	 */
-	public static void main(String[] args) throws Exception {
+    /**
+     * Main
+     *
+     * @param args Arguments
+     */
+    public static void main(String[] args) throws Exception {
 
-		BasicConfigurator.configure();
+        BasicConfigurator.configure();
 
-		// Configure Spark
-		staticFiles.location("/static/");
-		port(8081);
+        // Configure Spark
+        staticFiles.location("/static/");
+        port(8081);
 
-		Initializer.Init();
+        Initializer.Init();
 
-		// Create a test for Participant
-//		ParticipantFullTest participantFullTest = new ParticipantFullTest();
-//		participantFullTest.fillDatabase();
+        // Create a test for Participant
+//        ParticipantFullTest participantFullTest = new ParticipantFullTest();
+//        participantFullTest.fillDatabase();
 
-		defineGETs();
+        defineGETs();
 
-		definePOSTs();
+        definePOSTs();
 
-	}
+    }
 
-	/**
-	 * Define GETs
-	 * Define all the GETs routes
-	 */
-	public static void defineGETs() {
+    /**
+     * Define GETs
+     * Define all the GETs routes
+     */
+    public static void defineGETs() {
 
-		get("/", (request, response) -> {
-			System.out.println("GET /");
-			return IndexGUI.getInstance().renderPage(request, response);
-		});
+        get("/", (request, response) -> {
+            System.out.println("GET /");
+            return IndexGUI.getInstance().renderPage(request, response);
+        });
 
-		get("/default-template", (request, response) -> {
-			System.out.println("GET /default-template");
+        get("/default-template", (request, response) -> {
+            System.out.println("GET /default-template");
 
-			return IndexGUI.getInstance().renderPage(request, response);
-		});
+            return IndexGUI.getInstance().renderPage(request, response);
+        });
 
-		get("/template-chooser", (request, response) -> {
+        get("/template-chooser", (request, response) -> {
 
-			System.out.println("GET /template-chooser");
+            System.out.println("GET /template-chooser");
 
-			return TemplateChooserGUI.getInstance().renderPage(request, response);
+            return TemplateChooserGUI.getInstance().renderPage(request, response);
 
-		});
+        });
 
-		notFound((req, res) -> {
-			System.out.println("GET 404");
-			return Error404GUI.getInstance().renderPage(req, res);
-		});
+        notFound((req, res) -> {
+            System.out.println("GET 404");
+            return Error404GUI.getInstance().renderPage(req, res);
+        });
 
-		get("/player-list", (request, response) -> {
-			System.out.println("GET /player-list");
+        get("/player-list", (request, response) -> {
+            System.out.println("GET /player-list");
 
-			return PlayerListGUI.getInstance().renderPage(request, response);
-		});
+            return PlayerListGUI.getInstance().renderPage(request, response);
+        });
 
-		get("/api/players", (request, response) -> {
+        get("/api/players", (request, response) -> {
 
-			// Return a json with all the players
-			response.type("application/json");
+            // Return a json with all the players
+            response.type("application/json");
 
-			// TODO : Add token to prevent sensitive data to be sent to anyone
-			List<ParticipantEntity> participants = ParticipantDAO.getInstance().getAll();
+            // TODO : Add token to prevent sensitive data to be sent to anyone
+            List<ParticipantEntity> participants = ParticipantDAO.getInstance().getAll();
 
-			return new Gson().toJson(participants);
+            return new Gson().toJson(participants);
 
-		});
+        });
 
-	}
+    }
 
-	/**
-	 * Define POSTs
-	 * Define all the POSTs routes
-	 */
-	public static void definePOSTs() {
+    /**
+     * Define POSTs
+     * Define all the POSTs routes
+     */
+    public static void definePOSTs() {
 
-		post("/template-chooser", (request, response) -> {
+        post("/template-chooser", (request, response) -> {
 
-			String theme = request.queryParams("template");
+            String theme = request.queryParams("template");
 
-			System.out.println(theme);
+            System.out.println(theme);
 
-			if (theme == null || theme.isEmpty()) {
-				response.redirect("/template-chooser");
-				return null;
-			}
+            if (theme == null || theme.isEmpty()) {
+                response.redirect("/template-chooser");
+                return null;
+            }
 
-			System.out.println("POST /template-chooser");
+            System.out.println("POST /template-chooser");
 
-			response.cookie("theme", theme);
+            response.cookie("theme", theme);
 
-			response.redirect("/");
+            response.redirect("/");
 
-			return null;
+            return null;
 
-		});
+        });
 
-	}
+    }
 
 }

@@ -9,7 +9,7 @@ import fr.astro.entity.field.Nationality;
 
 /**
  * Participant
- * 
+ *
  * @see PersonEntity
  */
 public class ParticipantEntity {
@@ -27,31 +27,31 @@ public class ParticipantEntity {
 
     /**
      * Constructor
-     * 
-     * @param userId
+     *
+     * @param personId
      * @param name
      * @param surname
      * @param participantId
      * @param category
      * @param present
-     * @throws NullPointerException if name, surname, participantId, category or
+     * @throws NullPointerException if the name, surname, participantId, category or
      *                              present is null (personId can be
      *                              because of auto-increment)
      */
     private ParticipantEntity(int personId,
-            String name,
-            String surname,
-            String gender,
-            String birthDate,
-            int participantId,
-            String category,
-            boolean present,
-            String license,
-            int initialLocalRanking,
-            int initialInternationalRanking,
-            String league,
-            String club,
-            String nationality) {
+                              String name,
+                              String surname,
+                              String gender,
+                              String birthDate,
+                              int participantId,
+                              String category,
+                              boolean present,
+                              String license,
+                              int initialLocalRanking,
+                              int initialInternationalRanking,
+                              String league,
+                              String club,
+                              String nationality) {
 
         this.personEntity = PersonEntity.of(personId, name, surname, gender, birthDate);
 
@@ -79,8 +79,9 @@ public class ParticipantEntity {
 
     /**
      * Return a Participant
-     * 
-     * @param personEntity
+     *
+     * @param name
+     * @param surname
      * @param participantId
      * @param category
      * @param present
@@ -90,19 +91,19 @@ public class ParticipantEntity {
      *                              because of auto-increment)
      */
     public static ParticipantEntity of(int personId,
-            String name,
-            String surname,
-            String gender,
-            String birthDate,
-            int participantId,
-            String category,
-            boolean present,
-            String license,
-            int initialLocalRanking,
-            int initialInternationalRanking,
-            String league,
-            String club,
-            String nationality) {
+                                       String name,
+                                       String surname,
+                                       String gender,
+                                       String birthDate,
+                                       int participantId,
+                                       String category,
+                                       boolean present,
+                                       String license,
+                                       int initialLocalRanking,
+                                       int initialInternationalRanking,
+                                       String league,
+                                       String club,
+                                       String nationality) {
         return new ParticipantEntity(personId, name, surname, gender, birthDate, participantId, category, present,
                 license,
                 initialLocalRanking, initialInternationalRanking, league, club, nationality);
@@ -110,7 +111,7 @@ public class ParticipantEntity {
 
     /**
      * Return the participantId
-     * 
+     *
      * @return participantId
      */
     public int getParticipantId() {
@@ -119,7 +120,7 @@ public class ParticipantEntity {
 
     /**
      * Return the category
-     * 
+     *
      * @return category
      */
     public Category getParticipantCategory() {
@@ -127,17 +128,8 @@ public class ParticipantEntity {
     }
 
     /**
-     * Return the present
-     * 
-     * @return present
-     */
-    public boolean isParticipantPresent() {
-        return present;
-    }
-
-    /**
      * Set the category
-     * 
+     *
      * @param category
      * @throws NullPointerException if category is null
      */
@@ -149,8 +141,17 @@ public class ParticipantEntity {
     }
 
     /**
+     * Return the present
+     *
+     * @return present
+     */
+    public boolean isParticipantPresent() {
+        return present;
+    }
+
+    /**
      * Set the present
-     * 
+     *
      * @param present
      * @throws NullPointerException if present is null
      */
@@ -163,7 +164,7 @@ public class ParticipantEntity {
 
     /**
      * Return the personId
-     * 
+     *
      * @return personId
      */
     public int getPersonId() {
@@ -172,7 +173,7 @@ public class ParticipantEntity {
 
     /**
      * Return the name
-     * 
+     *
      * @return name
      */
     public String getPersonName() {
@@ -180,8 +181,17 @@ public class ParticipantEntity {
     }
 
     /**
+     * Set the name
+     *
+     * @param name
+     */
+    public void setPersonName(String name) {
+        personEntity.setPersonName(name);
+    }
+
+    /**
      * Return the surname
-     * 
+     *
      * @return surname
      */
     public String getPersonSurname() {
@@ -189,8 +199,17 @@ public class ParticipantEntity {
     }
 
     /**
+     * Set the surname
+     *
+     * @param surname
+     */
+    public void setPersonSurname(String surname) {
+        personEntity.setPersonSurname(surname);
+    }
+
+    /**
      * Return the license
-     * 
+     *
      * @return license
      */
     public String getParticipantLicense() {
@@ -199,7 +218,7 @@ public class ParticipantEntity {
 
     /**
      * Return the initialLocalRanking
-     * 
+     *
      * @return initialLocalRanking
      */
     public int getParticipantInitialLocalRanking() {
@@ -208,7 +227,7 @@ public class ParticipantEntity {
 
     /**
      * Return the initialInternationalRanking
-     * 
+     *
      * @return initialInternationalRanking
      */
     public int getParticipantInitialInternationalRanking() {
@@ -217,7 +236,7 @@ public class ParticipantEntity {
 
     /**
      * Return the league
-     * 
+     *
      * @return league
      */
     public League getParticipantLeague() {
@@ -226,7 +245,7 @@ public class ParticipantEntity {
 
     /**
      * Return the club
-     * 
+     *
      * @return club
      */
     public Club getParticipantClub() {
@@ -235,25 +254,14 @@ public class ParticipantEntity {
 
     /**
      * Return the nationality
-     * 
-     * @param nationality
      */
     public Nationality getParticipantNationality() {
         return nationality;
     }
 
     /**
-     * Set the name
-     * 
-     * @param name
-     */
-    public void setPersonName(String name) {
-        personEntity.setPersonName(name);
-    }
-
-    /**
      * Return the personEntity
-     * 
+     *
      * @return personEntity
      */
     public PersonEntity getPersonEntity() {
@@ -261,17 +269,8 @@ public class ParticipantEntity {
     }
 
     /**
-     * Set the surname
-     * 
-     * @param surname
-     */
-    public void setPersonSurname(String surname) {
-        personEntity.setPersonSurname(surname);
-    }
-
-    /**
      * Return a String representation of Participant
-     * 
+     *
      * @return a String representation of Participant
      */
     @Override
@@ -286,10 +285,10 @@ public class ParticipantEntity {
 
     /**
      * Indicates whether some other Participant is "equal to" this one.
-     * 
+     *
      * @param o - the reference object with which to compare.
      * @return true if this Participant is the same as the o argument; false
-     *         otherwise.
+     * otherwise.
      */
     @Override
     public boolean equals(Object o) {
@@ -316,7 +315,7 @@ public class ParticipantEntity {
 
     /**
      * Returns a hash code value for the Participant.
-     * 
+     *
      * @return a hash code value for this Participant.
      */
     @Override

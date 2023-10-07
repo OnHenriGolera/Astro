@@ -1,260 +1,98 @@
-const HEADERS = {
-    initialLocalRanking: {
-        name: "Rank",
-        val: (object) => {
-            return object.initialLocalRanking;
-        }
-    },
-    name: {
-        name: "Name",
-        val: (object) => {
-            return object.personEntity.name;
-        }
+import {Query} from "./util/Query.js";
+import {DataTable} from "./util/DataTable.js";
 
-    },
-    surname: {
-        name: "Surname",
-        val: (object) => {
-            return object.personEntity.surname;
-        }
-    },
-    gender: {
-        name: "Gender",
-        val: (object) => {
-            return object.personEntity.gender.name;
-        }
-    },
-    league: {
-        name: "League",
-        val: (object) => {
-            return object.league.name;
-        }
-    },
-    club: {
-        name: "Club",
-        val: (object) => {
-            return object.club.name;
-        }
-    },
-    nationality: {
-        name: "Nationality",
-        val: (object) => {
-            return object.nationality.name;
-        },
-        img: (object) => {
-            return getCountryFlag(object.nationality.name);
-        }
-    },
-    category: {
-        name: "Category",
-        val: (object) => {
-            return object.category.name;
-        }
-    },
-    present: {
-        name: "Present",
-        val: (object) => {
-            return object.present;
-        }
-    }
-};
+// ------------------ Specific Configuration ------------------
+function isValidHeader(header, element) {
 
-let header = {};
-let playerList = [];
-let sortKey = { val: HEADERS.nationality.val, name: "Nationality" };
+	if ("Unknown".localeCompare(element) === 0) {
+		return false;
+	}
+
+	// Removes useless / unwanted headers
+	if (["personBirthDate", "participantId", "personId", "name"].includes(header)) {
+		return false;
+	}
+
+	return true;
+
+}
+
+// ------------------ Specific Configuration ------------------
+
+
+// Default query
+let query = new Query(undefined, undefined, undefined);
+
+// Default table
+let table = undefined;
+
+// Sort key
+let sortKey;
+
 // Jquery load on page load
 $(function () {
-    // Get the player list
-    getPlayerList();
 
-    // If a header is clicked
-    $("#thead").on("click", "th", function () {
+	// Load the player list
+	loadPlayerList();
 
-        // Get the header name (find the header name from the header object)
-        let headerName = Object.keys(header).find(key => header[key].name === $(this).text());
+	// When the search input is changed
+	$("#search-input").on("input", function () {
 
-        // If the header is not present
-        if (headerName === undefined) {
-            return;
-        }
+		// Set the search value
+		table.filter($(this).val());
 
-        // If the sort key is different from the header value
-        if (sortKey.name.localeCompare(header[headerName].name) !== 0) {
+	})
 
-            // sort the player list
-            playerList.sort(function (a, b) {
-
-                // Get the value of the header
-                let valA = header[headerName].val(a);
-                let valB = header[headerName].val(b);
-
-                // If the value is a string
-                if (typeof valA === "string") {
-                    return valA.localeCompare(valB);
-                }
-
-                // Everything else
-                return valA - valB;
-            });
-
-            // Set the sort key
-            sortKey = header[headerName];
-
-        } else {
-
-            playerList.reverse();
-
-        }
-
-
-        // Clear the table
-        $("#tbody").empty();
-
-        // Show the player list
-        showPlayerList();
-
-    });
-
-    // When search bar is changed
-    $("#search-bar").on("input", function () {
-
-        showPlayerList();
-
-    });
 });
 
-// Show the player list
-function showPlayerList() {
+function loadPlayerList() {
 
-    // Get the search bar value
-    let search = $("#search-input").val().toLowerCase();
+	$.ajax({
+		url: "/api/players",
+		type: "GET",
+		success: function (data) {
 
-    // Clear the table
-    $("#tbody").empty();
+			// Get the header
+			let header = [];
 
-    // For each player
-    for (let player of playerList) {
+			let getHeaders = (object, parent = undefined) => {
 
-        // If the player can be shown
-        if (canShowPlayer(player, search)) {
+				for (let key in object) {
 
-            // Append the player to the table
-            $("#tbody").append(playerToHTML(player));
+					if (object[key] instanceof Object) {
 
-        }
-    }
-}
+						getHeaders(object[key], key);
 
-// Check if the player can be shown
-function canShowPlayer(player, search) {
+					} else {
 
-    if (search === "") {
-        return true;
-    }
+						if (!header.includes(key) && isValidHeader(key, object[key])) {
 
-    let name = HEADERS.name.val(player).toLowerCase();
-    let surname = HEADERS.surname.val(player).toLowerCase();
-    let club = HEADERS.club.val(player).toLowerCase();
+							header.push(key);
 
-    return name.includes(search) || surname.includes(search) || club.includes(search);
-}
+						} else if ("Unknown".localeCompare(object[key]) !== 0 && "name".localeCompare(key) === 0) {
 
-// Get the player list
-function getPlayerList() {
+							header.push(parent);
 
-    // GET request to /api/players
-    $.get("/api/players", function (data) {
+						}
 
-        // Save the player list
-        playerList = data;
+					}
 
-        // Clear the table
-        $("#thead").empty();
+				}
+			}
 
-        // Get the header
-        getHeader(data);
+			getHeaders(data[0]);
 
-        // For each header
-        $.each(header, function (index, header) {
+			query.setData(data);
+			query.setHeaders(header);
+			query.setSortKey(sortKey);
 
-            // Append the header
-            $("#thead").append(`<th>${header.name}</th>`);
-        });
+		}
+	}).then(() => {
 
-        // Show the player list
-        showPlayerList();
+		table = new DataTable("main", query.getHeaders());
 
-    });
+		table.setElements(query.getData());
+		table.update();
 
-}
-
-// Get header of the table (see if there is at least one non "Uknown" value, add the header)
-function getHeader(players) {
-
-    header = {};
-
-    // For each player
-    for (let player of players) {
-
-        // For each header
-        for (let key in HEADERS) {
-
-            // If the header is not present
-            if (header[key] === undefined) {
-
-                let val = HEADERS[key].val(player);
-
-                // If the value is not "Unknown" or undefined or null
-                if (val !== "Unknown" && val !== undefined && val !== null) {
-
-                    // Add the header
-                    header[key] = {name: HEADERS[key].name, val: HEADERS[key].val, img: HEADERS[key].img};
-                }
-            }
-        }
-    }
-
-}
-
-// Player (json) to HTML
-/*
-
-{
-cateogory: {"name": "categoryName"},
-present: true,
-personEntity: {"name": "personName", "surname":personSurname, "gender": {"name":genderName}},
-initialLocalRanking: 1,
-league: {"name": "leagueName"},
-club: {"name": "clubName"},
-nationality: {"name": "nationalityName"}
-}
-
-Order : initialLocalRank, name, surname, gender, league, club, nationality, category, present
-
- */
-function playerToHTML(player) {
-
-    let html = "<tr>";
-
-    // For each header
-    $.each(header, function (index, header) {
-
-        if (header.name === "Present") {
-            html += `<td class="centering"><input type="checkbox" ${header.val(player) ? "checked" : ""} disabled></td>`;
-            return;
-        }
-
-        // Append the value
-        if (header.img === undefined) {
-            html += `<td>${header.val(player)}</td>`;
-        } else {
-            html += `<td class="centering"><img class="flag" src="${header.img(player)}" alt="${header.val(player)}"></td>`;
-        }
-
-    });
-
-    html += "</tr>";
-
-    return html;
-
+	});
 }

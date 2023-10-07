@@ -10,38 +10,23 @@
 
 <body>
 
-    <#include "../util/nav_en.ftl">
+<#include "../util/nav_en.ftl">
 
-        <main>
+<main>
 
-            <h1>Player list</h1>
+    <h1>Player list</h1>
 
-            <#--  Search bar  -->
-            <div id="search-bar">
-                <input type="text" id="search-input" placeholder="Search for players...">
-            </div>
+    <#--  Search bar  -->
+    <div id="search-bar">
+        <input type="text" id="search-input" placeholder="Search for players...">
+    </div>
 
 
+</main>
 
-            <#--  List "players"  -->
-            <table>
-
-                <thead id="thead">
-
-                </thead>
-
-                <tbody id="tbody">
-
-                </tbody>
-
-            </table>
-
-        </main>
-
-    <#-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/js/country.js"></script>
-    <script src="/js/player-list.js"></script>
+<#-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="module" src="/js/player-list.js"></script>
 
 
 </body>

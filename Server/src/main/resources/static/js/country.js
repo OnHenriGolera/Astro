@@ -256,7 +256,7 @@ function getCountryCode(alpha3) {
     return countryISOMapping[alpha3];
 }
 
-function getCountryFlag(alpha3) {
+export default function getCountryFlag(alpha3) {
 
     alpha3 = alpha3.toUpperCase();
 
