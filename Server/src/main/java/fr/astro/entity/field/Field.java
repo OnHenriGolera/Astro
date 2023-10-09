@@ -4,7 +4,7 @@ import java.util.Set;
 
 /**
  * Field
- * 
+ * <p>
  * Represents a field for a class
  */
 public abstract class Field {
@@ -14,15 +14,26 @@ public abstract class Field {
 
     /**
      * Defines the elements
-     * 
+     *
+     * @param name the name of the element
      */
     public Field(String name) {
         this.name = name;
     }
 
     /**
+     * Return a field
+     *
+     * @param name the name of the field
+     * @return a field
+     */
+    public static Field of(String name) {
+        return null;
+    }
+
+    /**
      * Return the name of the element
-     * 
+     *
      * @return the name of the element
      */
     public String getName() {
@@ -31,8 +42,8 @@ public abstract class Field {
 
     /**
      * Return true if the name is a valid element
-     * 
-     * @param name
+     *
+     * @param name the name to check
      * @return true if the name is a valid element
      */
     public boolean isElement(String name) {
@@ -46,20 +57,10 @@ public abstract class Field {
 
     /**
      * Return the name of the field
-     * 
+     *
      * @return the name of the field
      */
     public abstract String getFieldName();
-
-    /**
-     * Return a field
-     * 
-     * @param name
-     * @return a field
-     */
-    public static Field of(String name) {
-        return null;
-    }
 
     @Override
     public String toString() {

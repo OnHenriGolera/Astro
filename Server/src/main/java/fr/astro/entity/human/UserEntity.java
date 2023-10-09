@@ -12,20 +12,22 @@ import fr.astro.entity.field.Gender;
  */
 public class UserEntity {
 
+    private final int userId;
+    private final PersonEntity personEntity;
     private RoleEntity roleEntity;
-    private int userId;
     private String password;
-    private PersonEntity personEntity;
 
     /**
      * Constructor
      *
-     * @param personId
-     * @param name
-     * @param surname
-     * @param userId
-     * @param roleEntity
-     * @param password
+     * @param personId   the id of the person
+     * @param name       the name of the person
+     * @param surname    the surname of the person
+     * @param gender     the gender of the person
+     * @param birthDate  the birthDate of the person
+     * @param userId     the id of the user
+     * @param password   the password of the user
+     * @param roleEntity the role of the user
      * @throws NullPointerException if name, surname, password or
      *                              roleEntity is null (personId and userId can be
      *                              because of auto-increment)
@@ -45,12 +47,14 @@ public class UserEntity {
     /**
      * Return a UserEntity
      *
-     * @param personId
-     * @param name
-     * @param surname
-     * @param userId
-     * @param roleEntity
-     * @param password
+     * @param personId   the id of the person
+     * @param name       the name of the person
+     * @param surname    the surname of the person
+     * @param gender     the gender of the person
+     * @param birthDate  the birthDate of the person
+     * @param userId     the id of the user
+     * @param password   the password of the user
+     * @param roleEntity the role of the user
      * @return a UserEntity
      * @throws NullPointerException if name, surname, password or
      *                              roleEntity is null (personId and userId can be
@@ -64,12 +68,14 @@ public class UserEntity {
     /**
      * Return a UserEntity
      *
-     * @param personId
-     * @param name
-     * @param surname
-     * @param userId
-     * @param roleEntity
-     * @param password
+     * @param personId   the id of the person
+     * @param name       the name of the person
+     * @param surname    the surname of the person
+     * @param gender     the gender of the person
+     * @param birthDate  the birthDate of the person
+     * @param userId     the id of the user
+     * @param password   the password of the user
+     * @param roleEntity the role of the user
      * @return a UserEntity
      * @throws NullPointerException if name, surname, password or
      *                              roleEntity is null (personId and userId can be
@@ -80,6 +86,12 @@ public class UserEntity {
         return new UserEntity(personId, name, surname, gender.getName(), birthDate, userId, password, roleEntity);
     }
 
+    /**
+     * Return a UserEntity
+     *
+     * @param userEntity the userEntity to copy
+     * @return a UserEntity
+     */
     public static UserEntity of(UserEntity userEntity) {
         return UserEntity.of(
                 userEntity.getPersonId(),
@@ -140,7 +152,7 @@ public class UserEntity {
     /**
      * Set the password
      *
-     * @param password
+     * @param password the password to set
      * @throws NullPointerException if password is null
      */
     public void setUserPassword(String password) {
@@ -160,7 +172,7 @@ public class UserEntity {
     /**
      * Set the RoleEntity
      *
-     * @param roleEntity
+     * @param roleEntity the roleEntity to set
      * @throws NullPointerException if roleEntity is null
      */
     public void setUserRoleEntity(RoleEntity roleEntity) {
@@ -180,7 +192,7 @@ public class UserEntity {
     /**
      * Set the name
      *
-     * @param name
+     * @param name the name to set
      * @throws NullPointerException if name is null
      */
     public void setPersonName(String name) {
@@ -200,7 +212,7 @@ public class UserEntity {
     /**
      * Set the surname
      *
-     * @param surname
+     * @param surname the surname to set
      * @throws NullPointerException if surname is null
      */
     public void setPersonSurname(String surname) {
@@ -240,11 +252,6 @@ public class UserEntity {
         return personEntity;
     }
 
-    /**
-     * Give a String representation of the UserEntity
-     *
-     * @return a String representation of the UserEntity
-     */
     @Override
     public String toString() {
         return "UserEntity [userId=" +
@@ -258,12 +265,6 @@ public class UserEntity {
                 "]";
     }
 
-    /**
-     * Equals method
-     *
-     * @param obj
-     * @return true if the two objects are equals, false otherwise
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
@@ -285,11 +286,6 @@ public class UserEntity {
 
     }
 
-    /**
-     * HashCode method
-     *
-     * @return hashCode
-     */
     @Override
     public int hashCode() {
 

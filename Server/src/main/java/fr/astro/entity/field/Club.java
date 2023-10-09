@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class Club extends OptionalField {
 
-    private static Set<String> elementsSet = Set.of(
+    private static final Set<String> elementsSet = Set.of(
             "poitiers",
             "paris",
             "lyon");
@@ -18,11 +18,6 @@ public class Club extends OptionalField {
             setDefaultElement();
         }
 
-    }
-
-    @Override
-    public String getFieldName() {
-        return "Club";
     }
 
     public static Club of(String name) {
@@ -45,6 +40,11 @@ public class Club extends OptionalField {
         }
 
         return null;
+    }
+
+    @Override
+    public String getFieldName() {
+        return "Club";
     }
 
     @Override

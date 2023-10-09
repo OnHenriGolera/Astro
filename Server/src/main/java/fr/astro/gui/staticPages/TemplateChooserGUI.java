@@ -15,8 +15,6 @@ public class TemplateChooserGUI extends Page implements Instantiable {
 
     /**
      * Constructor
-     * 
-     * @param name
      */
     private TemplateChooserGUI() {
         super(ftlPath);
@@ -24,7 +22,7 @@ public class TemplateChooserGUI extends Page implements Instantiable {
 
     /**
      * Return the instance of the Object
-     * 
+     *
      * @return the instance of the Object
      */
     public static Page getInstance() {
@@ -39,5 +37,5 @@ public class TemplateChooserGUI extends Page implements Instantiable {
     protected boolean hasToRedirect(Request request, Response response) throws Exception {
         return false;
     }
-    
+
 }

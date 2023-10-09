@@ -15,8 +15,8 @@ public abstract class Page {
 
     /**
      * Constructor
-     * 
-     * @param name
+     *
+     * @param name the name of the page
      */
     protected Page(String name) {
 
@@ -26,9 +26,9 @@ public abstract class Page {
 
     /**
      * Constructor
-     * 
-     * @param name
-     * @param redirectPath
+     *
+     * @param name         the name of the page
+     * @param redirectPath the path to redirect the user
      */
     protected Page(String name, String redirectPath) {
 
@@ -39,9 +39,11 @@ public abstract class Page {
 
     /**
      * Render the page without any input
-     * 
-     * @return
-     * @throws Exception
+     *
+     * @param request  the http request
+     * @param response the http response
+     * @return the page in HTML
+     * @throws Exception if the page name is null
      */
     public String renderPage(Request request, Response response) throws Exception {
 
@@ -51,10 +53,12 @@ public abstract class Page {
 
     /**
      * Render the page with the input
-     * 
-     * @param input
+     *
+     * @param input    the input of the page
+     * @param request  the http request
+     * @param response the http response
      * @return the page in HTML
-     * @throws Exception
+     * @throws Exception if the page name is null
      */
     protected String renderPage(Map<String, Object> input, Request request, Response response) throws Exception {
 
@@ -82,11 +86,11 @@ public abstract class Page {
 
     /**
      * Redirect the user if he has to be redirected
-     * 
-     * @param request
-     * @param response
+     *
+     * @param request  the http request
+     * @param response the http response
      * @return true if the user is redirected, false otherwise
-     * @throws Exception
+     * @throws Exception if the page name is null
      */
     protected boolean redirectUser(Request request, Response response) throws Exception {
 
@@ -107,7 +111,9 @@ public abstract class Page {
 
     /**
      * Return true if the user has to be redirected, false otherwise
-     * 
+     *
+     * @param request  the http request
+     * @param response the http response
      * @return true if the user has to be redirected, false otherwise
      */
     protected abstract boolean hasToRedirect(Request request, Response response) throws Exception;

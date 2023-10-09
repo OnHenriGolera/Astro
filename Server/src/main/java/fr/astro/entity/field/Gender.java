@@ -4,9 +4,9 @@ import java.util.Set;
 
 public class Gender extends Field {
 
-    private static Set<String> elementsSet = Set.of(
-        "m",
-        "f");
+    private static final Set<String> elementsSet = Set.of(
+            "m",
+            "f");
 
     public Gender(String name) {
         super(name);
@@ -17,11 +17,6 @@ public class Gender extends Field {
             throw new IllegalArgumentException("The name is not a valid element");
         }
 
-    }
-
-    @Override
-    public String getFieldName() {
-        return "Gender";
     }
 
     public static Gender of(String name) {
@@ -45,6 +40,11 @@ public class Gender extends Field {
         }
 
         return null;
+    }
+
+    @Override
+    public String getFieldName() {
+        return "Gender";
     }
 
 }

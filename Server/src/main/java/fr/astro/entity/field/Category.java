@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class Category extends Field {
 
-    private static Set<String> elementsSet = Set.of(
+    private static final Set<String> elementsSet = Set.of(
             "m9",
             "m11",
             "m13",
@@ -24,11 +24,6 @@ public class Category extends Field {
             throw new IllegalArgumentException("The name is not a valid element");
         }
 
-    }
-
-    @Override
-    public String getFieldName() {
-        return "Category";
     }
 
     public static Category of(String name) {
@@ -52,6 +47,11 @@ public class Category extends Field {
         }
 
         return null;
+    }
+
+    @Override
+    public String getFieldName() {
+        return "Category";
     }
 
 }

@@ -13,17 +13,16 @@ public class RoleEntity {
 
     /**
      * Constructor
-     * 
-     * @param roleId
-     * @param name
-     * @param accessLevel
+     *
+     * @param roleId      the id of the role
+     * @param name        the name of the role
+     * @param accessLevel the accessLevel of the role
      * @throws NullPointerException if name or accessLevel is null (roleId can be
      *                              because of auto-increment)
      */
     private RoleEntity(int roleId, String name, int accessLevel) {
 
         requireNonNull(name);
-        requireNonNull(accessLevel);
 
         this.roleId = roleId;
         this.name = name;
@@ -32,10 +31,10 @@ public class RoleEntity {
 
     /**
      * Return a RoleEntity
-     * 
-     * @param roleId
-     * @param name
-     * @param accessLevel
+     *
+     * @param roleId      the id of the role
+     * @param name        the name of the role
+     * @param accessLevel the accessLevel of the role
      * @return a RoleEntity
      * @throws NullPointerException if name or accessLevel is null (roleId can be
      *                              because of auto-increment)
@@ -46,7 +45,7 @@ public class RoleEntity {
 
     /**
      * Return the roleId
-     * 
+     *
      * @return roleId
      */
     public int getRoleId() {
@@ -54,8 +53,17 @@ public class RoleEntity {
     }
 
     /**
+     * Set the roleId
+     *
+     * @param roleId the roleId to set
+     */
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    /**
      * Return the name
-     * 
+     *
      * @return name
      */
     public String getRoleName() {
@@ -63,8 +71,17 @@ public class RoleEntity {
     }
 
     /**
+     * Set the name
+     *
+     * @param name the name to set
+     */
+    public void setRoleName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Return the accessLevel
-     * 
+     *
      * @return accessLevel
      */
     public int getRoleAccessLevel() {
@@ -72,48 +89,19 @@ public class RoleEntity {
     }
 
     /**
-     * Set the roleId
-     * 
-     * @param roleId
-     */
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    /**
-     * Set the name
-     * 
-     * @param name
-     */
-    public void setRoleName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Set the accessLevel
-     * 
-     * @param accessLevel
+     *
+     * @param accessLevel the accessLevel to set
      */
     public void setRoleAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
     }
 
-    /**
-     * Return a String representation of the object
-     * 
-     * @return a String representation of the object
-     */
     @Override
     public String toString() {
         return "RoleEntity [accessLevel=" + accessLevel + ", name=" + name + ", roleId=" + roleId + "]";
     }
 
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     * 
-     * @param obj the reference object with which to compare.
-     * @return true if this object is the same as the obj argument; false otherwise.
-     */
     @Override
     public boolean equals(Object obj) {
 
@@ -132,11 +120,6 @@ public class RoleEntity {
 
     }
 
-    /**
-     * Returns a hash code value for the object.
-     * 
-     * @return a hash code value for this object.
-     */
     @Override
     public int hashCode() {
 

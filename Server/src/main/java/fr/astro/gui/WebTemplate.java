@@ -8,25 +8,24 @@ import freemarker.template.TemplateException;
 
 /**
  * Represent a template a user can choose to personalize his website
- * 
  */
 public class WebTemplate {
 
     private final static String defaultTheme = "Default_Light";
 
     // Attributes
-    private String pageName;
-    private String templateName;
-    private String author;
-    private String imgPath;
+    private final String pageName;
+    private final String templateName;
+    private final String author;
+    private final String imgPath;
 
     /**
      * Constructor
-     * 
-     * @param pageName
-     * @param name
-     * @param author
-     * @param imgPath
+     *
+     * @param pageName the name of the page
+     * @param name     the name of the template
+     * @param author   the author of the template
+     * @param imgPath  the path of the image of the template
      */
     private WebTemplate(String pageName, String name, String author, String imgPath) {
 
@@ -39,13 +38,12 @@ public class WebTemplate {
 
     /**
      * Return a template
-     * 
-     * @param pageI
-     * @param nameI
-     * @param path
-     * @param author
-     * @param imgPath
-     * @return
+     *
+     * @param pageI   the page name
+     * @param nameI   the name of the template
+     * @param author  the author of the template
+     * @param imgPath the path of the image of the template
+     * @return a template
      */
     public static WebTemplate getTemplate(String pageI, String nameI, String author, String imgPath) {
 
@@ -55,9 +53,9 @@ public class WebTemplate {
 
     /**
      * Return a template, with the default page name
-     * 
-     * @param nameI
-     * @param path
+     *
+     * @param nameI the name of the template
+     * @param pageI the page name
      * @return
      */
     public static WebTemplate getTemplate(String pageI, String nameI) {
@@ -68,8 +66,8 @@ public class WebTemplate {
 
     /**
      * Return a page name
-     * 
-     * @return
+     *
+     * @return the page name
      */
     public String getTemplatePageName() {
 
@@ -79,8 +77,8 @@ public class WebTemplate {
 
     /**
      * Return the name of the template
-     * 
-     * @return
+     *
+     * @return the name of the template
      */
     public String getTemplateName() {
 
@@ -90,8 +88,8 @@ public class WebTemplate {
 
     /**
      * Return the author of the template
-     * 
-     * @return
+     *
+     * @return the author of the template
      */
     public String getTemplateAuthor() {
 
@@ -101,8 +99,8 @@ public class WebTemplate {
 
     /**
      * Return the path of the image of the template
-     * 
-     * @return
+     *
+     * @return the path of the image of the template
      */
     public String getTemplateImgPath() {
 
@@ -112,9 +110,9 @@ public class WebTemplate {
 
     /**
      * Load the template
-     * 
-     * @param lang
-     * @return
+     *
+     * @param lang the lang of the template
+     * @return the template
      * @see PageGetter
      */
     public String loadTemplate(FreeMarkerInitializer.Lang lang) throws TemplateException, IOException {
@@ -125,10 +123,10 @@ public class WebTemplate {
 
     /**
      * Load the template
-     * 
-     * @param lang
-     * @param input
-     * @return
+     *
+     * @param lang  the lang of the template
+     * @param input the input of the template
+     * @return the template
      * @see PageGetter
      */
     public String loadTemplate(FreeMarkerInitializer.Lang lang, Map<String, Object> input)
@@ -138,7 +136,7 @@ public class WebTemplate {
 
         try {
 
-            if (templateName.equals("")) {
+            if (templateName.isEmpty()) {
 
                 page = PageGetter.getPage(pageName, input, lang);
 

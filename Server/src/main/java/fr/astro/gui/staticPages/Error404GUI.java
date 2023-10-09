@@ -15,8 +15,6 @@ public class Error404GUI extends Page implements Instantiable {
 
     /**
      * Constructor
-     * 
-     * @param name
      */
     private Error404GUI() {
         super(ftlPath);
@@ -24,7 +22,7 @@ public class Error404GUI extends Page implements Instantiable {
 
     /**
      * Return the instance of the Object
-     * 
+     *
      * @return the instance of the Object
      */
     public static Page getInstance() {

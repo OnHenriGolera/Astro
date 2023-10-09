@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class League extends OptionalField {
 
-    private static Set<String> elementsSet = Set.of(
+    private static final Set<String> elementsSet = Set.of(
             "Nouvelle-Aquitaine",
             "Occitanie"); // TODO
 
@@ -17,11 +17,6 @@ public class League extends OptionalField {
             setDefaultElement();
         }
 
-    }
-
-    @Override
-    public String getFieldName() {
-        return "League";
     }
 
     public static League of(String name) {
@@ -44,6 +39,11 @@ public class League extends OptionalField {
         }
 
         return null;
+    }
+
+    @Override
+    public String getFieldName() {
+        return "League";
     }
 
     @Override

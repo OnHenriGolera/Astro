@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class Nationality extends OptionalField {
 
-    private static Set<String> elementsSet = Set.of(
+    private static final Set<String> elementsSet = Set.of(
             "fra",
             "esp",
             "ita",
@@ -20,11 +20,6 @@ public class Nationality extends OptionalField {
             setDefaultElement();
         }
 
-    }
-
-    @Override
-    public String getFieldName() {
-        return "Nationality";
     }
 
     public static Nationality of(String name) {
@@ -48,6 +43,11 @@ public class Nationality extends OptionalField {
         }
 
         return null;
+    }
+
+    @Override
+    public String getFieldName() {
+        return "Nationality";
     }
 
     @Override

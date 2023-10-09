@@ -6,7 +6,7 @@ import fr.astro.exception.InvalidArguments;
 
 public class FormulaElementEntity {
 
-    private int formulaElementId;
+    private final int formulaElementId;
     private String type;
     private int numberBefore;
     private int numberAfter;
@@ -14,16 +14,16 @@ public class FormulaElementEntity {
 
     /**
      * Constructor
-     * 
-     * @param formulaElementId
-     * @param type
-     * @param numberBefore
-     * @param numberAfter
-     * @param description
+     *
+     * @param formulaElementId the id of the formulaElement
+     * @param type             the type of the formulaElement
+     * @param numberBefore     the number of player entering the formulaElement
+     * @param numberAfter      the number of player qualifying to the next formulaElement
+     * @param description      the description of the formulaElement
      * @throws InvalidArguments if numberBefore or numberAfter is negative
      */
     public FormulaElementEntity(int formulaElementId, String type, int numberBefore, int numberAfter,
-            String description) throws InvalidArguments {
+                                String description) throws InvalidArguments {
 
         requireNonNull(type);
         requireNonNull(description);
@@ -41,23 +41,23 @@ public class FormulaElementEntity {
 
     /**
      * Return a FormulaElementEntity
-     * 
-     * @param formulaElementId
-     * @param type
-     * @param numberBefore
-     * @param numberAfter
-     * @param description
+     *
+     * @param formulaElementId the id of the formulaElement
+     * @param type             the type of the formulaElement
+     * @param numberBefore     the number of player entering the formulaElement
+     * @param numberAfter      the number of player qualifying to the next formulaElement
+     * @param description      the description of the formulaElement
      * @return a FormulaElementEntity
      * @throws InvalidArguments if numberBefore or numberAfter is negative
      */
     public static FormulaElementEntity of(int formulaElementId, String type, int numberBefore, int numberAfter,
-            String description) throws InvalidArguments {
+                                          String description) throws InvalidArguments {
         return new FormulaElementEntity(formulaElementId, type, numberBefore, numberAfter, description);
     }
 
     /**
      * Return the formulaElementId
-     * 
+     *
      * @return formulaElementId
      */
     public int getFormulaElementId() {
@@ -66,7 +66,7 @@ public class FormulaElementEntity {
 
     /**
      * Return the type
-     * 
+     *
      * @return type
      */
     public String getFormulaElementType() {
@@ -74,36 +74,9 @@ public class FormulaElementEntity {
     }
 
     /**
-     * Return the numberBefore
-     * 
-     * @return numberBefore
-     */
-    public int getFormulaElementNumberBefore() {
-        return numberBefore;
-    }
-
-    /**
-     * Return the numberAfter
-     * 
-     * @return numberAfter
-     */
-    public int getFormulaElementNumberAfter() {
-        return numberAfter;
-    }
-
-    /**
-     * Return the description
-     * 
-     * @return description
-     */
-    public String getFormulaElementDescription() {
-        return description;
-    }
-
-    /**
      * Set the type
-     * 
-     * @param type
+     *
+     * @param type the type of the formulaElement
      */
     public void setFormulaElementType(String type) {
 
@@ -113,9 +86,18 @@ public class FormulaElementEntity {
     }
 
     /**
+     * Return the numberBefore
+     *
+     * @return numberBefore
+     */
+    public int getFormulaElementNumberBefore() {
+        return numberBefore;
+    }
+
+    /**
      * Set the numberBefore
-     * 
-     * @param numberBefore
+     *
+     * @param numberBefore the number of player entering the formulaElement
      * @throws InvalidArguments if numberBefore is negative
      */
     public void setFormulaElementNumberBefore(int numberBefore) throws InvalidArguments {
@@ -126,9 +108,18 @@ public class FormulaElementEntity {
     }
 
     /**
+     * Return the numberAfter
+     *
+     * @return numberAfter
+     */
+    public int getFormulaElementNumberAfter() {
+        return numberAfter;
+    }
+
+    /**
      * Set the numberAfter
-     * 
-     * @param numberAfter
+     *
+     * @param numberAfter the number of player qualifying to the next formulaElement
      * @throws InvalidArguments if numberAfter is negative
      */
     public void setFormulaElementNumberAfter(int numberAfter) throws InvalidArguments {
@@ -139,9 +130,19 @@ public class FormulaElementEntity {
     }
 
     /**
+     * Return the description
+     *
+     * @return description
+     */
+    public String getFormulaElementDescription() {
+        return description;
+    }
+
+    /**
      * Set the description
-     * 
-     * @param description
+     *
+     * @param description the description of the formulaElement
+     * @throws NullPointerException if description is null
      */
     public void setFormulaElementDescription(String description) {
 
@@ -152,7 +153,7 @@ public class FormulaElementEntity {
 
     /**
      * Return the FormulaElementEntity as a String
-     * 
+     *
      * @return FormulaElementEntity as a String
      */
     @Override
@@ -163,8 +164,8 @@ public class FormulaElementEntity {
 
     /**
      * Test if two FormulaElementEntity are equals
-     * 
-     * @param obj
+     *
+     * @param obj the object to test
      * @return true if they are equals, false otherwise
      */
     @Override
@@ -188,7 +189,7 @@ public class FormulaElementEntity {
 
     /**
      * Return the hashcode of the FormulaElementEntity
-     * 
+     *
      * @return the hashcode of the FormulaElementEntity
      */
     @Override

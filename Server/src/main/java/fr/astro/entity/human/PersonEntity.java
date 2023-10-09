@@ -9,18 +9,15 @@ import fr.astro.entity.field.Gender;
  */
 public class PersonEntity {
 
-    private int personId;
+    private final int personId;
+    private final Gender personGender;
+    private final String personBirthDate;
     private String personName;
     private String personSurname;
-    private Gender personGender;
-    private String personBirthDate;
 
     /**
      * Constructor
      *
-     * @param personId
-     * @param personName
-     * @param personSurname
      * @throws NullPointerException if name or surname is null (personId can be
      *                              because of auto-increment)
      */
@@ -72,8 +69,6 @@ public class PersonEntity {
     /**
      * Set the name
      *
-     * @param name
-     * @return void
      * @throws NullPointerException if name is null
      */
     public void setPersonName(String name) {
@@ -95,8 +90,6 @@ public class PersonEntity {
     /**
      * Set the surname
      *
-     * @param surname
-     * @return void
      * @throws NullPointerException if surname is null
      */
     public void setPersonSurname(String surname) {
@@ -117,8 +110,6 @@ public class PersonEntity {
 
     /**
      * Get the birthDate
-     *
-     * @param birthDate
      */
     public String getPersonBirthDate() {
         return personBirthDate;
@@ -138,13 +129,6 @@ public class PersonEntity {
                 '}';
     }
 
-    /**
-     * Return a boolean if the object is equals to the PersonEntity
-     *
-     * @param obj
-     * @return a boolean
-     * @see PersonEntity
-     */
     @Override
     public boolean equals(Object obj) {
 
@@ -166,12 +150,6 @@ public class PersonEntity {
                 && personEntity.personBirthDate.equals(this.personBirthDate);
     }
 
-    /**
-     * Return a hashcode
-     *
-     * @return a hashcode
-     * @see PersonEntity
-     */
     @Override
     public int hashCode() {
 

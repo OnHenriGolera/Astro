@@ -10,41 +10,75 @@ import java.util.Locale;
 
 /**
  * FreeMarkerInitializer
- * 
+ * <p>
  * Initialize FreeMarker
  */
 public class FreeMarkerInitializer {
+
+    private final static Lang DEFAULT_LANG = Lang.EN;
+    private static final HashMap<Lang, Configuration> configurations = new HashMap<>();
+
+    /**
+     * Return the default configuration of FreeMarker
+     *
+     * @return the default configuration of FreeMarker
+     */
+    public static Configuration getConfiguration() {
+        return getConfiguration(DEFAULT_LANG);
+    }
+
+    /**
+     * Return the configuration of FreeMarker
+     *
+     * @param lang the lang of the configuration
+     * @return a configuration of FreeMarker with the lang
+     */
+    public static Configuration getConfiguration(Lang lang) {
+        if (!configurations.containsKey(lang)) {
+            configurations.put(lang, getNewConfiguration(lang));
+        }
+
+        return configurations.get(lang);
+    }
+
+    /**
+     * Create a new configuration of FreeMarker
+     *
+     * @param lang the lang of the configuration
+     * @return a new configuration of FreeMarker with the lang
+     */
+    public static Configuration getNewConfiguration(Lang lang) {
+        // Configure FreeMarker
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
+        configuration.setClassForTemplateLoading(Server.class, "/views");
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setLocale(lang.getLocale());
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+
+        return configuration;
+    }
 
     public enum Lang {
         FR(Locale.FRANCE),
         EN(Locale.ENGLISH);
 
         // Locale
-        private Locale locale;
+        private final Locale locale;
 
         /**
          * Constructor
-         * 
-         * @param locale
+         *
+         * @param locale the locale
          */
         Lang(Locale locale) {
             this.locale = locale;
         }
 
         /**
-         * Return the locale
-         * 
-         * @return
-         */
-        public Locale getLocale() {
-            return locale;
-        }
-
-        /**
          * Return the lang from the locale
-         * 
-         * @param locale
-         * @return
+         *
+         * @param request the http request
+         * @return the lang from the locale
          */
         public static Lang getLang(Request request) {
             String lang = request.cookie("lang");
@@ -61,48 +95,14 @@ public class FreeMarkerInitializer {
                     return Lang.EN;
             }
         }
-    }
 
-    private static HashMap<Lang, Configuration> configurations = new HashMap<>();
-
-    private final static Lang DEFAULT_LANG = Lang.EN;
-
-    /**
-     * Return the default configuration of FreeMarker
-     *
-     * @return
-     */
-    public static Configuration getConfiguration() {
-        return getConfiguration(DEFAULT_LANG);
-    }
-
-    /**
-     * Return the configuration of FreeMarker
-     * 
-     * @param lang
-     * @return
-     */
-    public static Configuration getConfiguration(Lang lang) {
-        if (!configurations.containsKey(lang)) {
-            configurations.put(lang, getNewConfiguration(lang));
+        /**
+         * Return the locale
+         *
+         * @return the locale
+         */
+        public Locale getLocale() {
+            return locale;
         }
-
-        return configurations.get(lang);
-    }
-
-    /**
-     * Create a new configuration of FreeMarker
-     * 
-     * @return
-     */
-    public static Configuration getNewConfiguration(Lang lang) {
-        // Configure FreeMarker
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
-        configuration.setClassForTemplateLoading(Server.class, "/views");
-        configuration.setDefaultEncoding("UTF-8");
-        configuration.setLocale(lang.getLocale());
-        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-        return configuration;
     }
 }

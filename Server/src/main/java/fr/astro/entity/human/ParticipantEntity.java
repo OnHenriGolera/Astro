@@ -14,26 +14,34 @@ import fr.astro.entity.field.Nationality;
  */
 public class ParticipantEntity {
 
-    private int participantId;
+    private final int participantId;
+    private final PersonEntity personEntity;
+    private final String license;
+    private final int initialLocalRanking;
+    private final int initialInternationalRanking;
+    private final League league;
+    private final Club club;
+    private final Nationality nationality;
     private Category category;
     private boolean present;
-    private PersonEntity personEntity;
-    private String license;
-    private int initialLocalRanking;
-    private int initialInternationalRanking;
-    private League league;
-    private Club club;
-    private Nationality nationality;
 
     /**
      * Constructor
      *
-     * @param personId
-     * @param name
-     * @param surname
-     * @param participantId
-     * @param category
-     * @param present
+     * @param personId                    the id of the person
+     * @param name                        the name of the person
+     * @param surname                     the surname of the person
+     * @param gender                      the gender of the person
+     * @param birthDate                   the birthDate of the person
+     * @param participantId               the id of the participant
+     * @param category                    the category of the participant
+     * @param present                     the presence of the participant
+     * @param license                     the license of the participant
+     * @param initialLocalRanking         the initial local ranking of the participant
+     * @param initialInternationalRanking the initial international ranking of the participant
+     * @param league                      the league of the participant
+     * @param club                        the club of the participant
+     * @param nationality                 the nationality of the participant
      * @throws NullPointerException if the name, surname, participantId, category or
      *                              present is null (personId can be
      *                              because of auto-increment)
@@ -56,7 +64,6 @@ public class ParticipantEntity {
         this.personEntity = PersonEntity.of(personId, name, surname, gender, birthDate);
 
         requireNonNull(category);
-        requireNonNull(present);
 
         if (initialInternationalRanking == -1) {
             initialInternationalRanking = 10001;
@@ -80,13 +87,22 @@ public class ParticipantEntity {
     /**
      * Return a Participant
      *
-     * @param name
-     * @param surname
-     * @param participantId
-     * @param category
-     * @param present
+     * @param personId                    the id of the person
+     * @param name                        the name of the person
+     * @param surname                     the surname of the person
+     * @param gender                      the gender of the person
+     * @param birthDate                   the birthDate of the person
+     * @param participantId               the id of the participant
+     * @param category                    the category of the participant
+     * @param present                     the presence of the participant
+     * @param license                     the license of the participant
+     * @param initialLocalRanking         the initial local ranking of the participant
+     * @param initialInternationalRanking the initial international ranking of the participant
+     * @param league                      the league of the participant
+     * @param club                        the club of the participant
+     * @param nationality                 the nationality of the participant
      * @return a Participant
-     * @throws NullPointerException if name, surname, participantId, category or
+     * @throws NullPointerException if the name, surname, participantId, category or
      *                              present is null (personId can be
      *                              because of auto-increment)
      */
@@ -130,7 +146,7 @@ public class ParticipantEntity {
     /**
      * Set the category
      *
-     * @param category
+     * @param category the category of the participant
      * @throws NullPointerException if category is null
      */
     public void setParticipantCategory(Category category) {
@@ -152,12 +168,10 @@ public class ParticipantEntity {
     /**
      * Set the present
      *
-     * @param present
+     * @param present the presence of the participant
      * @throws NullPointerException if present is null
      */
     public void setParticipantPresent(boolean present) {
-
-        requireNonNull(present);
 
         this.present = present;
     }
@@ -183,7 +197,7 @@ public class ParticipantEntity {
     /**
      * Set the name
      *
-     * @param name
+     * @param name the name of the person
      */
     public void setPersonName(String name) {
         personEntity.setPersonName(name);
@@ -201,7 +215,7 @@ public class ParticipantEntity {
     /**
      * Set the surname
      *
-     * @param surname
+     * @param surname the surname of the person
      */
     public void setPersonSurname(String surname) {
         personEntity.setPersonSurname(surname);

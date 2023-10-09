@@ -9,11 +9,7 @@ function isValidHeader(header, element) {
 	}
 
 	// Removes useless / unwanted headers
-	if (["personBirthDate", "participantId", "personId", "name"].includes(header)) {
-		return false;
-	}
-
-	return true;
+	return !["personBirthDate", "participantId", "personId", "name"].includes(header);
 
 }
 
